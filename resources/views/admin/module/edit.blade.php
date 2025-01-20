@@ -85,7 +85,7 @@
                                     <select class="form-select" name="status" id="status">
                                         @foreach ($status as $key => $value)
                                             <option value="{{ $key }}"
-                                                {{ $module->status == $key ? 'selected' : '' }}>
+                                                {{ $module->status->value == $key ? 'selected' : '' }}>
                                                 {{ $value }}
                                             </option>
                                         @endforeach

@@ -1,5 +1,4 @@
-@if ($status == 1)
-    <span class="badge bg-red-lt">Chưa hoàn thành</span>
-@else
-    <span class="badge bg-green-lt">Đã hoàn thành</span>
-@endif
+<span @class([
+    'badge',
+    App\Enums\Module\ModuleStatus::from($status)->badge(),
+])>{{ \App\Enums\Module\ModuleStatus::getDescription($status) }}</span>
