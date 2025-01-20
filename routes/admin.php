@@ -133,23 +133,23 @@ Route::middleware(['auth:admin'])->prefix('admin')->as('admin.')->group(function
 
     //Post Catalogue
     Route::prefix('post-catalogue')->as('post_catalogue.')->group(function () {
-        Route::middleware(['permission:viewPostCatalogue'])->group(function () {
+        Route::middleware(['permission:viewCatalogue'])->group(function () {
             Route::get('/', [PostCatalogueController::class, 'index'])->name('index');
             Route::get('/get', [PostCatalogueController::class, 'get'])->name('get');
         });
 
-        Route::middleware(['permission:createPostCatalogue'])->group(function () {
+        Route::middleware(['permission:createCatalogue'])->group(function () {
             Route::get('/create', [PostCatalogueController::class, 'create'])->name('create');
             Route::post('/store', [PostCatalogueController::class, 'store'])->name('store');
         });
 
-        Route::middleware(['permission:editPostCatalogue'])->group(function () {
+        Route::middleware(['permission:editCatalogue'])->group(function () {
             Route::get('/edit/{id}', [PostCatalogueController::class, 'edit'])->name('edit');
             Route::put('/update', [PostCatalogueController::class, 'update'])->name('update');
             Route::patch('/update-status', [PostCatalogueController::class, 'updateStatus'])->name('update.status');
         });
 
-        Route::middleware(['permission:deletePostCatalogue'])->group(function () {
+        Route::middleware(['permission:deleteCatalogue'])->group(function () {
             Route::delete('/delete/{id}', [PostCatalogueController::class, 'delete'])->name('delete');
         });
     });
