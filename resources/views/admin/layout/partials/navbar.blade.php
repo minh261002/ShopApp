@@ -54,7 +54,7 @@
                             {{ $admin->name }}
                         </div>
                         <div class="mt-1 small text-secondary">
-                            {{ $admin->role->pluck('name')->first() }}
+                            {{ $admin->role->pluck('title')->first() }}
                         </div>
                     </div>
                 </a>
