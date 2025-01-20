@@ -15,6 +15,7 @@ class AppServiceProvider extends ServiceProvider
         'App\Repositories\Permission\PermissionRepositoryInterface' => 'App\Repositories\Permission\PermissionRepository',
         'App\Repositories\Role\RoleRepositoryInterface' => 'App\Repositories\Role\RoleRepository',
         'App\Repositories\Admin\AdminRepositoryInterface' => 'App\Repositories\Admin\AdminRepository',
+        'App\Repositories\User\UserRepositoryInterface' => 'App\Repositories\User\UserRepository',
     ];
 
     public function register(): void

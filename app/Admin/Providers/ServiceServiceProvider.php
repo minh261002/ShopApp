@@ -14,6 +14,7 @@ class ServiceServiceProvider extends ServiceProvider
         'App\Admin\Services\Permission\PermissionServiceInterface' => 'App\Admin\Services\Permission\PermissionService',
         'App\Admin\Services\Role\RoleServiceInterface' => 'App\Admin\Services\Role\RoleService',
         'App\Admin\Services\Admin\AdminServiceInterface' => 'App\Admin\Services\Admin\AdminService',
+        'App\Admin\Services\User\UserServiceInterface' => 'App\Admin\Services\User\UserService',
     ];
     public function register(): void
     {
