@@ -1,6 +1,7 @@
 <?php
 use App\Admin\Http\Controllers\Dashboard\DashboardController;
 use App\Admin\Http\Controllers\Module\ModuleController;
+use App\Admin\Http\Controllers\Permission\PermissionController;
 use Illuminate\Support\Facades\Route;
 use App\Admin\Http\Controllers\Auth\AuthController;
 
@@ -58,7 +59,7 @@ Route::middleware(['auth:admin'])->prefix('admin')->as('admin.')->group(function
         });
 
         Route::middleware(['permission:deletePermission'])->group(function () {
-            Route::delete('/{id}', [PermissionController::class, 'destroy'])->name('delete');
+            Route::delete('/{id}', [PermissionController::class, 'delete'])->name('delete');
         });
     });
 
