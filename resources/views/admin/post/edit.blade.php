@@ -168,18 +168,14 @@
 
                                 <div class="form-group">
                                     <label for="is_featured" class="form-label">
-                                        Nổi bật
+                                        Tuỳ chọn
                                     </label>
-                                    <select class="form-select" name="is_featured" id="is_featured">
-                                        <option value="1"
-                                            {{ old('is_featured', $post->is_featured) == 1 ? 'selected' : '' }}>
-                                            Bài viết không nổi bật
-                                        </option>
-                                        <option value="2"
-                                            {{ old('is_featured', $post->is_featured) == 2 ? 'selected' : '' }}>
-                                            Bài viết nổi bật
-                                        </option>
-                                    </select>
+                                    <label class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="is_featured"
+                                            value="1"
+                                            {{ old('is_featured', $post->is_feature) == true ? 'checked' : '' }}>
+                                        <span class="form-check-label">Bài viết nổi bật</span>
+                                    </label>
 
                                     @error('is_featured')
                                         <span class="text-danger">{{ $message }}</span>

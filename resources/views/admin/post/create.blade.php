@@ -142,14 +142,13 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="is_featured" class="form-label">
-                                        Nổi bật
+                                    <label for="is_feature" class="form-label">
+                                        Tuỳ chọn
                                     </label>
-                                    <select class="form-select" name="is_featured" id="is_featured">
-                                        @foreach ($featured as $key => $value)
-                                            <option value="{{ $key }}">{{ $value }}</option>
-                                        @endforeach
-                                    </select>
+                                    <label class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="is_feature" value="1">
+                                        <span class="form-check-label">Bài viết nổi bật</span>
+                                    </label>
                                 </div>
                             </div>
                         </div>
