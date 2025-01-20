@@ -1,5 +1,5 @@
 <?php
-namespace App\Supports\Eloquent;
+namespace App\Supports;
 
 use Illuminate\Support\Str;
 
