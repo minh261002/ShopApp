@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Enums\Module\ActiveStatus;
+use App\Enums\ActiveStatus;
 use App\Supports\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;

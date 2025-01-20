@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Enums\Module;
+namespace App\Enums;
 
 use App\Supports\Enum;
 
