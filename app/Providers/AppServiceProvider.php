@@ -9,9 +9,15 @@ class AppServiceProvider extends ServiceProvider
     /**
      * Register any application services.
      */
+    protected $repositories = [
+        'App\Repositories\BaseRepositoryInterface' => 'App\Repositories\BaseRepository',
+    ];
+
     public function register(): void
     {
-        //
+        foreach ($this->repositories as $interface => $repository) {
+            $this->app->bind($interface, $repository);
+        }
     }
 
     /**
