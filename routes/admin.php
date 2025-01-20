@@ -4,6 +4,7 @@ use App\Admin\Http\Controllers\Dashboard\DashboardController;
 use App\Admin\Http\Controllers\Module\ModuleController;
 use App\Admin\Http\Controllers\Permission\PermissionController;
 use App\Admin\Http\Controllers\Role\RoleController;
+use App\Admin\Http\Controllers\Slider\SliderController;
 use App\Admin\Http\Controllers\User\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Admin\Http\Controllers\Auth\AuthController;
