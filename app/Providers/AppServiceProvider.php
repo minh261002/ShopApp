@@ -11,6 +11,7 @@ class AppServiceProvider extends ServiceProvider
      */
     protected $repositories = [
         'App\Repositories\BaseRepositoryInterface' => 'App\Repositories\BaseRepository',
+        'App\Repositories\Module\ModuleRepositoryInterface' => 'App\Repositories\Module\ModuleRepository',
     ];
 
     public function register(): void

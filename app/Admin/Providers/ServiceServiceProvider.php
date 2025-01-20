@@ -9,9 +9,14 @@ class ServiceServiceProvider extends ServiceProvider
     /**
      * Register any application services.
      */
+    protected $services = [
+        'App\Admin\Services\Module\ModuleServiceInterface' => 'App\Admin\Services\Module\ModuleService',
+    ];
     public function register(): void
     {
-        //
+        foreach ($this->services as $interface => $service) {
+            $this->app->bind($interface, $service);
+        }
     }
 
     /**
