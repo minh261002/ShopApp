@@ -2,6 +2,7 @@
 use App\Admin\Http\Controllers\Admin\AdminController;
 use App\Admin\Http\Controllers\Category\CategoryController;
 use App\Admin\Http\Controllers\Dashboard\DashboardController;
+use App\Admin\Http\Controllers\Discount\DiscountController;
 use App\Admin\Http\Controllers\Module\ModuleController;
 use App\Admin\Http\Controllers\Permission\PermissionController;
 use App\Admin\Http\Controllers\Post\PostCatalogueController;

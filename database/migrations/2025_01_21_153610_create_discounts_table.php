@@ -26,6 +26,7 @@ return new class extends Migration {
             $table->enum('apply_for', DiscountApplyFor::getValues())->default(DiscountApplyFor::All->value);
             $table->enum('status', ActiveStatus::getValues())->default(ActiveStatus::Active->value);
             $table->text('description')->nullable();
+            $table->boolean('show_home')->default(false);
             $table->softDeletes();
             $table->timestamps();
         });

@@ -250,6 +250,13 @@ return [
             'printable' => true,
             'addClass' => 'text-center align-middle',
         ],
+        'value' => [
+            'title' => 'Giá giảm',
+            'orderable' => true,
+            'exportable' => true,
+            'printable' => true,
+            'addClass' => 'text-center align-middle',
+        ],
         'status' => [
             'title' => 'Trạng thái',
             'orderable' => true,

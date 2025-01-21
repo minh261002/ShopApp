@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Enums\Discount\DiscountApplyFor;
+use App\Enums\Discount\DiscountType;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -15,6 +17,12 @@ class Discount extends Model
 
     protected $guarded = [];
 
+    protected $casts = [
+        'show_home' => 'boolean',
+        'type' => DiscountType::class,
+        'apply_for' => DiscountApplyFor::class,
+    ];
+
     public function discountApps()
     {
         return $this->hasMany(DiscountApplication::class);
@@ -22,7 +30,7 @@ class Discount extends Model
 
     public function users()
     {
-        return $this->belongsToMany(User::class, 'discount_apps', 'discount_id', 'user_id');
+        return $this->belongsToMany(User::class, 'discount_applications', 'discount_id', 'user_id');
     }
 
 
