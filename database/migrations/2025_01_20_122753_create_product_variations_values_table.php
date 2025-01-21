@@ -12,6 +12,12 @@ return new class extends Migration {
     {
         Schema::create('product_variations_values', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('product_variation_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('variation_attribute_id')->constrained()->cascadeOnDelete();
+            $table->string('value');
+            // Sửa tên index thành tên ngắn hơn
+            $table->unique(['product_variation_id', 'variation_attribute_id'], 'unique_variation_attribute');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
