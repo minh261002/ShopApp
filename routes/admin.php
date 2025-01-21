@@ -1,8 +1,14 @@
 <?php
+use App\Admin\Http\Controllers\Admin\AdminController;
+use App\Admin\Http\Controllers\Category\CategoryController;
 use App\Admin\Http\Controllers\Dashboard\DashboardController;
 use App\Admin\Http\Controllers\Module\ModuleController;
 use App\Admin\Http\Controllers\Permission\PermissionController;
+use App\Admin\Http\Controllers\Post\PostCatalogueController;
+use App\Admin\Http\Controllers\Post\PostController;
 use App\Admin\Http\Controllers\Role\RoleController;
+use App\Admin\Http\Controllers\Slider\SliderController;
+use App\Admin\Http\Controllers\User\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Admin\Http\Controllers\Auth\AuthController;
 
@@ -108,45 +114,45 @@ Route::middleware(['auth:admin'])->prefix('admin')->as('admin.')->group(function
 
     //User
     Route::prefix('user')->as('user.')->group(function () {
-        Route::middleware(['permission:viewUser'])->group(function () {
+        Route::middleware(['permission:viewCustomer'])->group(function () {
             Route::get('/', [UserController::class, 'index'])->name('index');
         });
 
-        Route::middleware(['permission:createUser'])->group(function () {
+        Route::middleware(['permission:createCustomer'])->group(function () {
             Route::get('create', [UserController::class, 'create'])->name('create');
             Route::post('create', [UserController::class, 'store'])->name('store');
         });
 
-        Route::middleware(['permission:editUser'])->group(function () {
+        Route::middleware(['permission:editCustomer'])->group(function () {
             Route::get('edit/{id}', [UserController::class, 'edit'])->name('edit');
             Route::put('/update', [UserController::class, 'update'])->name('update');
             Route::patch('/update-status', [UserController::class, 'updateStatus'])->name('update.status');
         });
 
-        Route::middleware(['permission:deleteUser'])->group(function () {
+        Route::middleware(['permission:deleteCustomer'])->group(function () {
             Route::delete('/{id}', [UserController::class, 'delete'])->name('delete');
         });
     });
 
     //Post Catalogue
     Route::prefix('post-catalogue')->as('post_catalogue.')->group(function () {
-        Route::middleware(['permission:viewPostCatalogue'])->group(function () {
+        Route::middleware(['permission:viewCatalogue'])->group(function () {
             Route::get('/', [PostCatalogueController::class, 'index'])->name('index');
             Route::get('/get', [PostCatalogueController::class, 'get'])->name('get');
         });
 
-        Route::middleware(['permission:createPostCatalogue'])->group(function () {
+        Route::middleware(['permission:createCatalogue'])->group(function () {
             Route::get('/create', [PostCatalogueController::class, 'create'])->name('create');
             Route::post('/store', [PostCatalogueController::class, 'store'])->name('store');
         });
 
-        Route::middleware(['permission:editPostCatalogue'])->group(function () {
+        Route::middleware(['permission:editCatalogue'])->group(function () {
             Route::get('/edit/{id}', [PostCatalogueController::class, 'edit'])->name('edit');
             Route::put('/update', [PostCatalogueController::class, 'update'])->name('update');
             Route::patch('/update-status', [PostCatalogueController::class, 'updateStatus'])->name('update.status');
         });
 
-        Route::middleware(['permission:deletePostCatalogue'])->group(function () {
+        Route::middleware(['permission:deleteCatalogue'])->group(function () {
             Route::delete('/delete/{id}', [PostCatalogueController::class, 'delete'])->name('delete');
         });
     });
@@ -236,6 +242,28 @@ Route::middleware(['auth:admin'])->prefix('admin')->as('admin.')->group(function
 
         Route::middleware(['permission:deleteCategory'])->group(function () {
             Route::delete('/delete/{id}', [CategoryController::class, 'delete'])->name('delete');
+        });
+    });
+
+    //Product
+    Route::prefix('product')->as('product.')->group(function () {
+        Route::middleware(['permission:viewProduct'])->group(function () {
+            Route::get('/', [ProductController::class, 'index'])->name('index');
+        });
+
+        Route::middleware(['permission:createProduct'])->group(function () {
+            Route::get('/create', [ProductController::class, 'create'])->name('create');
+            Route::post('/store', [ProductController::class, 'store'])->name('store');
+        });
+
+        Route::middleware(['permission:editProduct'])->group(function () {
+            Route::get('/edit/{id}', [ProductController::class, 'edit'])->name('edit');
+            Route::put('/update', [ProductController::class, 'update'])->name('update');
+            Route::patch('/update-status', [ProductController::class, 'updateStatus'])->name('update.status');
+        });
+
+        Route::middleware(['permission:deleteProduct'])->group(function () {
+            Route::delete('/delete/{id}', [ProductController::class, 'delete'])->name('delete');
         });
     });
 });

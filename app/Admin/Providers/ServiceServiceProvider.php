@@ -13,6 +13,13 @@ class ServiceServiceProvider extends ServiceProvider
         'App\Admin\Services\Module\ModuleServiceInterface' => 'App\Admin\Services\Module\ModuleService',
         'App\Admin\Services\Permission\PermissionServiceInterface' => 'App\Admin\Services\Permission\PermissionService',
         'App\Admin\Services\Role\RoleServiceInterface' => 'App\Admin\Services\Role\RoleService',
+        'App\Admin\Services\Admin\AdminServiceInterface' => 'App\Admin\Services\Admin\AdminService',
+        'App\Admin\Services\User\UserServiceInterface' => 'App\Admin\Services\User\UserService',
+        'App\Admin\Services\Slider\SliderServiceInterface' => 'App\Admin\Services\Slider\SliderService',
+        'App\Admin\Services\Slider\SliderItemServiceInterface' => 'App\Admin\Services\Slider\SliderItemService',
+        'App\Admin\Services\Post\PostServiceInterface' => 'App\Admin\Services\Post\PostService',
+        'App\Admin\Services\Post\PostCatalogueServiceInterface' => 'App\Admin\Services\Post\PostCatalogueService',
+        'App\Admin\Services\Category\CategoryServiceInterface' => 'App\Admin\Services\Category\CategoryService',
     ];
     public function register(): void
     {

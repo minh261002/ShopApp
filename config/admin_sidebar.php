@@ -23,23 +23,44 @@ return [
         ]
     ],
     [
+        'active' => ['admin.product.*'],
+        'show' => ['admin.product.*'],
+        'title' => 'Quản lý sản phẩm',
+        'icon' => 'ti ti-package fs-2',
+        'permission' => ['viewProduct', 'createProduct', 'editProduct', 'deleteProduct'],
+        'children' => [
+            [
+                'title' => 'Thêm mới',
+                'route' => 'admin.product.create',
+                'icon' => 'ti ti-plus fs-3 me-2',
+                'permission' => 'createProduct'
+            ],
+            [
+                'title' => 'Danh sách',
+                'route' => 'admin.product.index',
+                'icon' => 'ti ti-list fs-3 me-2',
+                'permission' => 'viewProduct'
+            ]
+        ]
+    ],
+    [
         'active' => ['admin.post_catalogue.*'],
         'show' => ['admin.post_catalogue.*'],
         'title' => 'Quản lý chuyên mục',
         'icon' => 'ti ti-list-letters fs-2',
-        'permission' => ['viewPostCatalogue', 'createPostCatalogue', 'editPostCatalogue', 'deletePostCatalogue'],
+        'permission' => ['viewCatalogue', 'createCatalogue', 'editCatalogue', 'deleteCatalogue'],
         'children' => [
             [
                 'title' => 'Thêm mới',
                 'route' => 'admin.post_catalogue.create',
                 'icon' => 'ti ti-plus fs-3 me-2',
-                'permission' => 'createPostCatalogue'
+                'permission' => 'createCatalogue'
             ],
             [
                 'title' => 'Danh sách',
                 'route' => 'admin.post_catalogue.index',
                 'icon' => 'ti ti-list fs-3 me-2',
-                'permission' => 'viewPostCatalogue'
+                'permission' => 'viewCatalogue'
             ]
         ]
     ],
@@ -90,19 +111,19 @@ return [
         'show' => ['admin.user.*'],
         'title' => 'Quản lý khách hàng',
         'icon' => 'ti ti-user fs-2',
-        'permission' => ['viewUser', 'createUser', 'editUser', 'deleteUser'],
+        'permission' => ['viewCustomer', 'createCustomer', 'editCustomer', 'deleteCustomer'],
         'children' => [
             [
                 'title' => 'Thêm mới',
                 'route' => 'admin.user.create',
                 'icon' => 'ti ti-plus fs-3 me-2',
-                'permission' => 'createUser'
+                'permission' => 'createCustomer'
             ],
             [
                 'title' => 'Danh sách',
                 'route' => 'admin.user.index',
                 'icon' => 'ti ti-list fs-3 me-2',
-                'permission' => 'viewUser'
+                'permission' => 'viewCustomer'
             ]
         ]
     ],
