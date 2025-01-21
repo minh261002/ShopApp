@@ -60,15 +60,22 @@ return [
             'printable' => true,
             'addClass' => 'text-center align-middle',
         ],
-        'status' => [
-            'title' => 'Trạng thái',
+        'show_home' => [
+            'title' => 'Hiển thị trang chủ',
             'orderable' => true,
             'exportable' => true,
             'printable' => true,
             'addClass' => 'text-center align-middle',
         ],
-        'created_at' => [
-            'title' => 'Ngày tạo',
+        'show_menu' => [
+            'title' => 'Hiển thị menu',
+            'orderable' => true,
+            'exportable' => true,
+            'printable' => true,
+            'addClass' => 'text-center align-middle',
+        ],
+        'status' => [
+            'title' => 'Trạng thái',
             'orderable' => true,
             'exportable' => true,
             'printable' => true,

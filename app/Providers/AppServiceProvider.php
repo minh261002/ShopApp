@@ -20,6 +20,7 @@ class AppServiceProvider extends ServiceProvider
         'App\Repositories\Slider\SliderItemRepositoryInterface' => 'App\Repositories\Slider\SliderItemRepository',
         'App\Repositories\Post\PostRepositoryInterface' => 'App\Repositories\Post\PostRepository',
         'App\Repositories\Post\PostCatalogueRepositoryInterface' => 'App\Repositories\Post\PostCatalogueRepository',
+        'App\Repositories\Category\CategoryRepositoryInterface' => 'App\Repositories\Category\CategoryRepository',
     ];
 
     public function register(): void

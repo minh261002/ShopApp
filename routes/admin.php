@@ -1,5 +1,6 @@
 <?php
 use App\Admin\Http\Controllers\Admin\AdminController;
+use App\Admin\Http\Controllers\Category\CategoryController;
 use App\Admin\Http\Controllers\Dashboard\DashboardController;
 use App\Admin\Http\Controllers\Module\ModuleController;
 use App\Admin\Http\Controllers\Permission\PermissionController;
