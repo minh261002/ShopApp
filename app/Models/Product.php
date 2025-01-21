@@ -19,4 +19,16 @@ class Product extends Model
     protected $casts = [
         'status' => ActiveStatus::class
     ];
+
+    public function variations()
+    {
+        return $this->hasMany(ProductVariation::class);
+    }
+
+    public function attributes()
+    {
+        return $this->belongsToMany(VariationAttribute::class, 'product_variations_values', 'product_variation_id', 'variation_attribute_id')
+            ->withPivot('value')
+            ->withTimestamps();
+    }
 }
