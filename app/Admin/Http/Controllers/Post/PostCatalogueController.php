@@ -63,9 +63,8 @@ class PostCatalogueController extends Controller
         return response()->json(['status' => 'success', 'message' => 'Cập nhật trạng thái thành công']);
     }
 
-    public function delete(Request $request)
+    public function delete($id)
     {
-        $id = $request->get('id');
         $this->repository->delete($id);
         return response()->json(['status' => 'success', 'message' => 'Xóa chuyên mục bài viết thành công']);
     }
