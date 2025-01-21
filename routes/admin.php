@@ -228,6 +228,7 @@ Route::middleware(['auth:admin'])->prefix('admin')->as('admin.')->group(function
     Route::prefix('category')->as('category.')->group(function () {
         Route::middleware(['permission:viewCategory'])->group(function () {
             Route::get('/', [CategoryController::class, 'index'])->name('index');
+            Route::get('/get', [CategoryController::class, 'get'])->name('get');
         });
 
         Route::middleware(['permission:createCategory'])->group(function () {
