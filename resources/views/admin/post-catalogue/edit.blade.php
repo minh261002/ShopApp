@@ -183,6 +183,21 @@
 
                         <div class="card mt-3">
                             <div class="card-header">
+                                <h3 class="card-title">Tuỳ chọn</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="show_menu" value="1"
+                                            {{ $post_catalogue->show_menu ? 'checked' : '' }}>
+                                        <span class="form-check-label">Hiển thị menu</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card mt-3">
+                            <div class="card-header">
                                 <h3 class="card-title">
                                     Ảnh
                                 </h3>

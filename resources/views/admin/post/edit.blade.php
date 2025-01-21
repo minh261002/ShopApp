@@ -167,17 +167,16 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="is_featured" class="form-label">
+                                    <label for="is_feature" class="form-label">
                                         Tuỳ chọn
                                     </label>
                                     <label class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="is_featured"
-                                            value="1"
-                                            {{ old('is_featured', $post->is_feature) == true ? 'checked' : '' }}>
+                                        <input class="form-check-input" type="checkbox" name="is_feature" value="1"
+                                            {{ $post->is_feature ? 'checked' : '' }}>
                                         <span class="form-check-label">Bài viết nổi bật</span>
                                     </label>
 
-                                    @error('is_featured')
+                                    @error('is_feature')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>

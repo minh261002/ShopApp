@@ -23,6 +23,7 @@ class PostCatalogueDataTable extends BaseDataTable
             'action' => 'admin.post-catalogue.datatable.action',
             'image' => 'admin.post-catalogue.datatable.image',
             'status' => 'admin.post-catalogue.datatable.status',
+            'show_menu' => 'admin.post-catalogue.datatable.show_menu',
         ];
     }
     public function query()
@@ -33,11 +34,18 @@ class PostCatalogueDataTable extends BaseDataTable
     public function setColumnSearch(): void
     {
 
-        $this->columnAllSearch = [1, 2, 3];
+        $this->columnAllSearch = [1, 2, 3, 4];
         $this->columnSearchSelect = [
             [
-                'column' => 3,
+                'column' => 4,
                 'data' => ActiveStatus::asSelectArray(),
+            ],
+            [
+                'column' => 3,
+                'data' => [
+                    '0' => 'Không hiển thị',
+                    '1' => 'Hiển thị',
+                ]
             ]
         ];
 
@@ -56,6 +64,7 @@ class PostCatalogueDataTable extends BaseDataTable
             'name' => function ($query) {
                 return generate_text_depth_tree($query->depth) . $query->name;
             },
+            'show_menu' => $this->view['show_menu'],
         ];
     }
 
@@ -72,6 +81,7 @@ class PostCatalogueDataTable extends BaseDataTable
             'action',
             'image',
             'status',
+            'show_menu',
         ];
     }
 

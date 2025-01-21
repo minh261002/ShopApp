@@ -206,6 +206,13 @@ return [
             'printable' => true,
             'addClass' => 'text-center align-middle',
         ],
+        'show_menu' => [
+            'title' => 'Hiển thị menu',
+            'orderable' => true,
+            'exportable' => true,
+            'printable' => true,
+            'addClass' => 'text-center align-middle',
+        ],
         'status' => [
             'title' => 'Trạng thái',
             'orderable' => true,
