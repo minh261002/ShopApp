@@ -290,4 +290,26 @@ Route::middleware(['auth:admin'])->prefix('admin')->as('admin.')->group(function
         Route::get('product-variation/edit/{id}', [ProductVariationController::class, 'edit'])->name('product.variation.edit');
         Route::put('product-variation/update', [ProductVariationController::class, 'update'])->name('product.variation.update');
     });
+
+    //Discount
+    Route::prefix('discount')->as('discount.')->group(function () {
+        Route::middleware(['permission:viewDiscount'])->group(function () {
+            Route::get('/', [DiscountController::class, 'index'])->name('index');
+        });
+
+        Route::middleware(['permission:createDiscount'])->group(function () {
+            Route::get('/create', [DiscountController::class, 'create'])->name('create');
+            Route::post('/store', [DiscountController::class, 'store'])->name('store');
+        });
+
+        Route::middleware(['permission:editDiscount'])->group(function () {
+            Route::get('/edit/{id}', [DiscountController::class, 'edit'])->name('edit');
+            Route::put('/update', [DiscountController::class, 'update'])->name('update');
+            Route::patch('/update-status', [DiscountController::class, 'updateStatus'])->name('update.status');
+        });
+
+        Route::middleware(['permission:deleteDiscount'])->group(function () {
+            Route::delete('/delete/{id}', [DiscountController::class, 'delete'])->name('delete');
+        });
+    });
 });
