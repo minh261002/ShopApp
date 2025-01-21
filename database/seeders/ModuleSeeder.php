@@ -94,6 +94,22 @@ class ModuleSeeder extends Seeder
                 'status' => 2,
                 'created_at' => now(),
                 'updated_at' => now(),
+            ],
+            [
+                'id' => 11,
+                'name' => 'Quản lý mã giảm giá',
+                'description' => 'Quản lý mã giảm giá',
+                'status' => 2,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'id' => 12,
+                'name' => 'Quản lý đơn hàng',
+                'description' => 'Quản lý đơn hàng',
+                'status' => 2,
+                'created_at' => now(),
+                'updated_at' => now(),
             ]
         ]);
 
@@ -339,6 +355,54 @@ class ModuleSeeder extends Seeder
                 'guard_name' => 'admin',
                 'module_id' => 10,
             ],
+            [
+                'title' => 'Xem mã giảm giá',
+                'name' => 'viewDiscount',
+                'guard_name' => 'admin',
+                'module_id' => 11,
+            ],
+            [
+                'title' => 'Tạo mã giảm giá',
+                'name' => 'createDiscount',
+                'guard_name' => 'admin',
+                'module_id' => 11,
+            ],
+            [
+                'title' => 'Sửa mã giảm giá',
+                'name' => 'editDiscount',
+                'guard_name' => 'admin',
+                'module_id' => 11,
+            ],
+            [
+                'title' => 'Xóa mã giảm giá',
+                'name' => 'deleteDiscount',
+                'guard_name' => 'admin',
+                'module_id' => 11,
+            ],
+            [
+                'title' => 'Xem đơn hàng',
+                'name' => 'viewOrder',
+                'guard_name' => 'admin',
+                'module_id' => 12,
+            ],
+            [
+                'title' => 'Tạo đơn hàng',
+                'name' => 'createOrder',
+                'guard_name' => 'admin',
+                'module_id' => 12,
+            ],
+            [
+                'title' => 'Sửa đơn hàng',
+                'name' => 'editOrder',
+                'guard_name' => 'admin',
+                'module_id' => 12,
+            ],
+            [
+                'title' => 'Xóa đơn hàng',
+                'name' => 'deleteOrder',
+                'guard_name' => 'admin',
+                'module_id' => 12,
+            ],
         ]);
 
         //Role
@@ -513,6 +577,38 @@ class ModuleSeeder extends Seeder
             ],
             [
                 'permission_id' => 40,
+                'role_id' => 1,
+            ],
+            [
+                'permission_id' => 41,
+                'role_id' => 1,
+            ],
+            [
+                'permission_id' => 42,
+                'role_id' => 1,
+            ],
+            [
+                'permission_id' => 43,
+                'role_id' => 1,
+            ],
+            [
+                'permission_id' => 44,
+                'role_id' => 1,
+            ],
+            [
+                'permission_id' => 45,
+                'role_id' => 1,
+            ],
+            [
+                'permission_id' => 46,
+                'role_id' => 1,
+            ],
+            [
+                'permission_id' => 47,
+                'role_id' => 1,
+            ],
+            [
+                'permission_id' => 48,
                 'role_id' => 1,
             ],
         ]);
