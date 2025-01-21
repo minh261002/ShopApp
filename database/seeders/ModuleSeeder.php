@@ -110,6 +110,14 @@ class ModuleSeeder extends Seeder
                 'status' => 2,
                 'created_at' => now(),
                 'updated_at' => now(),
+            ],
+            [
+                'id' => 13,
+                'name' => 'Quản lý CTKM',
+                'description' => 'Quản lý CTKM',
+                'status' => 2,
+                'created_at' => now(),
+                'updated_at' => now(),
             ]
         ]);
 
@@ -403,6 +411,30 @@ class ModuleSeeder extends Seeder
                 'guard_name' => 'admin',
                 'module_id' => 12,
             ],
+            [
+                'title' => 'Xem CTKM',
+                'name' => 'viewFlashSale',
+                'guard_name' => 'admin',
+                'module_id' => 13,
+            ],
+            [
+                'title' => 'Tạo CTKM',
+                'name' => 'createFlashSale',
+                'guard_name' => 'admin',
+                'module_id' => 13,
+            ],
+            [
+                'title' => 'Sửa CTKM',
+                'name' => 'editFlashSale',
+                'guard_name' => 'admin',
+                'module_id' => 13,
+            ],
+            [
+                'title' => 'Xóa CTKM',
+                'name' => 'deleteFlashSale',
+                'guard_name' => 'admin',
+                'module_id' => 13,
+            ],
         ]);
 
         //Role
@@ -611,6 +643,22 @@ class ModuleSeeder extends Seeder
                 'permission_id' => 48,
                 'role_id' => 1,
             ],
+            [
+                'permission_id' => 49,
+                'role_id' => 1,
+            ],
+            [
+                'permission_id' => 50,
+                'role_id' => 1,
+            ],
+            [
+                'permission_id' => 51,
+                'role_id' => 1,
+            ],
+            [
+                'permission_id' => 52,
+                'role_id' => 1,
+            ]
         ]);
 
         //Admin

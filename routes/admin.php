@@ -350,4 +350,26 @@ Route::middleware(['auth:admin'])->prefix('admin')->as('admin.')->group(function
             Route::patch('/update-status', [ShippingController::class, 'updateStatus'])->name('update.status');
         });
     });
+
+    //Flash Sale
+    Route::prefix('flash-sale')->as('flash_sale.')->group(function () {
+        Route::middleware(['permission:viewFlashSale'])->group(function () {
+            Route::get('/', [FlashSaleController::class, 'index'])->name('index');
+        });
+
+        Route::middleware(['permission:createFlashSale'])->group(function () {
+            Route::get('/create', [FlashSaleController::class, 'create'])->name('create');
+            Route::post('/store', [FlashSaleController::class, 'store'])->name('store');
+        });
+
+        Route::middleware(['permission:editFlashSale'])->group(function () {
+            Route::get('/edit/{id}', [FlashSaleController::class, 'edit'])->name('edit');
+            Route::put('/update', [FlashSaleController::class, 'update'])->name('update');
+            Route::patch('/update-status', [FlashSaleController::class, 'updateStatus'])->name('update.status');
+        });
+
+        Route::middleware(['permission:deleteFlashSale'])->group(function () {
+            Route::delete('/delete/{id}', [FlashSaleController::class, 'delete'])->name('delete');
+        });
+    });
 });

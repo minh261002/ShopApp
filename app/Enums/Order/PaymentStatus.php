@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Enums\Payment;
+namespace App\Enums\Order;
 
 use App\Supports\Enum;
 

@@ -2,9 +2,30 @@
 
 return [
     [
+        'active' => ['admin.notification.*'],
+        'show' => ['admin.notification.*'],
+        'title' => 'Thông báo',
+        'icon' => 'ti ti-bell fs-2',
+        'permission' => ['viewCategory', 'createCategory', 'editCategory', 'deleteCategory'],
+        'children' => [
+            [
+                'title' => 'Thêm mới',
+                'route' => 'admin.category.create',
+                'icon' => 'ti ti-plus fs-3 me-2',
+                'permission' => 'createCategory'
+            ],
+            [
+                'title' => 'Danh sách',
+                'route' => 'admin.category.index',
+                'icon' => 'ti ti-list fs-3 me-2',
+                'permission' => 'viewCategory'
+            ]
+        ]
+    ],
+    [
         'active' => ['admin.category.*'],
         'show' => ['admin.category.*'],
-        'title' => 'Quản lý danh mục',
+        'title' => 'Danh mục',
         'icon' => 'ti ti-category-2 fs-2',
         'permission' => ['viewCategory', 'createCategory', 'editCategory', 'deleteCategory'],
         'children' => [
@@ -25,7 +46,7 @@ return [
     [
         'active' => ['admin.product.*'],
         'show' => ['admin.product.*'],
-        'title' => 'Quản lý sản phẩm',
+        'title' => 'Sản phẩm',
         'icon' => 'ti ti-package fs-2',
         'permission' => ['viewProduct', 'createProduct', 'editProduct', 'deleteProduct'],
         'children' => [
@@ -44,9 +65,30 @@ return [
         ]
     ],
     [
+        'active' => ['admin.flash_sale.*'],
+        'show' => ['admin.flash_sale.*'],
+        'title' => 'Flash Sale',
+        'icon' => 'ti ti-bolt fs-2',
+        'permission' => ['viewFlashSale', 'createFlashSale', 'editFlashSale', 'deleteFlashSale'],
+        'children' => [
+            [
+                'title' => 'Thêm mới',
+                'route' => 'admin.flash_sale.create',
+                'icon' => 'ti ti-plus fs-3 me-2',
+                'permission' => 'createFlashSale'
+            ],
+            [
+                'title' => 'Danh sách',
+                'route' => 'admin.flash_sale.index',
+                'icon' => 'ti ti-list fs-3 me-2',
+                'permission' => 'viewFlashSale'
+            ]
+        ]
+    ],
+    [
         'active' => ['admin.order.*'],
         'show' => ['admin.order.*'],
-        'title' => 'Quản lý đơn hàng',
+        'title' => 'Đơn hàng',
         'icon' => 'ti ti-shopping-cart fs-2',
         'permission' => ['viewOrder', 'createOrder', 'editOrder', 'deleteOrder'],
         'children' => [
@@ -67,7 +109,7 @@ return [
     [
         'active' => ['admin.discount.*'],
         'show' => ['admin.discount.*'],
-        'title' => 'Quản lý mã giảm giá',
+        'title' => 'Mã giảm giá',
         'icon' => 'ti ti-ticket fs-2',
         'permission' => ['viewDiscount', 'createDiscount', 'editDiscount', 'deleteDiscount'],
         'children' => [
@@ -88,7 +130,7 @@ return [
     [
         'active' => ['admin.post_catalogue.*'],
         'show' => ['admin.post_catalogue.*'],
-        'title' => 'Quản lý chuyên mục',
+        'title' => 'Chuyên mục',
         'icon' => 'ti ti-list-letters fs-2',
         'permission' => ['viewCatalogue', 'createCatalogue', 'editCatalogue', 'deleteCatalogue'],
         'children' => [
@@ -109,8 +151,29 @@ return [
     [
         'active' => ['admin.post.*'],
         'show' => ['admin.post.*'],
-        'title' => 'Quản lý bài viết',
+        'title' => 'Bài viết',
         'icon' => 'ti ti-inbox fs-2',
+        'permission' => ['viewPost', 'createPost', 'editPost', 'deletePost'],
+        'children' => [
+            [
+                'title' => 'Thêm mới',
+                'route' => 'admin.post.create',
+                'icon' => 'ti ti-plus fs-3 me-2',
+                'permission' => 'createPost'
+            ],
+            [
+                'title' => 'Danh sách',
+                'route' => 'admin.post.index',
+                'icon' => 'ti ti-list fs-3 me-2',
+                'permission' => 'viewPost'
+            ]
+        ]
+    ],
+    [
+        'active' => ['admin.review.*'],
+        'show' => ['admin.review.*'],
+        'title' => 'Đánh giá',
+        'icon' => 'ti ti-star fs-2',
         'permission' => ['viewPost', 'createPost', 'editPost', 'deletePost'],
         'children' => [
             [
@@ -130,7 +193,7 @@ return [
     [
         'active' => ['admin.slider.*'],
         'show' => ['admin.slider.*'],
-        'title' => 'Quản lý slider',
+        'title' => 'Slider',
         'icon' => 'ti ti-library-photo fs-2',
         'permission' => ['viewSlider', 'createSlider', 'editSlider', 'deleteSlider'],
         'children' => [
@@ -151,7 +214,7 @@ return [
     [
         'active' => ['admin.user.*'],
         'show' => ['admin.user.*'],
-        'title' => 'Quản lý khách hàng',
+        'title' => 'Khách hàng',
         'icon' => 'ti ti-user fs-2',
         'permission' => ['viewCustomer', 'createCustomer', 'editCustomer', 'deleteCustomer'],
         'children' => [
@@ -191,9 +254,30 @@ return [
         ]
     ],
     [
+        'active' => ['admin.setting.*'],
+        'show' => ['admin.setting.*'],
+        'title' => 'Cài đặt',
+        'icon' => 'ti ti-settings fs-2',
+        'permission' => ['viewAdmin', 'createAdmin', 'editAdmin', 'deleteAdmin'],
+        'children' => [
+            [
+                'title' => 'Thêm mới',
+                'route' => 'admin.admin.create',
+                'icon' => 'ti ti-plus fs-3 me-2',
+                'permission' => 'createAdmin'
+            ],
+            [
+                'title' => 'Danh sách',
+                'route' => 'admin.admin.index',
+                'icon' => 'ti ti-list fs-3 me-2',
+                'permission' => 'viewAdmin'
+            ]
+        ]
+    ],
+    [
         'active' => ['admin.role.*'],
         'show' => ['admin.role.*'],
-        'title' => 'Quản lý vai trò',
+        'title' => 'Vai trò',
         'icon' => 'ti ti-code fs-2',
         'permission' => ['viewRole', 'createRole', 'editRole', 'deleteRole'],
         'children' => [
@@ -214,7 +298,7 @@ return [
     [
         'active' => ['admin.permission.*'],
         'show' => ['admin.permission.*'],
-        'title' => 'Quản lý quyền',
+        'title' => 'Quyền',
         'icon' => 'ti ti-code fs-2',
         'permission' => ['viewPermission', 'createPermission', 'editPermission', 'deletePermission'],
         'children' => [
@@ -235,7 +319,7 @@ return [
     [
         'active' => ['admin.module.*'],
         'show' => ['admin.module.*'],
-        'title' => 'Quản lý module',
+        'title' => 'Module',
         'icon' => 'ti ti-code fs-2',
         'permission' => ['viewModule', 'createModule', 'editModule', 'deleteModule'],
         'children' => [
