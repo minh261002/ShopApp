@@ -3,6 +3,7 @@
 namespace App\Admin\DataTables\User;
 
 use App\Admin\DataTables\BaseDataTable;
+use App\Enums\ActiveStatus;
 use App\Repositories\User\UserRepositoryInterface;
 
 class UserDataTable extends BaseDataTable
@@ -38,10 +39,7 @@ class UserDataTable extends BaseDataTable
         $this->columnSearchSelect = [
             [
                 'column' => 3,
-                'data' => [
-                    'active' => 'Đang hoạt động',
-                    'inactive' => 'Ngưng hoạt động',
-                ]
+                'data' =>ActiveStatus::asSelectArray()
             ]
         ];
     }

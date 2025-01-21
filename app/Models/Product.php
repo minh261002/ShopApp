@@ -22,7 +22,7 @@ class Product extends Model
 
     public function variations()
     {
-        return $this->hasMany(ProductVariation::class);
+        return $this->hasMany(ProductVariation::class, 'product_id');
     }
 
     public function attributes()
@@ -30,5 +30,10 @@ class Product extends Model
         return $this->belongsToMany(VariationAttribute::class, 'product_variations_values', 'product_variation_id', 'variation_attribute_id')
             ->withPivot('value')
             ->withTimestamps();
+    }
+
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class, 'products_categories', 'product_id', 'category_id');
     }
 }

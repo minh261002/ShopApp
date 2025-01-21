@@ -57,6 +57,15 @@
 @push('scripts')
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            const form = document.querySelector('form');
+            form.addEventListener('submit', function() {
+                const button = form.querySelector('button[type="submit"]');
+                button.innerHTML =
+                    '<div class="spinner-border" role="status"><span class="visually-hidden">Loading...</span></div>';
+                button.disabled = true;
+            });
+        });
+        document.addEventListener('DOMContentLoaded', function() {
             const showPassword = document.getElementById('show_password');
             const password = document.querySelector('input[name="password"]');
 

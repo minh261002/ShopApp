@@ -2,15 +2,18 @@
 use App\Admin\Http\Controllers\Admin\AdminController;
 use App\Admin\Http\Controllers\Category\CategoryController;
 use App\Admin\Http\Controllers\Dashboard\DashboardController;
+use App\Admin\Http\Controllers\Discount\DiscountController;
 use App\Admin\Http\Controllers\Module\ModuleController;
 use App\Admin\Http\Controllers\Permission\PermissionController;
 use App\Admin\Http\Controllers\Post\PostCatalogueController;
 use App\Admin\Http\Controllers\Post\PostController;
+use App\Admin\Http\Controllers\Product\ProductVariationController;
 use App\Admin\Http\Controllers\Role\RoleController;
 use App\Admin\Http\Controllers\Slider\SliderController;
 use App\Admin\Http\Controllers\User\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Admin\Http\Controllers\Auth\AuthController;
+use App\Admin\Http\Controllers\Product\ProductController;
 
 Route::middleware(['admin'])->prefix('admin')->as('admin.')->group(function () {
     Route::get('/login', [AuthController::class, 'login'])->name('login');
@@ -227,6 +230,7 @@ Route::middleware(['auth:admin'])->prefix('admin')->as('admin.')->group(function
     Route::prefix('category')->as('category.')->group(function () {
         Route::middleware(['permission:viewCategory'])->group(function () {
             Route::get('/', [CategoryController::class, 'index'])->name('index');
+            Route::get('/get', [CategoryController::class, 'get'])->name('get');
         });
 
         Route::middleware(['permission:createCategory'])->group(function () {
@@ -264,6 +268,49 @@ Route::middleware(['auth:admin'])->prefix('admin')->as('admin.')->group(function
 
         Route::middleware(['permission:deleteProduct'])->group(function () {
             Route::delete('/delete/{id}', [ProductController::class, 'delete'])->name('delete');
+        });
+    });
+
+    //Product Variant
+    Route::prefix('product/{id}/variation')->group(function () {
+        Route::middleware(['permission:viewProduct'])->group(function () {
+            Route::get('/', [ProductVariationController::class, 'index'])->name('product.variation.index');
+        });
+
+        Route::middleware(['permission:createProduct'])->group(function () {
+            Route::get('/create', [ProductVariationController::class, 'create'])->name('product.variation.create');
+            Route::post('/store', [ProductVariationController::class, 'store'])->name('product.variation.store');
+        });
+    });
+
+    Route::middleware(['permission:deleteProduct'])->group(function () {
+        Route::delete('product-variation/delete/{id}', [ProductVariationController::class, 'delete'])->name('product.variation.delete');
+    });
+
+    Route::middleware(['permission:editProduct'])->group(function () {
+        Route::get('product-variation/edit/{id}', [ProductVariationController::class, 'edit'])->name('product.variation.edit');
+        Route::put('product-variation/update', [ProductVariationController::class, 'update'])->name('product.variation.update');
+    });
+
+    //Discount
+    Route::prefix('discount')->as('discount.')->group(function () {
+        Route::middleware(['permission:viewDiscount'])->group(function () {
+            Route::get('/', [DiscountController::class, 'index'])->name('index');
+        });
+
+        Route::middleware(['permission:createDiscount'])->group(function () {
+            Route::get('/create', [DiscountController::class, 'create'])->name('create');
+            Route::post('/store', [DiscountController::class, 'store'])->name('store');
+        });
+
+        Route::middleware(['permission:editDiscount'])->group(function () {
+            Route::get('/edit/{id}', [DiscountController::class, 'edit'])->name('edit');
+            Route::put('/update', [DiscountController::class, 'update'])->name('update');
+            Route::patch('/update-status', [DiscountController::class, 'updateStatus'])->name('update.status');
+        });
+
+        Route::middleware(['permission:deleteDiscount'])->group(function () {
+            Route::delete('/delete/{id}', [DiscountController::class, 'delete'])->name('delete');
         });
     });
 });

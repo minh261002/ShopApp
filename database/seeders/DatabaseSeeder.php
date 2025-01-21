@@ -25,7 +25,8 @@ class DatabaseSeeder extends Seeder
             ProvinceSeeder::class,
             DistrictSeeder::class,
             WardSeeder::class,
-            ModuleSeeder::class
+            ModuleSeeder::class,
+            VariationAttributeSeeder::class,
         ]);
     }
 }

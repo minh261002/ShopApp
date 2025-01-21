@@ -1,5 +1,6 @@
 @php
     $adminSidebar = config('admin_sidebar');
+    $admin = Auth::guard('admin')->user();
 @endphp
 
 <aside class="navbar navbar-vertical navbar-expand-lg" data-bs-theme="dark">
@@ -14,6 +15,29 @@
                     style="height:2.5em">
             </a>
         </h1>
+
+        <div class="navbar-nav flex-row d-lg-none">
+            <div class="nav-item dropdown">
+                <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown"
+                    aria-label="Open user menu">
+                    <span class="avatar avatar-sm" style="background-image: url({{ $admin->image }})"></span>
+                    <div class="d-none d-xl-block ps-2">
+                        <div>
+                            {{ $admin->name }}
+                        </div>
+                        <div class="mt-1 small text-secondary">
+                            {{ $admin->role->pluck('title')->first() }}
+                        </div>
+                    </div>
+                </a>
+                <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                    <form action="{{ route('admin.logout') }}" method="POST">
+                        @csrf
+                        <button type="submit" class="dropdown-item">Đăng xuất</button>
+                    </form>
+                </div>
+            </div>
+        </div>
 
         <div class="collapse navbar-collapse" id="sidebar-menu">
             <ul class="navbar-nav pt-lg-3">
@@ -66,4 +90,3 @@
         </div>
     </div>
 </aside>
-

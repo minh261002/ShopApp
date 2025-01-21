@@ -19,10 +19,13 @@ class ProductVariation extends Model
         return $this->belongsTo(Product::class);
     }
 
-    public function attributes()
+    public function variationAttributes()
     {
-        return $this->belongsToMany(VariationAttribute::class, 'product_variations_values', 'product_variation_id', 'variation_attribute_id')
-            ->withPivot('value')
-            ->withTimestamps();
+        return $this->belongsToMany(
+            VariationAttribute::class,
+            'product_variations_values',
+            'product_variation_id',
+            'variation_attribute_id'
+        )->withPivot('value');
     }
 }
