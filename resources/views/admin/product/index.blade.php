@@ -68,4 +68,25 @@
     @include('admin.layout.partials.scripts', [
         'id_table' => $dataTable->getTableAttribute('id'),
     ])
+
+    <script>
+        $(document).on('change', '.form-check-input', function() {
+            let status = $(this).prop('checked') == true ? 'active' : 'inActive';
+            let id = $(this).data('id');
+
+            $.ajax({
+                type: 'PATCH',
+                dataType: 'json',
+                url: '{{ route('admin.product.update.status') }}',
+                data: {
+                    '_token': '{{ csrf_token() }}',
+                    'status': status,
+                    'id': id
+                },
+                success: function(data) {
+                    FuiToast.success('Cập nhật trạng thái thành công');
+                }
+            });
+        });
+    </script>
 @endpush

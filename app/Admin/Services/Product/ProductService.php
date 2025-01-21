@@ -38,6 +38,23 @@ class ProductService implements ProductServiceInterface
 
     public function update(Request $request): void
     {
-        //
+        $data = $request->validated();
+        $product = $this->repository->findOrFail($data['id']);
+
+        $categoryIds = $data['category_id'];
+        unset($data['category_id']);
+
+        if ($data['image'] == null) {
+            $data['image'] = '/admin/images/not-found.jpg';
+        }
+
+        if ($data['gallery'] !== null) {
+            $data['gallery'] = json_encode($data['gallery']);
+        }
+
+        $product->update($data);
+        $product->categories()->sync($categoryIds);
+
+        return;
     }
 }

@@ -37,8 +37,11 @@
 
         <!-- Page body -->
         <div class="page-body">
-            <form action="{{ route('admin.product.store') }}" method="POST">
+            <form action="{{ route('admin.product.update') }}" method="POST">
                 @csrf
+                @method('PUT')
+
+                <input type="hidden" name="id" value="{{ $product->id }}">
 
                 <div class="row">
                     <div class="col-md-9">
@@ -54,7 +57,7 @@
                                     <div class="col-12 mb-3">
                                         <label for="name" class="form-label">Tên sản phẩm</label>
                                         <input type="text" class="form-control" id="name" name="name"
-                                            value="{{ old('name') }}">
+                                            value="{{ $product->name }}">
                                         @error('name')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
@@ -62,7 +65,7 @@
 
                                     <div class="col-12 mb-3">
                                         <label for="short_desc" class="form-label">Mô tả ngắn</label>
-                                        <textarea name="short_desc" class="form-control" id="short_desc">{{ old('short_desc') }}</textarea>
+                                        <textarea name="short_desc" class="form-control" id="short_desc">{{ $product->short_desc }}</textarea>
                                         @error('short_desc')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
@@ -70,7 +73,7 @@
 
                                     <div class="col-12 mb-3">
                                         <label for="desc" class="form-label">Mô tả</label>
-                                        <textarea name="desc" class="form-control ck-editor" id="desc">{{ old('desc') }}</textarea>
+                                        <textarea name="desc" class="form-control ck-editor" id="desc">{{ $product->desc }}</textarea>
                                         @error('desc')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
@@ -87,6 +90,11 @@
 
                             <div class="card-body">
                                 <div class="col-lg-12">
+                                    @php
+                                        $gallery =
+                                            old('gallery') ??
+                                            ($product->gallery ? json_decode($product->gallery, true) : []);
+                                    @endphp
                                     @if (!isset($gallery) || count($gallery) == 0)
                                         <div class="click-to-upload">
                                             <div class="icon">
@@ -104,9 +112,6 @@
                                             </div>
                                         </div>
                                     @endif
-                                    @php
-                                        $gallery = old('product.gallery') ?? ($product->gallery ?? []);
-                                    @endphp
                                     <div class="upload-list {{ isset($gallery) && count($gallery) ? '' : 'hidden' }}">
                                         <ul id="sortable" class="clearfix data-album sortui ui-sortable">
                                             @if (isset($gallery) && count($gallery))
@@ -119,7 +124,7 @@
                                                                     value="{{ $val }}">
                                                             </span>
                                                             <button class="delete-image">
-                                                                <i class="fa-solid fa-trash"></i>
+                                                                <i class="ti ti-trash"></i>
                                                             </button>
                                                         </div>
                                                     </li>
@@ -190,7 +195,9 @@
                                 <div class="form-group mb-3">
                                     <select class="form-select" name="status" id="status">
                                         @foreach ($status as $key => $value)
-                                            <option value="{{ $key }}">{{ $value }}</option>
+                                            <option value="{{ $key }}"
+                                                {{ $product->status->value == $key ? 'selected' : '' }}>
+                                                {{ $value }}</option>
                                         @endforeach
                                     </select>
 
@@ -212,9 +219,10 @@
                                 <div class="col-lg-12">
                                     <div class="form-group">
                                         <span class="image img-cover image-target"><img class="w-100"
-                                                src="{{ old('image') ? old('image') : asset('admin/images/not-found.jpg') }}"
+                                                src="{{ old('image', $product->image ?? '') ? old('image', $product->image ?? '') : asset('admin/images/not-found.jpg') }}"
                                                 alt=""></span>
-                                        <input type="hidden" name="image" value="{{ old('image') }}">
+                                        <input type="hidden" name="image"
+                                            value="{{ old('image', $product->image ?? '') }}">
                                     </div>
                                 </div>
                             </div>
@@ -233,7 +241,7 @@
                                 </a>
 
                                 <button type="submit" class="btn btn-primary w-100">
-                                    Thêm mới
+                                    Lưu thay đổi
                                 </button>
                             </div>
                         </div>
@@ -252,12 +260,13 @@
             theme: 'bootstrap-5'
         });
 
-        // Load more category
         $(document).ready(function() {
             let offset = 0;
             let totalCategories = 0;
             const limit = 10;
             let keyword = '';
+
+            let list_categories = {{ json_encode($product->categories->pluck('id')) }};
 
             function getCategories(hidePrevious = false) {
                 let url = "{{ route('admin.category.get') }}";
@@ -289,6 +298,7 @@
                                         data-lft="${category._lft}"
                                         data-rgt="${category._rgt}"
                                         id="category_id-${category.id}"
+                                        ${list_categories.includes(category.id) ? 'checked' : ''}
                                         >
                                     <label class="form-check-label" for="category_id-${category.id}">
                                         ${category.name}
