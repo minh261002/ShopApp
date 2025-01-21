@@ -313,4 +313,41 @@ Route::middleware(['auth:admin'])->prefix('admin')->as('admin.')->group(function
             Route::delete('/delete/{id}', [DiscountController::class, 'delete'])->name('delete');
         });
     });
+
+    //Order
+    Route::prefix('order')->as('order.')->group(function () {
+        Route::middleware(['permission:viewOrder'])->group(function () {
+            Route::get('/', [OrderController::class, 'index'])->name('index');
+        });
+
+        Route::middleware(['permission:editOrder'])->group(function () {
+            Route::get('/edit/{id}', [OrderController::class, 'edit'])->name('edit');
+            Route::put('/update', [OrderController::class, 'update'])->name('update');
+        });
+    });
+
+    //Transaction
+    Route::prefix('transaction')->as('transaction.')->group(function () {
+        Route::middleware(['permission:viewTransaction'])->group(function () {
+            Route::get('/', [TransactionController::class, 'index'])->name('index');
+        });
+
+        Route::middleware(['permission:editTransaction'])->group(function () {
+            Route::get('/edit/{id}', [TransactionController::class, 'edit'])->name('edit');
+            Route::put('/update', [TransactionController::class, 'update'])->name('update');
+        });
+    });
+
+    //Shipping
+    Route::prefix('shipping')->as('shipping.')->group(function () {
+        Route::middleware(['permission:viewShipping'])->group(function () {
+            Route::get('/', [ShippingController::class, 'index'])->name('index');
+        });
+
+        Route::middleware(['permission:editShipping'])->group(function () {
+            Route::get('/edit/{id}', [ShippingController::class, 'edit'])->name('edit');
+            Route::put('/update', [ShippingController::class, 'update'])->name('update');
+            Route::patch('/update-status', [ShippingController::class, 'updateStatus'])->name('update.status');
+        });
+    });
 });

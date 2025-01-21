@@ -44,6 +44,27 @@ return [
         ]
     ],
     [
+        'active' => ['admin.order.*'],
+        'show' => ['admin.order.*'],
+        'title' => 'Quản lý đơn hàng',
+        'icon' => 'ti ti-shopping-cart fs-2',
+        'permission' => ['viewOrder', 'createOrder', 'editOrder', 'deleteOrder'],
+        'children' => [
+            [
+                'title' => 'Danh sách đơn hàng',
+                'route' => 'admin.order.index',
+                'icon' => 'ti ti-list fs-3 me-2',
+                'permission' => 'viewOrder'
+            ],
+            [
+                'title' => 'Danh sách giao dịch',
+                'route' => 'admin.transaction.index',
+                'icon' => 'ti ti-list fs-3 me-2',
+                'permission' => 'viewOrder'
+            ]
+        ]
+    ],
+    [
         'active' => ['admin.discount.*'],
         'show' => ['admin.discount.*'],
         'title' => 'Quản lý mã giảm giá',
