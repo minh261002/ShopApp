@@ -21,6 +21,9 @@ class AppServiceProvider extends ServiceProvider
         'App\Repositories\Post\PostRepositoryInterface' => 'App\Repositories\Post\PostRepository',
         'App\Repositories\Post\PostCatalogueRepositoryInterface' => 'App\Repositories\Post\PostCatalogueRepository',
         'App\Repositories\Category\CategoryRepositoryInterface' => 'App\Repositories\Category\CategoryRepository',
+        'App\Repositories\Product\ProductRepositoryInterface' => 'App\Repositories\Product\ProductRepository',
+        'App\Repositories\Product\ProductVariationRepositoryInterface' => 'App\Repositories\Product\ProductVariationRepository',
+        'App\Repositories\Product\ProductVariationValueRepositoryInterface' => 'App\Repositories\Product\ProductVariationValueRepository',
     ];
 
     public function register(): void

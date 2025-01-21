@@ -1,18 +1,18 @@
 <?php
 
-namespace App\Admin\DataTables\User;
+namespace App\Admin\DataTables\Product;
 
 use App\Admin\DataTables\BaseDataTable;
 use App\Enums\ActiveStatus;
-use App\Repositories\User\UserRepositoryInterface;
+use App\Repositories\Product\ProductRepositoryInterface;
 
-class UserDataTable extends BaseDataTable
+class ProductDataTable extends BaseDataTable
 {
-    protected $nameTable = 'userTable';
+    protected $nameTable = 'productTable';
     protected $repository;
 
     public function __construct(
-        UserRepositoryInterface $repository
+        ProductRepositoryInterface $repository
     ) {
         $this->repository = $repository;
         parent::__construct();
@@ -21,9 +21,9 @@ class UserDataTable extends BaseDataTable
     public function setView(): void
     {
         $this->view = [
-            'action' => 'admin.user.datatable.action',
-            'image' => 'admin.user.datatable.image',
-            'status' => 'admin.user.datatable.status',
+            'action' => 'admin.product.datatable.action',
+            'image' => 'admin.product.datatable.image',
+            'status' => 'admin.product.datatable.status',
         ];
     }
 
@@ -39,14 +39,14 @@ class UserDataTable extends BaseDataTable
         $this->columnSearchSelect = [
             [
                 'column' => 3,
-                'data' =>ActiveStatus::asSelectArray()
+                'data' => ActiveStatus::asSelectArray()
             ]
         ];
     }
 
     protected function setCustomColumns(): void
     {
-        $this->customColumns = config('datatable_columns.users', []);
+        $this->customColumns = config('datatable_columns.products', []);
     }
 
     protected function setCustomEditColumns(): void

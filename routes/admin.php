@@ -11,6 +11,7 @@ use App\Admin\Http\Controllers\Slider\SliderController;
 use App\Admin\Http\Controllers\User\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Admin\Http\Controllers\Auth\AuthController;
+use App\Admin\Http\Controllers\Product\ProductController;
 
 Route::middleware(['admin'])->prefix('admin')->as('admin.')->group(function () {
     Route::get('/login', [AuthController::class, 'login'])->name('login');
