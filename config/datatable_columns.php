@@ -1,6 +1,43 @@
 <?php
 
 return [
+    'productVariations' => [
+        'sku' => [
+            'title' => 'SKU',
+            'orderable' => true,
+            'exportable' => true,
+            'printable' => true,
+            'addClass' => 'text-center align-middle',
+        ],
+        'price' => [
+            'title' => 'Giá',
+            'orderable' => true,
+            'exportable' => true,
+            'printable' => true,
+            'addClass' => 'text-center align-middle',
+        ],
+        'sale_price' => [
+            'title' => 'Giá khuyến mãi',
+            'orderable' => true,
+            'exportable' => true,
+            'printable' => true,
+            'addClass' => 'text-center align-middle',
+        ],
+        'stock' => [
+            'title' => 'Số lượng tồn kho',
+            'orderable' => true,
+            'exportable' => true,
+            'printable' => true,
+            'addClass' => 'text-center align-middle',
+        ],
+        'action' => [
+            'title' => 'Thao tác',
+            'orderable' => false,
+            'exportable' => false,
+            'printable' => false,
+            'addClass' => 'text-center align-middle',
+        ],
+    ],
     'products' => [
         'image' => [
             'title' => 'Ảnh',

@@ -15,18 +15,13 @@ class ProductVariationValue extends Model
 
     protected $guarded = [];
 
-    public function variation()
+    public function productVariation()
     {
         return $this->belongsTo(ProductVariation::class, 'product_variation_id');
     }
 
-    public function attribute()
+    public function variationAttribute()
     {
         return $this->belongsTo(VariationAttribute::class, 'variation_attribute_id');
-    }
-
-    public function product()
-    {
-        return $this->variation->product;
     }
 }

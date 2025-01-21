@@ -2,75 +2,73 @@
 
 namespace App\Admin\Http\Controllers\Product;
 
-use App\Admin\DataTables\Product\ProductDataTable;
-use App\Admin\Http\Requests\Product\ProductRequest;
+use App\Admin\DataTables\Product\ProductVariationDataTable;
+use App\Admin\Http\Requests\Product\ProductVariationRequest;
 use App\Admin\Services\Product\ProductServiceInterface;
-use App\Enums\ActiveStatus;
 use App\Http\Controllers\Controller;
 use App\Repositories\Product\ProductRepositoryInterface;
+use App\Repositories\Product\ProductVariationRepositoryInterface;
+use App\Repositories\Product\ProductVariationValueRepositoryInterface;
 use App\Repositories\Product\VariationAttributeRepositoryInterface;
-use Illuminate\Http\Request;
 
 class ProductVariationController extends Controller
 {
     protected $service;
     protected $repository;
+    protected $productRepository;
     protected $variationAttributeRepository;
+    protected $productVariationValueRepository;
 
     public function __construct(
         ProductServiceInterface $service,
-        ProductRepositoryInterface $repository,
-        VariationAttributeRepositoryInterface $variationAttributeRepository
+        ProductVariationRepositoryInterface $repository,
+        ProductRepositoryInterface $productRepository,
+        VariationAttributeRepositoryInterface $variationAttributeRepository,
+        ProductVariationValueRepositoryInterface $productVariationValueRepository
     ) {
         $this->service = $service;
         $this->repository = $repository;
+        $this->productRepository = $productRepository;
         $this->variationAttributeRepository = $variationAttributeRepository;
+        $this->productVariationValueRepository = $productVariationValueRepository;
     }
 
-    public function index(ProductDataTable $dataTable)
+    public function index(ProductVariationDataTable $dataTable)
     {
-        return $dataTable->render('admin.product.index');
+        return $dataTable->render('admin.product.variation.index');
     }
 
-    public function create()
+    public function create($id)
     {
+        $product = $this->productRepository->findOrFail($id);
         $variationAttributes = $this->variationAttributeRepository->getAll();
-        $status = ActiveStatus::asSelectArray();
-
-        return view('admin.product.create', compact('status', 'variationAttributes'));
+        return view('admin.product.variation.create', compact('product', 'variationAttributes'));
     }
 
-    public function store(ProductRequest $request)
+    public function store(ProductVariationRequest $request)
     {
-        $this->service->store($request);
-        return redirect()->route('admin.product.index')->with('success', 'Thêm sản phẩm thành công');
+        $variation = $this->service->variationStore($request);
+        return redirect()->route('admin.product.variation.index', $variation->product_id)->with('success', 'Thêm biến thể sản phẩm thành công');
     }
 
     public function edit($id)
     {
-        $product = $this->repository->findOrFail($id);
         $variationAttributes = $this->variationAttributeRepository->getAll();
-        $status = ActiveStatus::asSelectArray();
+        $variation = $this->repository->findOrFail($id)->with('variationAttributes')->first();
+        $variationValues = $variation->variationAttributes->pluck('pivot.value', 'id');
 
-        return view('admin.product.edit', compact('product', 'status', 'variationAttributes'));
+        return view('admin.product.variation.edit', compact('variation', 'variationAttributes', 'variationValues'));
     }
 
-    public function update(ProductRequest $request)
+    public function update(ProductVariationRequest $request)
     {
-        $this->service->update($request);
-        return redirect()->route('admin.product.index')->with('success', 'Cập nhật sản phẩm thành công');
-    }
-
-    public function updateStatus(Request $request)
-    {
-        $data = $request->only('id', 'status');
-        $this->repository->update($data['id'], $data);
-        return response()->json(['status' => 'success', 'message' => 'Cập nhật trạng thái thành công']);
+        $variation = $this->service->variationUpdate($request);
+        return redirect()->route('admin.product.variation.index', $variation->product_id)->with('success', 'Cập nhật biến thể sản phẩm thành công');
     }
 
     public function delete($id)
     {
         $this->repository->delete($id);
-        return response()->json(['status' => 'success', 'message' => 'Xóa chuyên mục bài viết thành công']);
+        return response()->json(['status' => 'success', 'message' => 'Xóa biến thể sản phẩm thành công']);
     }
 }
