@@ -15,7 +15,6 @@ return new class extends Migration {
             $table->foreignId('flash_sale_id')->constrained()->cascadeOnDelete();
             $table->foreignId('product_id')->constrained()->cascadeOnDelete();
             $table->integer('discount');
-            $table->integer('quantity');
             $table->integer('sold')->default(0);
             $table->softDeletes();
             $table->timestamps();

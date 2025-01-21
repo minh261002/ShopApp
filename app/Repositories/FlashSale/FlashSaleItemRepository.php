@@ -11,4 +11,9 @@ class FlashSaleItemRepository extends BaseRepository implements FlashSaleItemRep
     {
         return FlashSaleItem::class;
     }
+
+    public function deleteBySaleId($saleId)
+    {
+        return $this->model->where('flash_sale_id', $saleId)->delete();
+    }
 }
