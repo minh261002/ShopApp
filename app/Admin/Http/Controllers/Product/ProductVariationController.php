@@ -11,7 +11,7 @@ use App\Repositories\Product\ProductRepositoryInterface;
 use App\Repositories\Product\VariationAttributeRepositoryInterface;
 use Illuminate\Http\Request;
 
-class ProductController extends Controller
+class ProductVariationController extends Controller
 {
     protected $service;
     protected $repository;

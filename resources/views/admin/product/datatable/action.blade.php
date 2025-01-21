@@ -1,4 +1,4 @@
-<a href="{{ route('admin.product.edit', $id) }}" class="btn btn-sm btn-info">
+<a href="{{ route('admin.product.variation.index', $id) }}" class="btn btn-sm btn-info">
     <i class="ti ti-versions fs-1"></i>
 </a>
 

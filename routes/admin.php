@@ -6,6 +6,7 @@ use App\Admin\Http\Controllers\Module\ModuleController;
 use App\Admin\Http\Controllers\Permission\PermissionController;
 use App\Admin\Http\Controllers\Post\PostCatalogueController;
 use App\Admin\Http\Controllers\Post\PostController;
+use App\Admin\Http\Controllers\Product\ProductVariationController;
 use App\Admin\Http\Controllers\Role\RoleController;
 use App\Admin\Http\Controllers\Slider\SliderController;
 use App\Admin\Http\Controllers\User\UserController;
@@ -267,5 +268,26 @@ Route::middleware(['auth:admin'])->prefix('admin')->as('admin.')->group(function
         Route::middleware(['permission:deleteProduct'])->group(function () {
             Route::delete('/delete/{id}', [ProductController::class, 'delete'])->name('delete');
         });
+    });
+
+    //Product Variant
+    Route::prefix('product/{id}/variation')->group(function () {
+        Route::middleware(['permission:viewProduct'])->group(function () {
+            Route::get('/', [ProductVariationController::class, 'index'])->name('product.variation.index');
+        });
+
+        Route::middleware(['permission:createProduct'])->group(function () {
+            Route::get('/create', [ProductVariationController::class, 'create'])->name('product.variation.create');
+            Route::post('/store', [ProductVariationController::class, 'store'])->name('product.variation.store');
+        });
+    });
+
+    Route::middleware(['permission:deleteProduct'])->group(function () {
+        Route::delete('product-variation/delete/{id}', [ProductVariationController::class, 'delete'])->name('product.variation.delete');
+    });
+
+    Route::middleware(['permission:editProduct'])->group(function () {
+        Route::get('product-variation/edit/{id}', [ProductVariationController::class, 'edit'])->name('product.variation.edit');
+        Route::put('product-variation/update', [ProductVariationController::class, 'update'])->name('product.variation.update');
     });
 });
