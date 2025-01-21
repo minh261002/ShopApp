@@ -31,4 +31,9 @@ class Product extends Model
             ->withPivot('value')
             ->withTimestamps();
     }
+
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class, 'products_categories', 'product_id', 'category_id');
+    }
 }

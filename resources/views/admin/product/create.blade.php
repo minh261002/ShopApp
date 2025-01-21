@@ -52,26 +52,26 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-12 mb-3">
-                                        <label for="product[name]" class="form-label">Tên sản phẩm</label>
-                                        <input type="text" class="form-control" id="product[name]" name="product[name]"
-                                            value="{{ old('product[name]') }}">
-                                        @error('product[name]')
+                                        <label for="name" class="form-label">Tên sản phẩm</label>
+                                        <input type="text" class="form-control" id="name" name="name"
+                                            value="{{ old('name') }}">
+                                        @error('name')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
 
                                     <div class="col-12 mb-3">
-                                        <label for="product[short_desc]" class="form-label">Mô tả ngắn</label>
-                                        <textarea name="product[short_desc]" class="form-control" id="product[short_desc]">{{ old('product[short_desc]') }}</textarea>
-                                        @error('product[short_desc]')
+                                        <label for="short_desc" class="form-label">Mô tả ngắn</label>
+                                        <textarea name="short_desc" class="form-control" id="short_desc">{{ old('short_desc') }}</textarea>
+                                        @error('short_desc')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
 
                                     <div class="col-12 mb-3">
-                                        <label for="product[desc]" class="form-label">Mô tả</label>
-                                        <textarea name="product[desc]" class="form-control ck-editor" id="product[desc]">{{ old('product[desc]') }}</textarea>
-                                        @error('product[desc]')
+                                        <label for="desc" class="form-label">Mô tả</label>
+                                        <textarea name="desc" class="form-control ck-editor" id="desc">{{ old('desc') }}</textarea>
+                                        @error('desc')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
@@ -115,7 +115,7 @@
                                                         <div class="thumb">
                                                             <span class="span image img-scaledown">
                                                                 <img src="{{ $val }}" alt="{{ $val }}">
-                                                                <input type="hidden" name="product[gallery][]"
+                                                                <input type="hidden" name="gallery[]"
                                                                     value="{{ $val }}">
                                                             </span>
                                                             <button class="delete-image">
@@ -129,16 +129,6 @@
                                     </div>
 
                                 </div>
-                            </div>
-                        </div>
-
-                        <div class="card mt-3">
-                            <div class="card-header d-flex align-items-center justify-content-between">
-                                <h2 class="card-title">Chi tiết sản phẩm</h2>
-                            </div>
-
-                            <div class="card-body">
-
                             </div>
                         </div>
 
@@ -295,7 +285,7 @@
                                         class="form-check-input"
                                         type="checkbox"
                                         value="${category.id}"
-                                        name="product[category_id][]"
+                                        name="category_id[]"
                                         data-lft="${category._lft}"
                                         data-rgt="${category._rgt}"
                                         id="category_id-${category.id}"

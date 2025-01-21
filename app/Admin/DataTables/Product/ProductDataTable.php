@@ -71,7 +71,6 @@ class ProductDataTable extends BaseDataTable
         $this->customRawColumns = [
             'action',
             'image',
-            'role',
             'status',
         ];
     }
@@ -79,11 +78,7 @@ class ProductDataTable extends BaseDataTable
     public function setCustomFilterColumns(): void
     {
         $this->customFilterColumns = [
-            'role' => function ($query, $keyword) {
-                return $query->whereHas('roles', function ($query) use ($keyword) {
-                    $query->where('name', 'like', '%' . $keyword . '%');
-                });
-            },
+
         ];
     }
 }

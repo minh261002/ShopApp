@@ -23,10 +23,6 @@ class VariationAttributeSeeder extends Seeder
                     'name' => 'Màu sắc',
                     'slug' => 'mau-sac',
                 ],
-                [
-                    'name' => 'Chất liệu',
-                    'slug' => 'chat-lieu',
-                ],
             ]);
     }
 }
