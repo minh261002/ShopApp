@@ -3,5 +3,5 @@
 @section('title', 'Trang chủ')
 
 @section('content')
-    âs
+    @include('client.home.components.carousel')
 @endsection
