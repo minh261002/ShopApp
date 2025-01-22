@@ -36,4 +36,9 @@ class Product extends Model
     {
         return $this->belongsToMany(Category::class, 'products_categories', 'product_id', 'category_id');
     }
+
+    public function flashSale()
+    {
+        return $this->belongsToMany(FlashSale::class, 'flash_sale_items', 'product_id', 'flash_sale_id');
+    }
 }

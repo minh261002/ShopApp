@@ -18,20 +18,26 @@ class ShowProductVariationResource extends JsonResource
             'id' => $this->id,
             'price' => $this->price,
             'sale_price' => $this->sale_price,
-            'image' => $this->image ? formatImageUrl($this->image) : null,
-            'quantity' => $this->qty,
-            'attributes' => $this->attributeVariations->map(function ($attributeVariation) {
-                return [
-                    'id' => $attributeVariation->id,
-                    'attribute_name' => $attributeVariation->attribute->name,
-                    'name' => $attributeVariation->name,
-                    'meta_value' => $attributeVariation->meta_value,
-                ];
-            }),
+            'stock' => $this->stock,
+            'sku' => $this->sku,
+            'attributes' => $this->getAttribute($this->variationAttributes),
         ];
 
         return $data;
     }
 
+    private function getAttribute($attribute)
+    {
+        return $attribute->map(function ($item) {
+            return [
+                'id' => $item->id,
+                'name' => $item->name,
+                'slug' => $item->slug,
+                'pivot' => [
+                    'value' => $item->pivot->value,
+                ]
+            ];
+        });
+    }
 
 }

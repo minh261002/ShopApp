@@ -56,10 +56,10 @@ Route::group([
         Route::get('/', [FlashSaleController::class, 'index']);
     });
 
-    // Route::prefix('product')->group(function () {
-    //     Route::get('/show/{slug}', [ProductController::class, 'show']);
-    //     Route::get('/new', [ProductController::class, 'new']);
-    // });
+    Route::prefix('product')->group(function () {
+        Route::get('/show/{slug}', [ProductController::class, 'show']);
+        Route::get('/new', [ProductController::class, 'new']);
+    });
 
     // Route::prefix('order')->group(function () {
     //     Route::post('/store', [OrderController::class, 'store']);
