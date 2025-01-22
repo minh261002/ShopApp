@@ -12,7 +12,7 @@ class FlashSaleResource extends JsonResource
             'id' => $this->id,
             'title' => $this->title,
             'start_date' => format_datetime($this->start_date),
-            'end_date' => format_datetime($this->end_date),
+            'end_date' => $this->end_date,
             'items' => FlashSaleProductResource::collection($this->items),
         ];
     }
