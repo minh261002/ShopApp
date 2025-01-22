@@ -21,7 +21,7 @@
 
             <div class="flex-grow-1">
                 <div class="d-flex justify-content-end align-items-center gap-4">
-                    <div>
+                    <div class="cursor-pointer">
                         <i class="ti ti-truck-delivery fs-2"></i>
                     </div>
 
@@ -36,8 +36,23 @@
                         </div>
                     </div>
 
-                    <div class="position-relative">
-                        <i class="ti ti-user-circle fs-2"></i>
+                    <div class="dropdown">
+                        <div class="user-dropdown dropdown-toggle cursor-pointer" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            <i class="ti ti-user-circle fs-2"></i>
+
+                        </div>
+                        <ul class="dropdown-menu">
+                            {{-- <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li> --}}
+                            @if (auth()->guard('web')->check())
+                                <li><a class="dropdown-item" href="{{ route('client.logout') }}">Đăng xuất</a></li>
+                            @else
+                                <li><a class="dropdown-item" href="{{ route('login') }}">Đăng nhập</a></li>
+                                <li><a class="dropdown-item" href="{{ route('register') }}">Đăng ký</a></li>
+                            @endif
+                        </ul>
                     </div>
                 </div>
             </div>

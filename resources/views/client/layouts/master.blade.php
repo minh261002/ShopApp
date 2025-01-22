@@ -15,16 +15,22 @@
     @stack('styles')
 </head>
 
-<body class="app-bg">
+<body>
 
     @include('client.layouts.partials.header-top')
     @include('client.layouts.partials.header-main')
-
-    @yield('content')
+    @include('client.layouts.partials.navigation')
+    <div class="w-100 app-bg">
+        <div class="container">
+            @yield('content')
+        </div>
+    </div>
 
     <script src="{{ 'client/js/jquery.js' }}"></script>
     <script src="{{ asset('client/js/popper.js') }}"></script>
     <script src="{{ asset('client/js/bootstrap.js') }}"></script>
+
+    @stack('scripts')
 </body>
 
 </html>
