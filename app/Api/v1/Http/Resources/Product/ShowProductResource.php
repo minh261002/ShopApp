@@ -28,6 +28,7 @@ class ShowProductResource extends JsonResource
                     'slug' => $category->slug,
                 ];
             }),
+            'short_desc' => $this->short_desc,
             'desc' => $this->desc,
             'meta_title' => $this->meta_title,
             'meta_desc' => $this->meta_desc,
@@ -43,12 +44,12 @@ class ShowProductResource extends JsonResource
                     'id' => $flashSale->id,
                     'title' => $flashSale->title,
                     'end_date' => $flashSale->end_date,
-                    'product' => $flashSale->items->where('product_id', $this->id)->map(function ($item) {
-                        return [
-                            'discount' => $item->discount,
-                            'image' => formatImageUrl($item->image),
-                        ];
-                    })->first()
+                    'discount' => $flashSale->items->where('product_id', $this->id)->map(function ($item) {
+                        return $item->discount;
+                    })->first(),
+                    'image' => formatImageUrl($flashSale->items->where('product_id', $this->id)->map(function ($item) {
+                        return $item->image;
+                    })->first()),
                 ];
             });
         }
