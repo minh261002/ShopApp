@@ -52,9 +52,9 @@ Route::group([
         Route::get('/home', [DiscountController::class, 'showHome']);
     });
 
-    // Route::prefix('flash-sale')->group(function () {
-    //     Route::get('/', [FlashSaleController::class, 'index']);
-    // });
+    Route::prefix('flash-sale')->group(function () {
+        Route::get('/', [FlashSaleController::class, 'index']);
+    });
 
     // Route::prefix('product')->group(function () {
     //     Route::get('/show/{slug}', [ProductController::class, 'show']);

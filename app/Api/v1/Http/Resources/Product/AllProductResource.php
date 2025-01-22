@@ -14,6 +14,8 @@ class AllProductResource extends ResourceCollection
                 'name' => $product->name,
                 'slug' => $product->slug,
                 'image' => formatImageUrl($product->image),
+                'price' => $product->variations->first()->price ?? 0,
+                'sale_price' => $product->variations->first()->sale_price ?? 0,
             ];
 
             return $data;
