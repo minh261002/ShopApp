@@ -7,6 +7,7 @@ use App\Api\V1\Http\Requests\Auth\LoginRequest;
 use App\Api\V1\Http\Requests\Auth\RegisterRequest;
 use App\Api\V1\Http\Resources\Auth\LoginResource;
 use App\Api\V1\Http\Resources\User\UserResource;
+use App\Enums\ActiveStatus;
 use App\Http\Controllers\Controller;
 use App\Mail\UserSendResetLinkMail;
 use App\Models\User;
@@ -39,19 +40,27 @@ class AuthController extends Controller
             'password' => $request->input('password'),
         ];
 
+
         if (!$token = auth()->guard('api')->attempt($credentials)) {
             return response()->json([
                 'status' => 401,
                 'error' => 'Thông tin đăng nhập không chính xác',
-            ], );
+            ]);
         }
 
         $user = auth()->guard('api')->user();
-        $cookie = $this->setAccessTokenAndRefreshToken($token);
+        if ($user->status->value == ActiveStatus::InActive->value) {
+            return response()->json([
+                'status' => 422,
+                'message' => 'Tài khoản hiện không hoạt động',
+            ]);
+        } else {
+            $cookie = $this->setAccessTokenAndRefreshToken($token);
 
-        $accessTokenCookie = $cookie['tokenCookie'];
+            $accessTokenCookie = $cookie['tokenCookie'];
 
-        return $this->respondWithToken($token, $user)->withCookie($accessTokenCookie);
+            return $this->respondWithToken($token, $user)->withCookie($accessTokenCookie);
+        }
     }
 
     /**
@@ -129,6 +138,8 @@ class AuthController extends Controller
     protected function respondWithToken($token, $user)
     {
         return response()->json([
+            "status" => 200,
+            'message' => 'Đăng nhập thành công',
             'user' => new LoginResource($user),
             'access_token' => $token,
             'token_type' => 'bearer',
