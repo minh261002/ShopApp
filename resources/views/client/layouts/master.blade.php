@@ -10,13 +10,15 @@
     </title>
     <link rel="stylesheet" href="{{ asset('client/css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('client/css/boostrap.css') }}">
-
+    <link rel="stylesheet" href="{{ asset('admin/icons/tabler-icons-filled.css') }}">
+    <link rel="stylesheet" href="{{ asset('admin/icons/tabler-icons.css') }}">
     @stack('styles')
 </head>
 
-<body>
+<body class="app-bg">
 
     @include('client.layouts.partials.header-top')
+    @include('client.layouts.partials.header-main')
 
     @yield('content')
 

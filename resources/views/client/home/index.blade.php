@@ -3,5 +3,5 @@
 @section('title', 'Trang chủ')
 
 @section('content')
-
+    âs
 @endsection
