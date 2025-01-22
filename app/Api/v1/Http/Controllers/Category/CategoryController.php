@@ -25,6 +25,22 @@ class CategoryController extends Controller
     /**
      * Danh sách danh mục sản phẩm trong menu
      *
+     * Api này trả về danh sách tất cả danh mục sản phẩm hiển thị trên menu
+     *
+     * @return \Illuminate\Http\JsonResponse
+     *
+     * @response
+     *     {
+     * "data": [
+     * {
+     * "id": 1,
+     * "name": "Áo",
+     * "slug": "ao",
+     * "image": "/admin/images/not-found.jpg"
+     * }
+     * ]
+     * }
+     *
      * @return void
      */
     public function getCategoryInMenu()
@@ -47,6 +63,13 @@ class CategoryController extends Controller
         }
     }
 
+    /**
+     * Danh sách danh mục sản phẩm trên trang chủ
+     *
+     * Api này trả về danh sách tất cả danh mục sản phẩm hiển thị trên trang chủ
+     *
+     * @return mixed|\Illuminate\Http\JsonResponse
+     */
     public function getCategoryInHome()
     {
         try {

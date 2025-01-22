@@ -15,6 +15,7 @@
         "laravel/framework": "^11.31",
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.9",
+        "ovac/idoc": "^1.7",
         "spatie/laravel-permission": "^6.10",
         "tymon/jwt-auth": "^2.1",
         "yajra/laravel-datatables": "^11"

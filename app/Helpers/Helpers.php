@@ -17,7 +17,7 @@ if (!function_exists('limit_text')) {
 if (!function_exists('formatImageUrl')) {
     function formatImageUrl($url)
     {
-        return env('APP_URL') . $url;
+        return url($url);
     }
 }
 

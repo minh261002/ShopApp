@@ -52,20 +52,20 @@ Route::group([
         Route::get('/home', [DiscountController::class, 'showHome']);
     });
 
-    Route::prefix('flash-sale')->group(function () {
-        Route::get('/', [FlashSaleController::class, 'index']);
-    });
+    // Route::prefix('flash-sale')->group(function () {
+    //     Route::get('/', [FlashSaleController::class, 'index']);
+    // });
 
-    Route::prefix('product')->group(function () {
-        Route::get('/show/{slug}', [ProductController::class, 'show']);
-        Route::get('/new', [ProductController::class, 'new']);
-    });
+    // Route::prefix('product')->group(function () {
+    //     Route::get('/show/{slug}', [ProductController::class, 'show']);
+    //     Route::get('/new', [ProductController::class, 'new']);
+    // });
 
-    Route::prefix('order')->group(function () {
-        Route::post('/store', [OrderController::class, 'store']);
-        Route::post('/shipping-fee', [OrderController::class, 'caculateShippingFee']);
-        Route::patch('/update-success', [OrderController::class, 'updateSuccess']);
-    });
+    // Route::prefix('order')->group(function () {
+    //     Route::post('/store', [OrderController::class, 'store']);
+    //     Route::post('/shipping-fee', [OrderController::class, 'caculateShippingFee']);
+    //     Route::patch('/update-success', [OrderController::class, 'updateSuccess']);
+    // });
 
     // Route::middleware(['jwt', 'auth:api'])->group(function () {
     //     Route::prefix('product')->group(function () {
