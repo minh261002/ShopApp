@@ -1,4 +1,4 @@
-<div class="w-full bg-white shadow-sm py-2">
+<div class="w-full bg-white shadow-sm ">
     <div class="container">
         <ul class="navbar-nav d-flex flex-row align-items-center justify-content-center gap-4">
             <li class="nav-item">

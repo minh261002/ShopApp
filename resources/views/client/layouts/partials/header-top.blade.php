@@ -1,4 +1,4 @@
-<div id="topBarCarousel" class="carousel slide header-bg py-2" data-bs-ride="carousel">
+<div id="topBarCarousel" class="carousel slide header-bg py-1" data-bs-ride="carousel">
     <div class="carousel-inner text-center">
         <div class="carousel-item active">
             <span class="text-white fs-6 fw-normal">

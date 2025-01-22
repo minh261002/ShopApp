@@ -1,5 +1,5 @@
 <div class="w-100 header-main-bg">
-    <div class="container py-3">
+    <div class="container py-2">
         <div class="d-flex align-items-center justify-content-between">
             <div class="flex-grow-1">
                 <a href="{{ route('home') }}">

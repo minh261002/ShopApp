@@ -1,15 +1,6 @@
-<div class="my-5">
+<div class="py-5">
     <div id="homeCarousel" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
-            {{-- <div class="carousel-item active">
-                <img src="..." class="d-block w-100" alt="...">
-            </div>
-            <div class="carousel-item">
-                <img src="..." class="d-block w-100" alt="...">
-            </div>
-            <div class="carousel-item">
-                <img src="..." class="d-block w-100" alt="...">
-            </div> --}}
             @foreach ($slider->items as $item)
                 <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
                     <img src="{{ $item->image }}" class="d-block w-100" alt="{{ $item->title }}">
