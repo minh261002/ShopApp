@@ -6,17 +6,17 @@
     </div>
 
     <div class="row align-items-center">
-        @for ($i = 0; $i < 6; $i++)
-            @forelse ($homeCategories as $category)
-                <div class="col-4 col-md-2  d-flex flex-col align-items-center justify-content-center">
-                    <a href="" class="nav-link p-0">
-                        <img src="{{ $category->image }}" alt="{{ $category->name }}"
-                            class="img-fluid home-category-img">
-                        <p class="text-center text-uppercase text-dark fw-semibold mt-3">{{ $category->name }}</p>
-                    </a>
-                </div>
-            @empty
-            @endforelse
-        @endfor
+        @forelse ($homeCategories as $category)
+            <div class="col-4 col-md-2  d-flex flex-col align-items-center justify-content-center">
+                <a href="" class="nav-link p-0">
+                    <img src="{{ $category->image }}" alt="{{ $category->name }}" class="img-fluid home-category-img">
+                    <p class="text-center text-uppercase text-dark fw-semibold mt-3">{{ $category->name }}</p>
+                </a>
+            </div>
+        @empty
+            <div class="w-100 alert alert-light" role="alert">
+                Không có danh mục nào
+            </div>
+        @endforelse
     </div>
 </div>
