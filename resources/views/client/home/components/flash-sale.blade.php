@@ -9,7 +9,7 @@
         @foreach ($flashSale->items as $item)
             <div class="card border-0">
                 <div class="card-body p-0 border-gray rounded-2">
-                    <div class="img-wrapper" style="height: 300px; object-fit: cover;">
+                    <div class="img-wrapper" style="height: 340px; object-fit: cover;">
                         <a href="{{ route('product.detail', $item->product->slug) }}">
                             <img src="{{ $item->product->image }}" alt="{{ $item->name }}"
                                 class="w-100 h-100 rounded-2">

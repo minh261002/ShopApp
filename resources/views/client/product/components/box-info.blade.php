@@ -152,6 +152,25 @@
             </button>
         </div>
 
+        <div class="d-flex align-items-stretch mt-4">
+            <div class="flex-grow-1 d-flex flex-column align-items-center gap-2 text-center">
+                <img src="https://res.cloudinary.com/doy3slx9i/image/upload/v1735367737/Pengu/delivery_yhvchy.svg"
+                    width="50" height="auto" class="object-fit-cover">
+                <span class="text-secondary fs-14px fw-bold">Giao hàng toàn quốc</span>
+            </div>
+
+            <div class="flex-grow-1  d-flex flex-column align-items-center gap-2 text-center">
+                <img src="https://res.cloudinary.com/doy3slx9i/image/upload/v1735367738/Pengu/cash_yh8ysr.svg"
+                    width="35" height="auto" class="object-fit-cover">
+                <span class="text-secondary fs-14px fw-bold">Thanh toán khi nhận hàng</span>
+            </div>
+
+            <div class="flex-grow-1  d-flex flex-column align-items-center gap-2 text-center">
+                <img src="https://res.cloudinary.com/doy3slx9i/image/upload/v1735367737/Pengu/back_dsc2yw.svg"
+                    width="35" height="auto" class="object-fit-cover">
+                <span class="text-secondary fs-14px fw-bold">Đổi trả miễn phí</span>
+            </div>
+        </div>
 
     </div>
 </div>

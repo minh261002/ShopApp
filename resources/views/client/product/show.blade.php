@@ -35,6 +35,10 @@
                 </div>
             </div>
         </div>
+
+        <div class="mt-5">
+            @include('client.product.components.box-desc')
+        </div>
     </div>
 @endsection
 
