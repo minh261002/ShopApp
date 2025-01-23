@@ -678,7 +678,7 @@
                                                             <tr style="padding:0;vertical-align:top;text-align:left">
                                                                 <th class="col-pad-left-2 col-pad-right-2"
                                                                     style="color:#0a0a0a;font-family:'Cereal', Helvetica, Arial, sans-serif;font-weight:normal;padding:0;margin:0;text-align:left;font-size:16px;line-height:19px;padding-left:16px;padding-right:16px">
-                                                                    <a href="{{ env('CLIENT_URL') }}/dat-lai-mat-khau?token={{ $token }}&email={{ $email }}"
+                                                                    <a href="{{ route('password.reset', ['token' => $token, 'email' => $email]) }}"
                                                                         class="btn-primary btn-sm btn-rausch btn-full-width"
                                                                         style="font-family:'Cereal', Helvetica, Arial, sans-serif;font-weight:normal;margin:0;text-align:left;line-height:1.3;color:#2199e8;text-decoration:none;background-color:#ff5a5f;-webkit-border-radius:4px;border-radius:4px;display:block;padding:19px 24px 19px 24px;">
                                                                         <p class="text-center"

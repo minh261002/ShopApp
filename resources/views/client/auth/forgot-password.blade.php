@@ -1,6 +1,6 @@
 @extends('client.layouts.master')
 
-@section('title', 'Đăng nhập')
+@section('title', 'Quên mật khẩu')
 
 @section('content')
     <div class="my-5">
@@ -9,7 +9,12 @@
                 Quên mật khẩu
             </h1>
 
-            <form class="d-flex flex-column">
+            <form class="d-flex flex-column" method="POST" action="{{ route('password.email') }}">
+                @csrf
+
+                <input type="hidden" name="time" value="{{ time() }}">
+                <input type="hidden" name="device" value="{{ request()->header('User-Agent') }}">
+
                 <div class="form-group mb-3">
                     <label for="email" class="form-label">Email</label>
                     <input type="email" class="form-control" id="email" name="email" value="{{ old('email') }}">
