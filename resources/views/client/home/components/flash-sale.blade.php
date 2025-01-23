@@ -6,11 +6,43 @@
     </div>
 
     <div class="owl-carousel owl-theme">
-        {{-- <div class="item">
-            <h4>1</h4>
-        </div> --}}
         @foreach ($flashSale->items as $item)
-            <img src="{{ $item->image }}" alt="{{ $item->name }}" class="img-fluid">
+            <div class="card border-0">
+                <div class="card-body p-0 border-gray rounded-2">
+                    <div class="img-wrapper" style="height: 300px; object-fit: cover;">
+                        <a href="">
+                            <img src="{{ $item->product->image }}" alt="{{ $item->name }}"
+                                class="w-100 h-100 rounded-2">
+                        </a>
+                        <div>
+                            <span
+                                class="badge bg-danger text-white fw-semibold fs-14px position-absolute top-0 start-0 m-2">
+                                -{{ $item->discount }}%
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="d-flex flex-column mt-3 px-3">
+                        <div class="d-flex mb-1">
+                            @for ($i = 0; $i < 5; $i++)
+                                <i class="ti ti-star text-yellow"></i>
+                            @endfor
+                        </div>
+
+                        <a href="" class="text-dark fs-14px fw-normal text-decoration-none">
+                            {{ limit_text($item->product->name, 30) }}
+                        </a>
+
+                        <div class="d-flex align-items-center justify-content-between">
+                            <p class="mb-0 text-danger fs-18px fw-semibold">
+                                {{ format_price(($item->product->variations->first()->price * (100 - $item->discount)) / 100) }}
+                            <p class="mb-0 text-muted fs-14px text-decoration-line-through">
+                                {{ format_price($item->product->variations->first()->price) }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         @endforeach
     </div>
 @endforeach
@@ -27,7 +59,7 @@
             autoplayHoverPause: true,
             responsive: {
                 0: {
-                    items: 1
+                    items: 2
                 },
                 600: {
                     items: 3
