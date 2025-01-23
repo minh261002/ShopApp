@@ -14,6 +14,13 @@ if (!function_exists('limit_text')) {
     }
 }
 
+if (!function_exists('formatImageUrl')) {
+    function formatImageUrl($url)
+    {
+        return url($url);
+    }
+}
+
 if (!function_exists('format_datetime')) {
     function format_datetime($datetime)
     {

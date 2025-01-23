@@ -27,6 +27,6 @@ class FlashSale extends Model
 
     public function scopeActive($query)
     {
-        return $query->where('status', 2);
+        return $query->where('status', ActiveStatus::Active->value);
     }
 }
