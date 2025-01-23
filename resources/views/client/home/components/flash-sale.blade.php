@@ -1,7 +1,7 @@
 @foreach ($flashSales as $flashSale)
     <div class="d-flex align-items-center justify-content-center gap-4 mb-3">
         <img src="https://res.cloudinary.com/doy3slx9i/image/upload/v1737562155/Pengu/icon_yl8py7.svg" alt="">
-        <h1 class="mb-0 text-danger fs-4 fw-semibold text-uppercase">{{ $flashSale->title }}</h1>
+        <h1 class="mb-0 text-danger fs-20px fw-semibold text-uppercase">{{ $flashSale->title }}</h1>
         <img src="https://res.cloudinary.com/doy3slx9i/image/upload/v1737562155/Pengu/icon_yl8py7.svg" alt="">
     </div>
 

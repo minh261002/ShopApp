@@ -13,7 +13,7 @@
                     <div class="input-group">
                         <input type="text" class="form-control" name="keyword" placeholder="Tìm kiếm sản phẩm">
                         <button class="btn btn-danger" type="submit">
-                            <i class="ti ti-search"></i>
+                            <i class="ti ti-search fs-22px"></i>
                         </button>
                     </div>
                 </form>
@@ -22,15 +22,15 @@
             <div class="flex-grow-1">
                 <div class="d-flex justify-content-end align-items-center gap-4">
                     <div class="cursor-pointer">
-                        <i class="ti ti-truck-delivery fs-2"></i>
+                        <i class="ti ti-truck-delivery fs-28px"></i>
                     </div>
 
                     <div class="mb-0" data-bs-toggle="offcanvas" href="#shoppingCart" role="button"
                         aria-controls="shoppingCart">
                         <div class="position-relative">
-                            <i class="ti ti-shopping-cart fs-2"></i>
+                            <i class="ti ti-shopping-cart fs-28px"></i>
                             <span
-                                class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                class="position-absolute top-0 start-100 translate-middle badge bg-red text-white rounded-pill">
                                 0
                             </span>
                         </div>
@@ -39,7 +39,7 @@
                     <div class="dropdown">
                         <div class="user-dropdown dropdown-toggle cursor-pointer" data-bs-toggle="dropdown"
                             aria-expanded="false">
-                            <i class="ti ti-user-circle fs-2"></i>
+                            <i class="ti ti-user-circle fs-28px"></i>
 
                         </div>
                         <ul class="dropdown-menu">

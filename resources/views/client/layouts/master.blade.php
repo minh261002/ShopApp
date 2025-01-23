@@ -10,7 +10,12 @@
         @yield('title')
     </title>
     <link rel="stylesheet" href="{{ asset('client/css/app.css') }}">
-    <link rel="stylesheet" href="{{ asset('client/css/boostrap.css') }}">
+    {{-- <link rel="stylesheet" href="{{ asset('client/css/boostrap.css') }}"> --}}
+    <link href="{{ asset('admin/css/tabler.min.css?1692870487') }}" rel="stylesheet" />
+    <link href="{{ asset('admin/css/tabler-flags.min.css?1692870487') }}" rel="stylesheet" />
+    <link href="{{ asset('admin/css/tabler-payments.min.css?1692870487') }}" rel="stylesheet" />
+    <link href="{{ asset('admin/css/tabler-vendors.min.css?1692870487') }}" rel="stylesheet" />
+    <link href="{{ asset('admin/css/demo.min.css?1692870487') }}" rel="stylesheet" />
     <link rel="stylesheet" href="{{ asset('admin/icons/tabler-icons-filled.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/icons/tabler-icons.css') }}">
     <link rel="stylesheet" href="{{ asset('client/css/owl.carousel.min.css') }}">
@@ -19,7 +24,7 @@
     @stack('styles')
 </head>
 
-<body>
+<body class="bg-white">
 
     @include('client.layouts.partials.header-top')
     @include('client.layouts.partials.header-main')
@@ -30,9 +35,11 @@
         </div>
     </div>
 
-    <script src="{{ 'client/js/jquery.js' }}"></script>
-    <script src="{{ asset('client/js/popper.js') }}"></script>
-    <script src="{{ asset('client/js/bootstrap.js') }}"></script>
+    <script src="{{ asset('admin/js/jquery.js') }}"></script>
+    <script src="{{ asset('admin/js/jquery-ui.min.js') }}"></script>
+
+    <script src="{{ asset('admin/js/tabler.min.js?1692870487') }}" defer></script>
+    <script src="{{ asset('admin/js/demo.min.js?1692870487') }}" defer></script>
     <script src="{{ asset('client/js/owl.carousel.min.js') }}"></script>
 
     @stack('scripts')
