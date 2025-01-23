@@ -43,14 +43,15 @@
 
                         </div>
                         <ul class="dropdown-menu">
-                            {{-- <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li> --}}
                             @if (auth()->guard('web')->check())
                                 <li><a class="dropdown-item" href="{{ route('client.logout') }}">Đăng xuất</a></li>
                             @else
-                                <li><a class="dropdown-item" href="{{ route('login') }}">Đăng nhập</a></li>
-                                <li><a class="dropdown-item" href="{{ route('register') }}">Đăng ký</a></li>
+                                <li>
+                                    <a class="dropdown-item" href="{{ route('login') }}">Đăng nhập</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="{{ route('register') }}">Đăng ký</a>
+                                </li>
                             @endif
                         </ul>
                     </div>
