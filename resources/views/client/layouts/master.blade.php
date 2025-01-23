@@ -35,6 +35,8 @@
         </div>
     </div>
 
+    @include('client.layouts.partials.footer')
+
     <script src="{{ asset('admin/js/jquery.js') }}"></script>
     <script src="{{ asset('admin/js/jquery-ui.min.js') }}"></script>
 

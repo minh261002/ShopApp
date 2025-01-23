@@ -93,3 +93,15 @@
         </div>
     </div>
 </div>
+
+@push('scripts')
+    <script>
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 100) {
+                $('.header-main-bg').addClass('slide-down');
+            } else {
+                $('.header-main-bg').removeClass('slide-down');
+            }
+        });
+    </script>
+@endpush
