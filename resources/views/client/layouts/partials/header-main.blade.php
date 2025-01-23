@@ -25,8 +25,7 @@
                         <i class="ti ti-truck-delivery fs-28px"></i>
                     </div>
 
-                    <div class="mb-0" data-bs-toggle="offcanvas" href="#shoppingCart" role="button"
-                        aria-controls="shoppingCart">
+                    <div class="mb-0 cursor-pointer">
                         <div class="position-relative">
                             <i class="ti ti-shopping-cart fs-28px"></i>
                             <span
@@ -71,25 +70,14 @@
     </div>
 </div>
 
-<div class="offcanvas offcanvas-end" tabindex="-1" id="shoppingCart" aria-labelledby="shoppingCartLabel">
-    <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="shoppingCartLabel">Offcanvas</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-    </div>
-    <div class="offcanvas-body">
-        <div>
-            Some text as placeholder. In real life you can have the elements you have chosen. Like,
-            text, images, lists, etc.
-        </div>
-        <div class="dropdown mt-3">
-            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
-                Dropdown button
-            </button>
-            <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Action</a></li>
-                <li><a class="dropdown-item" href="#">Another action</a></li>
-                <li><a class="dropdown-item" href="#">Something else here</a></li>
-            </ul>
-        </div>
-    </div>
-</div>
+@push('scripts')
+    <script>
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 100) {
+                $('.header-main-bg').addClass('slide-down');
+            } else {
+                $('.header-main-bg').removeClass('slide-down');
+            }
+        });
+    </script>
+@endpush

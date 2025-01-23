@@ -27,18 +27,15 @@ class AuthController extends Controller
         unset($data['remember']);
 
         if (!auth()->guard('web')->attempt($data, $remember)) {
-            notyf()->error('Thông tin đăng nhập không chính xác');
-            return back()->withInput($request->only('email'));
+            return back()->withInput($request->only('email'))->with('error', 'Thông tin đăng nhập không chính xác');
         }
 
         if (auth()->guard('web')->user()->status->value == ActiveStatus::InActive->value) {
             auth()->guard('web')->logout();
-            notyf()->error('Tài khoản của bạn hiện không hoạt động');
-            return back()->withInput($request->only('email'));
+            return back()->withInput($request->only('email'))->with('error', 'Tài khoản hiện không hoạt động');
         }
 
-        notyf()->success('Xin chào, ' . auth()->guard('web')->user()->name);
-        return redirect()->route('home');
+        return redirect()->route('home')->with('success', 'Xin chào, ' . auth()->guard('web')->user()->name);
     }
 
     public function register()
@@ -56,8 +53,7 @@ class AuthController extends Controller
 
         auth()->guard('web')->login($user);
 
-        notyf()->success('Đăng ký tài khoản thành công');
-        return redirect()->route('home');
+        return redirect()->route('home')->with('success', 'Xin chào, ' . auth()->guard('web')->user()->name);
     }
 
     public function forgotPassword()
@@ -76,13 +72,11 @@ class AuthController extends Controller
         $user = User::where('email', $email)->first();
 
         if (!$user) {
-            notyf()->error('Email không tồn tại');
-            return back()->withInput($request->only('email'));
+            return back()->withInput($request->only('email'))->with('error', 'Email không tồn tại');
         }
 
         if ($user->status->value == ActiveStatus::InActive->value) {
-            notyf()->error('Tài khoản của bạn hiện không hoạt động');
-            return back()->withInput($request->only('email'));
+            return back()->withInput($request->only('email'))->with('error', 'Tài khoản hiện không hoạt động');
         }
 
 
@@ -104,9 +98,8 @@ class AuthController extends Controller
             ]);
         }
 
-        Mail::to( $email)->send(new UserSendResetLinkMail($token, $email, $user->name, $device, $time));
-        notyf()->success('Vui lòng kiểm tra email để đặt lại mật khẩu');
-        return redirect()->back();
+        Mail::to($email)->send(new UserSendResetLinkMail($token, $email, $user->name, $device, $time));
+        return redirect()->back()->with('success', 'Kiểm tra email để đặt lại mật khẩu');
     }
 
 
@@ -118,7 +111,6 @@ class AuthController extends Controller
     public function logout()
     {
         auth()->guard('web')->logout();
-        notyf()->success('Đăng xuất thành công');
-        return redirect()->route('home');
+        return redirect()->route('home')->with('success', 'Đăng xuất thành công');
     }
 }
