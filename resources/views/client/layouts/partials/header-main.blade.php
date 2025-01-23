@@ -39,7 +39,12 @@
                     <div class="dropdown">
                         <div class="user-dropdown dropdown-toggle cursor-pointer" data-bs-toggle="dropdown"
                             aria-expanded="false">
-                            <i class="ti ti-user-circle fs-28px"></i>
+                            @if (auth()->guard('web')->check())
+                                <img src="{{ auth()->guard('web')->user()->image }}" alt="avatar"
+                                    class="img-fluid rounded-circle" width="35">
+                            @else
+                                <i class="ti ti-user-circle fs-28px"></i>
+                            @endif
 
                         </div>
                         <ul class="dropdown-menu">
