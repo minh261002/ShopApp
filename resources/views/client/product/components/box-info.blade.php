@@ -16,9 +16,9 @@
             </div>
             <span>(11 Đánh giá)</span>
         </div>
+        @if ($product->flashSale && $product->flashSale->first()->items()->first()->product_id == $product->id)
+            <div class="d-flex align-items-center justify-content-between">
 
-        <div class="d-flex align-items-center justify-content-between">
-            @if ($product->flashSale)
                 <div class="card w-100">
                     <div class="card-header bg-red-lt text-white py-2">
                         <h4 class="mb-0 text-center">
@@ -68,12 +68,12 @@
                         }
                     }, 1000);
                 </script>
-            @endif
-        </div>
+            </div>
+        @endif
 
         <div class="d-flex align-items-center justify-content-between">
             <div class="d-flex align-items-center gap-2">
-                @if ($product->flashSale)
+                @if ($product->flashSale && $product->flashSale->first()->items()->first()->product_id == $product->id)
                     @if ($product->variations->first()->sale_price)
                         <span class="text-red fs-28px fw-bold">
                             {{ format_price(($product->variations->first()->price * (100 - $product->flashSale->first()->items()->first()->discount)) / 100) }}

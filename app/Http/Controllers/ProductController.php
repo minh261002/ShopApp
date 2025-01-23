@@ -29,7 +29,8 @@ class ProductController extends Controller
                 return [$key => collect($item)->pluck('pivot.value')->unique()->values()];
             });
 
+        $relatedProducts = $product->categories->first()->products()->where('id', '!=', $product->id)->get();
 
-        return view('client.product.show', compact('product', 'groupedAttributes'));
+        return view('client.product.show', compact('product', 'groupedAttributes', 'relatedProducts'));
     }
 }

@@ -39,19 +39,37 @@
         <div class="mt-5">
             @include('client.product.components.box-desc')
         </div>
+
+        <div class="mt-5">
+            @include('client.product.components.box-related')
+        </div>
     </div>
 @endsection
 
 @push('scripts')
     <script>
         $('.owl-carousel').owlCarousel({
-            loop: false,
+            loop: true,
             margin: 10,
             nav: false,
             dots: false,
-            autoplay: false,
+            autoplay: true,
+            autoplayTimeout: 3000,
+            autoplayHoverPause: true,
+            responsive: {
+                0: {
+                    items: 2
+                },
+                600: {
+                    items: 3
+                },
+                1000: {
+                    items: 5
+                }
+            }
         })
-
+    </script>
+    <script>
         $('.product-gallery-preview-item').on('click', function() {
             let src = $(this).find('img').attr('src')
             $('.product-gallery-preview img').attr('src', src)
