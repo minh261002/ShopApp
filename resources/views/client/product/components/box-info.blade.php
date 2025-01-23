@@ -1,6 +1,12 @@
-<div class="w-100">
+<div class="w-100 bg-white">
     <div class="d-flex flex-column gap-3">
-        <h1 class="fs-28px mb-0 fw-bold text-dark">{{ $product->name }}</h1>
+        <h1 class="fs-28px mb-0 fw-bold text-dark">
+            {{ $product->name }}
+            <br />
+            <span class="fs-16px fw-medium text-secondary">
+                SKU: {{ $product->variations->first()->sku }}
+            </span>
+        </h1>
 
         <div class="d-flex align-items-center justify-content-start gap-2">
             <div class="d-flex align-items-center justify-content-start gap-1">
@@ -134,6 +140,19 @@
                 </button>
             </div>
         </div>
+
+        <div class="d-flex gap-3">
+            <button class="btn bg-red-lt w-100 fs-18px">
+                <i class="ti ti-heart fs-20px me-1"></i>
+                Yêu thích
+            </button>
+            <button class="btn bg-red text-white w-100 fs-18px">
+                <i class="ti ti-shopping-cart fs-20px me-1"></i>
+                Thêm vào giỏ hàng
+            </button>
+        </div>
+
+
     </div>
 </div>
 
