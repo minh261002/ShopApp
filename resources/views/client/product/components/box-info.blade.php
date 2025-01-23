@@ -100,5 +100,18 @@
                 @endif
             </div>
         </div>
+
+        <div class="d-flex align-items-center justify-content-between mt-3 gap-4">
+            @foreach ($groupedAttributes as $attributeName => $values)
+                <div class="flex-grow-1">
+                    <label class="form-label fw-medium">{{ $attributeName }}</label>
+                    <select class="form-select">
+                        @foreach ($values as $value)
+                            <option value="{{ $value }}">{{ $value }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            @endforeach
+        </div>
     </div>
 </div>

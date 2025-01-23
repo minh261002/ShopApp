@@ -28,4 +28,7 @@ class ProductVariation extends Model
             'variation_attribute_id'
         )->withPivot('value');
     }
+
+
+
 }

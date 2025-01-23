@@ -27,7 +27,9 @@ class ProductVariationDataTable extends BaseDataTable
 
     public function query()
     {
-        return $this->repository->getQueryBuilderOrderBy();
+        return $this->repository->getByQueryBuilder([
+            'product_id' => request()->route('id'),
+        ]);
     }
 
     public function setColumnSearch(): void

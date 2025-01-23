@@ -19,8 +19,17 @@ class ProductController extends Controller
     {
         $product = $this->productRepository->getByQueryBuilder([
             'slug' => $slug
-        ], ['categories', 'variations'])->first();
+        ], [
+            'categories',
+            'variations',
+        ])->first();
 
-        return view('client.product.show', compact('product'));
+        $groupedAttributes = collect($product->variations->pluck('variationAttributes')->flatten(1)->groupBy('name'))
+            ->mapWithKeys(function ($item, $key) {
+                return [$key => collect($item)->pluck('pivot.value')->unique()->values()];
+            });
+
+
+        return view('client.product.show', compact('product', 'groupedAttributes'));
     }
 }
