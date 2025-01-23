@@ -10,13 +10,6 @@
             </h1>
 
             <form class="d-flex flex-column">
-                @if (session('error'))
-                    <div class="mb-3">
-                        <div class="alert alert-danger">
-                            {{ session('error') }}
-                        </div>
-                    </div>
-                @endif
                 <div class="form-group mb-3">
                     <label for="email" class="form-label">Email</label>
                     <input type="email" class="form-control" id="email" name="email" value="{{ old('email') }}">

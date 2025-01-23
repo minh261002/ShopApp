@@ -9,18 +9,8 @@
                 Đăng ký
             </h1>
 
-            <form class="d-flex flex-column">
-                @if (session('error'))
-                    <div class="alert alert-danger">
-                        {{ session('error') }}
-                    </div>
-                @endif
-
-                @if (session('success'))
-                    <div class="alert alert-success">
-                        {{ session('success') }}
-                    </div>
-                @endif
+            <form class="d-flex flex-column" action="{{ route('register.post') }}" method="POST">
+                @csrf
 
                 <div class="form-group mb-3">
                     <label for="name" class="form-label">Họ và tên</label>
