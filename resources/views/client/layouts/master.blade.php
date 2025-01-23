@@ -13,6 +13,9 @@
     <link rel="stylesheet" href="{{ asset('client/css/boostrap.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/icons/tabler-icons-filled.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/icons/tabler-icons.css') }}">
+    <link rel="stylesheet" href="{{ asset('client/css/owl.carousel.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('client/css/owl.theme.default.min.css') }}">
+
     @stack('styles')
 </head>
 
@@ -30,6 +33,7 @@
     <script src="{{ 'client/js/jquery.js' }}"></script>
     <script src="{{ asset('client/js/popper.js') }}"></script>
     <script src="{{ asset('client/js/bootstrap.js') }}"></script>
+    <script src="{{ asset('client/js/owl.carousel.min.js') }}"></script>
 
     @stack('scripts')
 </body>

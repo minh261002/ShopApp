@@ -9,7 +9,7 @@
     <title>
         @yield('guard_title')
     </title>
-    <link rel="shortcut icon" href="{{ asset('admin/images/favicon.png') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('uploads/images/favicon.ico') }}" type="image/x-icon">
     <!-- CSS files -->
     <link href="{{ asset('admin/css/tabler.min.css?1692870487') }}" rel="stylesheet" />
     <link href="{{ asset('admin/css/tabler-flags.min.css?1692870487') }}" rel="stylesheet" />
