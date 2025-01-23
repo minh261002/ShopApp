@@ -20,11 +20,15 @@
     <link rel="stylesheet" href="{{ asset('admin/icons/tabler-icons.css') }}">
     <link rel="stylesheet" href="{{ asset('client/css/owl.carousel.min.css') }}">
     <link rel="stylesheet" href="{{ asset('client/css/owl.theme.default.min.css') }}">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdn.jsdelivr.net/gh/lelinh014756/fui-toast-js@master/assets/css/toast@1.0.1/fuiToast.min.css">
+    <link rel="stylesheet" href="{{ asset('admin/css/jquery-ui.min.css') }}">
 
     @stack('styles')
 </head>
 
 <body class="bg-white">
+    <div id="fui-toast"></div>
 
     @include('client.layouts.partials.header-top')
     @include('client.layouts.partials.header-main')
@@ -43,6 +47,29 @@
     <script src="{{ asset('admin/js/tabler.min.js?1692870487') }}" defer></script>
     <script src="{{ asset('admin/js/demo.min.js?1692870487') }}" defer></script>
     <script src="{{ asset('client/js/owl.carousel.min.js') }}"></script>
+
+    <script type="text/javascript"
+        src="https://cdn.jsdelivr.net/gh/lelinh014756/fui-toast-js@master/assets/js/toast@1.0.1/fuiToast.min.js"></script>
+
+    @if (session('success'))
+        <script>
+            FuiToast.success('{{ session('success') }}');
+        </script>
+    @endif
+
+    @if (session('error'))
+        <script>
+            FuiToast.error('{{ session('error') }}');
+        </script>
+    @endif
+
+    @if ($errors->any())
+        <script>
+            @foreach ($errors->all() as $error)
+                FuiToast.error('{{ $error }}');
+            @endforeach
+        </script>
+    @endif
 
     @stack('scripts')
 </body>

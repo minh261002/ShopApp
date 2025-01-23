@@ -23,5 +23,5 @@ Route::get('/san-pham/{slug}', [ProductController::class, 'show'])->name('produc
 
 
 Route::middleware('auth:web')->group(function () {
-    Route::get('/dang-xuat', [AuthController::class, 'logout'])->name('logout');
+    Route::post('/dang-xuat', [AuthController::class, 'logout'])->name('logout');
 });
