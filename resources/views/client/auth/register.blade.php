@@ -10,6 +10,18 @@
             </h1>
 
             <form class="d-flex flex-column">
+                @if (session('error'))
+                    <div class="alert alert-danger">
+                        {{ session('error') }}
+                    </div>
+                @endif
+
+                @if (session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                @endif
+
                 <div class="form-group mb-3">
                     <label for="name" class="form-label">Họ và tên</label>
                     <input type="text" class="form-control" id="name" name="name" value="{{ old('name') }}">
@@ -56,7 +68,7 @@
                     <div class="d-flex align-items-center justify-content-between">
                         <div></div>
 
-                        <a href="" class="text-decoration-none text-red">Quên mật khẩu?</a>
+                        <a href="{{ route('password.forgot') }}" class="text-decoration-none text-red">Quên mật khẩu?</a>
                     </div>
                 </div>
 

@@ -36,7 +36,7 @@ Route::group([
     Route::post('auth/login', [AuthController::class, 'login']);
     Route::post('auth/register', [AuthController::class, 'register']);
     Route::post('/auth/password/forgot', [AuthController::class, 'forgotPassword']);
-    Route::post('auth/reset-password', [AuthController::class, 'resetPassword'])->name('password.reset');
+    Route::post('auth/reset-password', [AuthController::class, 'resetPassword'])->name('api.password.reset');
 
     Route::prefix('sliders')->group(function () {
         Route::get('/', [SliderController::class, 'index']);

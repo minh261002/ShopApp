@@ -44,7 +44,12 @@
                         </div>
                         <ul class="dropdown-menu">
                             @if (auth()->guard('web')->check())
-                                <li><a class="dropdown-item" href="{{ route('client.logout') }}">Đăng xuất</a></li>
+                                <li>
+                                    <form action="{{ route('logout') }}" method="POST">
+                                        @csrf
+                                        <button type="submit" class="dropdown-item">Đăng xuất</button>
+                                    </form>
+                                </li>
                             @else
                                 <li>
                                     <a class="dropdown-item" href="{{ route('login') }}">Đăng nhập</a>
