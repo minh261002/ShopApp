@@ -89,4 +89,49 @@ class ProductController extends Controller
         $products = $query->paginate(1)->withQueryString();
         return view('client.product.index', compact('products', 'attributes'));
     }
+
+    public function get(Request $request)
+    {
+        // Lấy dữ liệu từ request
+        $product_id = $request->get('product_id');
+        $data = $request->get('data'); // data chứa các thuộc tính như kích thước, màu sắc, chất liệu, v.v.
+
+        $product = $this->productRepository->getByQueryBuilder([
+            'id' => $product_id
+        ], [
+            'variations',
+        ])->first();
+
+        if (!$product) {
+            return response()->json(['message' => 'Product not found'], 404);
+        }
+
+        $variation = $product->variations->filter(function ($variation) use ($data) {
+
+            foreach ($data as $attributeName => $attributeValue) {
+
+                $hasAttribute = $variation->variationAttributes->contains(function ($attribute) use ($attributeName, $attributeValue) {
+                    return $attribute->slug == $attributeName && $attribute->pivot->value == $attributeValue;
+                });
+
+
+                if (!$hasAttribute) {
+                    return false;
+                }
+            }
+            return true;
+        })->first();
+
+
+        if (!$variation) {
+            return response()->json(['message' => 'Variation not found'], 404);
+        }
+
+        return response()->json([
+            'variation' => $variation,
+        ]);
+    }
+
+
+
 }

@@ -70,6 +70,8 @@
         })
     </script>
     <script>
+        $('.product-gallery-preview-item').first().addClass('border border-danger')
+
         $('.product-gallery-preview-item').on('click', function() {
             let src = $(this).find('img').attr('src')
             $('.product-gallery-preview img').attr('src', src)
@@ -78,6 +80,12 @@
             $(this).addClass('border border-danger')
             //hiệu ứng carousel
             $('.owl-carousel').trigger('to.owl.carousel', [$(this).index(), 300])
+
+        })
+    </script>
+
+    <script>
+        $(document).ready(function() {
 
         })
     </script>

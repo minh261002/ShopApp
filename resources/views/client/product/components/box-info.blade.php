@@ -3,7 +3,7 @@
         <h1 class="fs-28px mb-0 fw-bold text-dark">
             {{ $product->name }}
             <br />
-            <span class="fs-16px fw-medium text-secondary">
+            <span class="fs-16px fw-medium text-secondary" id="variation-sku">
                 SKU: {{ $product->variations->first()->sku }}
             </span>
         </h1>
@@ -16,6 +16,7 @@
             </div>
             <span>(11 Đánh giá)</span>
         </div>
+
         @if ($product->flashSale && $product->flashSale->first()->items()->first()->product_id == $product->id)
             <div class="d-flex align-items-center justify-content-between">
 
@@ -78,6 +79,7 @@
                         <span class="text-red fs-28px fw-bold">
                             {{ format_price(($product->variations->first()->price * (100 - $product->flashSale->first()->items()->first()->discount)) / 100) }}
                         </span>
+
                         <span class="text-muted fs-20px text-decoration-line-through text-secondary fw-medium">
                             {{ format_price($product->variations->first()->sale_price) }}
                             {{ format_price($product->variations->first()->price) }}
@@ -109,7 +111,7 @@
 
         <div class="d-flex align-items-center justify-content-between gap-4">
             @foreach ($groupedAttributes as $attributeName => $values)
-                <div class="flex-grow-1">
+                <div class="flex-grow-1" id="variation-{{ Str::slug($attributeName) }}">
                     <label class="form-label fw-medium">{{ $attributeName }}</label>
                     <select class="form-select">
                         @foreach ($values as $value)
@@ -127,17 +129,27 @@
             </a>
         </div>
 
-        <div style="width: 160px">
+        <div class="w-100">
             <label class="form-label fw-medium">Số lượng</label>
-            <div class="d-flex align-items-center position-relative">
-                <button class="btn bg-red text-white position-absolute py-2 ms-1">
-                    <i class="ti ti-minus"></i>
-                </button>
-                <input type="number" class="form-control text-center" value="1" min="1" step="1"
-                    readonly>
-                <button class="btn bg-red text-white position-absolute py-2 end-0 me-1">
-                    <i class="ti ti-plus"></i>
-                </button>
+
+            <div class="d-flex align-items-center position-relative justify-content-between">
+                <div class="d-flex align-items-center position-relative">
+                    <button class="btn bg-red text-white position-absolute py-2 ms-1">
+                        <i class="ti ti-minus"></i>
+                    </button>
+                    <input type="number" class="form-control text-center" value="1" min="1" step="1"
+                        readonly>
+                    <button class="btn bg-red text-white position-absolute py-2 end-0 me-1">
+                        <i class="ti ti-plus"></i>
+                    </button>
+                </div>
+
+                <div class="d-flex align-items-center gap-2 ms-3">
+                    <i class="ti ti-building-warehouse fs-18px me-1"></i>
+                    <span class="text-secondary" id="stock">Còn
+                        {{ $product->variations->first()->stock }}
+                        sản phẩm</span>
+                </div>
             </div>
         </div>
 
@@ -199,3 +211,47 @@
         </div>
     </div>
 </div>
+
+
+@push('scripts')
+    <script>
+        const format_price = (price) => {
+            return new Intl.NumberFormat('vi-VN', {
+                style: 'currency',
+                currency: 'VND'
+            }).format(price);
+        }
+        @foreach ($groupedAttributes as $attributeName => $values)
+            $('#variation-{{ Str::slug($attributeName) }} select').on('change', function() {
+                let data = {};
+
+                @foreach ($groupedAttributes as $attributeName => $values)
+                    data['{{ Str::slug($attributeName) }}'] = $(
+                        '#variation-{{ Str::slug($attributeName) }} select').val();
+                @endforeach
+
+                $.ajax({
+                    url: '{{ route('product.variation.get') }}',
+                    method: 'POST',
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                        data: data,
+                        product_id: '{{ $product->id }}'
+                    },
+                    success: function(response) {
+                        $('#variation-sku').text('SKU: ' + response.variation.sku);
+
+                        if (response.variation.sale_price) {
+                            $('.text-red').text(format_price(response.variation.sale_price));
+                            $('.text-muted').text(format_price(response.variation.price));
+                        } else {
+                            $('.text-danger').text(format_price(response.variation.price));
+                        }
+
+                        $('#stock').text('Còn ' + response.variation.stock + ' sản phẩm');
+                    }
+                });
+            });
+        @endforeach
+    </script>
+@endpush
