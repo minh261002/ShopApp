@@ -1,4 +1,10 @@
+{{-- @php
+    session()->forget('cart');
+@endphp --}}
+
 <div class="w-100 bg-white">
+    <input type="hidden" name="product_variation_id" value="{{ $product->variations->first()->id }}">
+
     <div class="d-flex flex-column gap-3">
         <h1 class="fs-28px mb-0 fw-bold text-dark">
             {{ $product->name }}
@@ -7,6 +13,10 @@
                 SKU: {{ $product->variations->first()->sku }}
             </span>
         </h1>
+
+        <div>
+            {{ $product->short_desc }}
+        </div>
 
         <div class="d-flex align-items-center justify-content-start gap-2">
             <div class="d-flex align-items-center justify-content-start gap-1">
@@ -18,8 +28,7 @@
         </div>
 
         @if ($product->flashSale && $product->flashSale->first()->items()->first()->product_id == $product->id)
-            <div class="d-flex align-items-center justify-content-between">
-
+            <div class="d-flex align-items-center justify-content-between">"
                 <div class="card w-100">
                     <div class="card-header bg-red-lt text-white py-2">
                         <h4 class="mb-0 text-center">
@@ -76,6 +85,8 @@
             <div class="d-flex align-items-center gap-2">
                 @if ($product->flashSale && $product->flashSale->first()->items()->first()->product_id == $product->id)
                     @if ($product->variations->first()->sale_price)
+                        <input type="hidden" name="price"
+                            value="  {{ ($product->variations->first()->price * (100 - $product->flashSale->first()->items()->first()->discount)) / 100 }} " />
                         <span class="text-red fs-28px fw-bold">
                             {{ format_price(($product->variations->first()->price * (100 - $product->flashSale->first()->items()->first()->discount)) / 100) }}
                         </span>
@@ -84,16 +95,11 @@
                             {{ format_price($product->variations->first()->sale_price) }}
                             {{ format_price($product->variations->first()->price) }}
                         </span>
-                    @else
-                        <span class="text-muted fs-20px text-decoration-line-through text-secondary fw-medium">
-                            {{ format_price($product->variations->first()->sale_price) }}
-                        </span>
-                        <span class="text-danger fs-24px fw-bold">
-                            {{ format_price($product->variations->first()->price) }}
-                        </span>
                     @endif
                 @else
                     @if ($product->variations->first()->sale_price)
+                        <input type="hidden" name="price" value="{{ $product->variations->first()->sale_price }}" />
+
                         <span class="text-red fs-28px fw-bold">
                             {{ format_price($product->variations->first()->sale_price) }}
                         </span>
@@ -101,6 +107,8 @@
                             {{ format_price($product->variations->first()->price) }}
                         </span>
                     @else
+                        <input type="hidden" name="price" value="{{ $product->variations->first()->price }}" />
+
                         <span class="text-danger fs-24px fw-bold">
                             {{ format_price($product->variations->first()->price) }}
                         </span>
@@ -113,7 +121,7 @@
             @foreach ($groupedAttributes as $attributeName => $values)
                 <div class="flex-grow-1" id="variation-{{ Str::slug($attributeName) }}">
                     <label class="form-label fw-medium">{{ $attributeName }}</label>
-                    <select class="form-select">
+                    <select class="form-select" name="variation_values[{{ Str::slug($attributeName) }}][]" required>
                         @foreach ($values as $value)
                             <option value="{{ $value }}">{{ $value }}</option>
                         @endforeach
@@ -134,12 +142,13 @@
 
             <div class="d-flex align-items-center position-relative justify-content-between">
                 <div class="d-flex align-items-center position-relative">
-                    <button class="btn bg-red text-white position-absolute py-2 ms-1">
+                    <button type="button" class="btn bg-red text-white position-absolute py-2 ms-1" id="decrement">
                         <i class="ti ti-minus"></i>
                     </button>
-                    <input type="number" class="form-control text-center" value="1" min="1" step="1"
-                        readonly>
-                    <button class="btn bg-red text-white position-absolute py-2 end-0 me-1">
+                    <input type="number" name="quantity" class="form-control text-center" value="1" min="1"
+                        step="1" readonly>
+                    <button type="button" class="btn bg-red text-white position-absolute py-2 end-0 me-1"
+                        id="increment">
                         <i class="ti ti-plus"></i>
                     </button>
                 </div>
@@ -172,7 +181,7 @@
             @endif
         </div>
 
-        <div class="d-flex align-items-stretch mt-4">
+        <div class="d-flex align-items-stretch">
             <div class="flex-grow-1 d-flex flex-column align-items-center gap-2 text-center">
                 <img src="https://res.cloudinary.com/doy3slx9i/image/upload/v1735367737/Pengu/delivery_yhvchy.svg"
                     width="50" height="auto" class="object-fit-cover">
@@ -191,7 +200,6 @@
                 <span class="text-secondary fs-14px fw-bold">Đổi trả miễn phí</span>
             </div>
         </div>
-
     </div>
 </div>
 
@@ -221,6 +229,30 @@
                 currency: 'VND'
             }).format(price);
         }
+
+        //increment and decrement quantity
+
+        $('input[name="quantity"]').val(1);
+
+        $('#increment').on('click', function() {
+            let quantity = parseInt($('input[name="quantity"]').val());
+            let stock = parseInt('{{ $product->variations->first()->stock }}');
+
+            if (quantity < stock) {
+                quantity++;
+                $('input[name="quantity"]').val(quantity);
+            }
+        });
+
+        $('#decrement').on('click', function() {
+            let quantity = parseInt($('input[name="quantity"]').val());
+
+            if (quantity > 1) {
+                quantity--;
+                $('input[name="quantity"]').val(quantity);
+            }
+        });
+
         @foreach ($groupedAttributes as $attributeName => $values)
             $('#variation-{{ Str::slug($attributeName) }} select').on('change', function() {
                 let data = {};
@@ -239,16 +271,30 @@
                         product_id: '{{ $product->id }}'
                     },
                     success: function(response) {
+                        $('input[name="product_variation_id"]').val(response.variation.id);
+
                         $('#variation-sku').text('SKU: ' + response.variation.sku);
 
                         if (response.variation.sale_price) {
                             $('.text-red').text(format_price(response.variation.sale_price));
                             $('.text-muted').text(format_price(response.variation.price));
+                            $('input[name="price"]').val(response.variation.sale_price);
                         } else {
                             $('.text-danger').text(format_price(response.variation.price));
+                            $('input[name="price"]').val(response.variation.price);
                         }
 
                         $('#stock').text('Còn ' + response.variation.stock + ' sản phẩm');
+
+                        if (parseInt($('input[name="quantity"]').val()) > response.variation.stock) {
+                            $('input[name="quantity"]').val(response.variation.stock);
+                        }
+
+                        if (response.variation.stock === 0) {
+                            $('button[type="submit"]').prop('disabled', true);
+                        } else {
+                            $('button[type="submit"]').prop('disabled', false);
+                        }
                     }
                 });
             });

@@ -30,7 +30,7 @@
                             <i class="ti ti-shopping-cart fs-28px"></i>
                             <span
                                 class="position-absolute top-0 start-100 translate-middle badge bg-red text-white rounded-pill">
-                                0
+                                {{ session()->has('cart') ? count(session('cart')) : 0 }}
                             </span>
                         </div>
                     </div>

@@ -7,7 +7,9 @@
         $gallery = json_decode($product->gallery);
     @endphp
     <div class="py-5">
-        <div class="container">
+        <form class="container" action="{{ route('cart.store') }}" method="post">
+            @csrf
+
             <nav class="mb-3" aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a class="text-black fs-18px" href="{{ route('home') }}">Trang chủ</a></li>
@@ -34,7 +36,7 @@
                     @include('client.product.components.box-info')
                 </div>
             </div>
-        </div>
+        </form>
 
         <div class="mt-5">
             @include('client.product.components.box-desc')
