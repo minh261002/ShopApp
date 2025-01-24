@@ -53,32 +53,9 @@
             aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse text-center" id="main_nav">
+        <div class="collapse navbar-collapse justify-content-center" id="main_nav">
             <ul class="navbar-nav">
                 <li class="nav-item active"> <a class="nav-link" href="{{ route('home') }}">Trang chủ </a> </li>
-
-                {{-- <li class="nav-item dropdown" id="myDropdown">
-                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"> Treeview menu </a>
-                    <ul class="dropdown-menu">
-                        <li> <a class="dropdown-item" href="#"> Dropdown item 1 </a></li>
-                        <li> <a class="dropdown-item" href="#"> Dropdown item 2 &raquo; </a>
-                            <ul class="submenu dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Submenu item 1</a></li>
-                                <li><a class="dropdown-item" href="#">Submenu item 2</a></li>
-                                <li><a class="dropdown-item" href="#">Submenu item 3 &raquo; </a>
-                                    <ul class="submenu dropdown-menu">
-                                        <li><a class="dropdown-item" href="#">Multi level 1</a></li>
-                                        <li><a class="dropdown-item" href="#">Multi level 2</a></li>
-                                    </ul>
-                                </li>
-                                <li><a class="dropdown-item" href="#">Submenu item 4</a></li>
-                                <li><a class="dropdown-item" href="#">Submenu item 5</a></li>
-                            </ul>
-                        </li>
-                        <li><a class="dropdown-item" href="#"> Dropdown item 3 </a></li>
-                        <li><a class="dropdown-item" href="#"> Dropdown item 4 </a></li>
-                    </ul>
-                </li> --}}
 
                 @foreach ($categories as $category)
                     @if ($category->children->count() > 0)
@@ -95,7 +72,7 @@
                                                 @foreach ($child->children as $subChild)
                                                     <li>
                                                         <a class="dropdown-item"
-                                                            href="{{ route('category.show', $subChild->slug) }}">{{ $subChild->name }}</a>
+                                                            href="">{{ $subChild->name }}</a>
                                                     </li>
                                                 @endforeach
                                             </ul>
