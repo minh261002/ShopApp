@@ -38,14 +38,16 @@
                             {{ format_price($item['price']) }}
                         </td>
 
-                        <td class="text-secondary w-25">
+                        <td class="text-secondary">
                             <div class="d-flex align-items-center justify-content-start position-relative">
-                                <button class="btn btn-icon bg-red-lt" id="decrease-quantity">
+                                <button class="btn btn-icon bg-red-lt" data-id="{{ $item['product_variation_id'] }}"
+                                    id="decrease-quantity">
                                     <i class="ti ti-minus"></i>
                                 </button>
-                                <input type="number" class="form-control text-center w-25"
+                                <input type="number" class="form-control text-center w-50"
                                     value="{{ $item['quantity'] }}" readonly>
-                                <button class="btn btn-icon bg-red-lt" id="increase-quantity">
+                                <button class="btn btn-icon bg-red-lt" data-id="{{ $item['product_variation_id'] }}"
+                                    id="increase-quantity">
                                     <i class="ti ti-plus"></i>
                                 </button>
                             </div>
@@ -66,5 +68,53 @@
 </div>
 
 @push('scripts')
-    <script></script>
+    <script>
+        const format_price = (price) => {
+            return new Intl.NumberFormat('vi-VN', {
+                style: 'currency',
+                currency: 'VND'
+            }).format(price);
+        }
+
+        $(document).on('click', '#increase-quantity', function() {
+            let quantity = $(this).siblings('input').val();
+            let product_variation_id = $(this).data('id');
+            let newQuantity = ++quantity;
+            $(this).siblings('input').val(newQuantity);
+
+            updateCartQuantity(product_variation_id, newQuantity);
+        });
+
+        $(document).on('click', '#decrease-quantity', function() {
+            let quantity = $(this).siblings('input').val();
+            let product_variation_id = $(this).data('id');
+            if (quantity > 1) {
+                let newQuantity = --quantity;
+                $(this).siblings('input').val(newQuantity);
+
+                updateCartQuantity(product_variation_id, newQuantity);
+            }
+        });
+
+        function updateCartQuantity(product_variation_id, quantity) {
+            $.ajax({
+                url: "{{ route('cart.update.quantity') }}",
+                method: "POST",
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    product_variation_id: product_variation_id,
+                    quantity: quantity
+                },
+                success: function(response) {
+                    if (response.status == 200) {
+                        $('#subTotal').text(format_price(response.subTotal));
+                        $('#total').text(format_price(response.totalPrice));
+                    }
+                },
+                error: function(error) {
+                    FuiToast.error(error.responseJSON.message);
+                }
+            });
+        }
+    </script>
 @endpush

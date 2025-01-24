@@ -70,6 +70,7 @@ class ShoppingCartController extends Controller
 
         if ($productVariation->stock < $quantity) {
             return response()->json([
+                'status' => 400,
                 'message' => 'Số lượng sản phẩm trong kho không đủ',
             ], 400);
         }
@@ -82,9 +83,19 @@ class ShoppingCartController extends Controller
 
         session()->put('cart', $cart);
 
+        $subTotal = 0;
+        foreach ($cart as $item) {
+            $subTotal += $item['price'] * $item['quantity'];
+        }
+
+        $totalPrice = $subTotal;
+
         return response()->json([
+            'status' => 200,
             'message' => 'Cập nhật số lượng sản phẩm thành công',
-        ]);
+            'subTotal' => $subTotal,
+            'totalPrice' => $totalPrice,
+        ], 200);
     }
 
     public function destroy($variation_id)

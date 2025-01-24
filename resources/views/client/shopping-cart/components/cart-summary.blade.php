@@ -24,7 +24,7 @@
          <div class="space-y-3 mb-4">
              <div class="d-flex justify-content-between text-sm">
                  <span class="text-muted">Tạm tính</span>
-                 <span class="fw-semibold">{{ number_format($subTotal) }}đ</span>
+                 <span class="fw-semibold" id="subTotal">{{ number_format($subTotal) }}đ</span>
              </div>
              <div class="d-flex justify-content-between text-sm">
                  <span class="text-muted">Phí vận chuyển</span>
@@ -40,7 +40,7 @@
 
          <div class="d-flex justify-content-between align-items-center fs-4 fw-bold text-danger mb-4">
              <span>Tổng thanh toán</span>
-             <span>{{ number_format($totalPrice) }}đ</span>
+             <span id="total">{{ number_format($totalPrice) }}đ</span>
          </div>
 
          <a href="" class="btn btn-danger w-100">
