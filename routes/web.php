@@ -20,7 +20,7 @@ Route::get('/dat-lai-mat-khau/{token}/{email}', [AuthController::class, 'resetPa
 Route::post('/dat-lai-mat-khau', [AuthController::class, 'handleResetPassword'])->name('password.reset.post');
 
 Route::get('/san-pham/{slug}', [ProductController::class, 'show'])->name('product.detail');
-
+Route::get('/san-pham', [ProductController::class, 'index'])->name('product.index');
 
 Route::middleware('auth:web')->group(function () {
     Route::post('/dang-xuat', [AuthController::class, 'logout'])->name('logout');

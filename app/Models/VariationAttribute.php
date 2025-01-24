@@ -22,4 +22,9 @@ class VariationAttribute extends Model
             'product_variation_id'
         )->withPivot('value');
     }
+
+    public function values()
+    {
+        return $this->hasMany(ProductVariationValue::class, 'variation_attribute_id');
+    }
 }
