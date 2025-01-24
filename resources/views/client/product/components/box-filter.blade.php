@@ -29,6 +29,7 @@
 
 <div class="bg-white">
     <div class="accordion" id="accordion">
+
         @foreach ($attributes as $attribute)
             <div class="accordion-item border-0">
                 <h2 class="accordion-header" id="heading-{{ $attribute->id }}">

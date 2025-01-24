@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Enums\ActiveStatus;
-use App\Models\Product;
-use App\Models\ProductVariation;
 use App\Repositories\Category\CategoryRepositoryInterface;
 use App\Repositories\Product\ProductRepositoryInterface;
 use App\Repositories\Product\ProductVariationValueRepositoryInterface;
@@ -16,15 +14,18 @@ class ProductController extends Controller
     protected $productRepository;
     protected $productVariationValueRepository;
     protected $variationAttributeRepository;
+    protected $categoryRepository;
 
     public function __construct(
         ProductRepositoryInterface $productRepository,
         ProductVariationValueRepositoryInterface $productVariationValueRepository,
-        VariationAttributeRepositoryInterface $variationAttributeRepository
+        VariationAttributeRepositoryInterface $variationAttributeRepository,
+        CategoryRepositoryInterface $categoryRepository
     ) {
         $this->productRepository = $productRepository;
         $this->productVariationValueRepository = $productVariationValueRepository;
         $this->variationAttributeRepository = $variationAttributeRepository;
+        $this->categoryRepository = $categoryRepository;
     }
 
     public function show($slug)
@@ -53,6 +54,11 @@ class ProductController extends Controller
             [],
             ['values']
         )->get();
+
+        $categories = $this->categoryRepository->getByQueryBuilder([
+            'status' => ActiveStatus::Active->value,
+            'parent_id' => null
+        ])->defaultOrder()->withDepth()->get()->toFlatTree();
 
         $query = $this->productRepository->getQueryBuilderOrderBy();
 
@@ -85,16 +91,21 @@ class ProductController extends Controller
             });
         }
 
+        if ($request->has('category')) {
+            $query->whereHas('categories', function ($query) use ($request) {
+                $query->where('slug', $request->get('category'));
+            });
+        }
+
 
         $products = $query->paginate(1)->withQueryString();
-        return view('client.product.index', compact('products', 'attributes'));
+        return view('client.product.index', compact('products', 'attributes', 'categories'));
     }
 
     public function get(Request $request)
     {
-        // Lấy dữ liệu từ request
         $product_id = $request->get('product_id');
-        $data = $request->get('data'); // data chứa các thuộc tính như kích thước, màu sắc, chất liệu, v.v.
+        $data = $request->get('data');
 
         $product = $this->productRepository->getByQueryBuilder([
             'id' => $product_id
