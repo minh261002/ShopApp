@@ -59,8 +59,8 @@
                     @endforelse
                 </div>
 
-                <div class="d-flex justify-content-center">
-                    {{ $products->links() }}
+                <div class="d-flex justify-content-center mt-3">
+                    {{ $products->links('client.layouts.partials.pagination') }}
                 </div>
             </div>
         </div>
