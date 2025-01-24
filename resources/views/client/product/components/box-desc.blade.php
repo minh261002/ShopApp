@@ -4,7 +4,7 @@
         <div class="accordion" id="accordion-desc">
             <div class="accordion-item">
                 <h2 class="accordion-header bg-red-lt" id="heading-1">
-                    <p class="mb-0 fs-20px accordion-button collapsed text-red" type="button" data-bs-toggle="collapse"
+                    <p class="mb-0 fs-20px accordion-button collapsed text-danger" type="button" data-bs-toggle="collapse"
                         data-bs-target="#desc" aria-expanded="false">
                         Mô tả sản phẩm
                     </p>

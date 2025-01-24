@@ -1,5 +1,5 @@
 <div class="w-100 header-main-bg">
-    <div class="container py-2">
+    <div class="container py-3">
         <div class="d-flex align-items-center justify-content-between">
             <div class="flex-grow-1">
                 <a href="{{ route('home') }}">
@@ -25,15 +25,15 @@
                         <i class="ti ti-truck-delivery fs-28px"></i>
                     </div>
 
-                    <div class="mb-0 cursor-pointer">
+                    <a href="{{ route('cart.index') }}" class="mb-0 cursor-pointer nav-link">
                         <div class="position-relative">
                             <i class="ti ti-shopping-cart fs-28px"></i>
                             <span
                                 class="position-absolute top-0 start-100 translate-middle badge bg-red text-white rounded-pill">
-                                0
+                                {{ session()->has('cart') ? count(session('cart')) : 0 }}
                             </span>
                         </div>
-                    </div>
+                    </a>
 
                     <div class="dropdown">
                         <div class="user-dropdown dropdown-toggle cursor-pointer" data-bs-toggle="dropdown"

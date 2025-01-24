@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ShoppingCartController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -20,8 +21,16 @@ Route::get('/dat-lai-mat-khau/{token}/{email}', [AuthController::class, 'resetPa
 Route::post('/dat-lai-mat-khau', [AuthController::class, 'handleResetPassword'])->name('password.reset.post');
 
 Route::get('/san-pham/{slug}', [ProductController::class, 'show'])->name('product.detail');
-
+Route::get('/san-pham', [ProductController::class, 'index'])->name('product.index');
+Route::post('/san-pham/chi-tiet', [ProductController::class, 'get'])->name('product.variation.get');
 
 Route::middleware('auth:web')->group(function () {
     Route::post('/dang-xuat', [AuthController::class, 'logout'])->name('logout');
+
+    Route::get('/gio-hang', [ShoppingCartController::class, 'index'])->name('cart.index');
+    Route::post('/gio-hang', [ShoppingCartController::class, 'store'])->name('cart.store');
+    Route::post('/gio-hang/cap-nhat', [ShoppingCartController::class, 'update'])->name('cart.update');
+    Route::get('/gio-hang/xoa/{variation_id}', [ShoppingCartController::class, 'destroy'])->name('cart.destroy');
+    Route::post('/gio-hang/xoa-tat-ca', [ShoppingCartController::class, 'destroyAll'])->name('cart.destroy.all');
+    Route::post('/gio-hang/cap-nhat-so-luong', [ShoppingCartController::class, 'updateQuantity'])->name('cart.update.quantity');
 });
