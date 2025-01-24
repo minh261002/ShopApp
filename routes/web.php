@@ -30,7 +30,7 @@ Route::middleware('auth:web')->group(function () {
     Route::get('/gio-hang', [ShoppingCartController::class, 'index'])->name('cart.index');
     Route::post('/gio-hang', [ShoppingCartController::class, 'store'])->name('cart.store');
     Route::post('/gio-hang/cap-nhat', [ShoppingCartController::class, 'update'])->name('cart.update');
-    Route::post('/gio-hang/xoa', [ShoppingCartController::class, 'destroy'])->name('cart.destroy');
+    Route::get('/gio-hang/xoa/{variation_id}', [ShoppingCartController::class, 'destroy'])->name('cart.destroy');
     Route::post('/gio-hang/xoa-tat-ca', [ShoppingCartController::class, 'destroyAll'])->name('cart.destroy.all');
     Route::post('/gio-hang/cap-nhat-so-luong', [ShoppingCartController::class, 'updateQuantity'])->name('cart.update.quantity');
 });

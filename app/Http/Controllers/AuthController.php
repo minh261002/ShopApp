@@ -37,8 +37,7 @@ class AuthController extends Controller
             auth()->guard('web')->logout();
             return back()->withInput($request->only('email'))->with('error', 'Tài khoản hiện không hoạt động');
         }
-        // dd($redirect);
-        // http://localhost:8000/san-pham/ao-so-mi-lua-mystic
+
         if ($redirect) {
             return redirect()->to($redirect)->with('success', 'Xin chào, ' . auth()->guard('web')->user()->name);
         }

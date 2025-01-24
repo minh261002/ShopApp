@@ -1,9 +1,8 @@
-{{-- @php
-    session()->forget('cart');
-@endphp --}}
-
 <div class="w-100 bg-white">
     <input type="hidden" name="product_variation_id" value="{{ $product->variations->first()->id }}">
+    <input type="hidden" name="product_name" value="{{ $product->name }}">
+    <input type="hidden" name="product_image" value="{{ $product->image }}">
+    <input type="hidden" name="product_slug" value="{{ $product->slug }}">
 
     <div class="d-flex flex-column gap-3">
         <h1 class="fs-28px mb-0 fw-bold text-dark">
@@ -121,7 +120,7 @@
             @foreach ($groupedAttributes as $attributeName => $values)
                 <div class="flex-grow-1" id="variation-{{ Str::slug($attributeName) }}">
                     <label class="form-label fw-medium">{{ $attributeName }}</label>
-                    <select class="form-select" name="variation_values[{{ Str::slug($attributeName) }}][]" required>
+                    <select class="form-select" name="variation_values[{{ $attributeName }}][]" required>
                         @foreach ($values as $value)
                             <option value="{{ $value }}">{{ $value }}</option>
                         @endforeach
@@ -164,11 +163,11 @@
 
         <div class="d-flex gap-3">
             @if (auth()->guard('web')->check())
-                <button class="btn bg-red-lt w-100 fs-18px">
+                <button type="button" class="btn bg-red-lt w-100 fs-18px" id="addToWishlist">
                     <i class="ti ti-heart fs-20px me-1"></i>
                     Yêu thích
                 </button>
-                <button class="btn bg-red text-white w-100 fs-18px">
+                <button class="btn bg-red text-white w-100 fs-18px" id="addToCart">
                     <i class="ti ti-shopping-cart fs-20px me-1"></i>
                     Thêm vào giỏ hàng
                 </button>
@@ -223,14 +222,24 @@
 
 @push('scripts')
     <script>
+        $('#addToCart').on('click', function() {
+            $(this).html(
+                '<i class="spinner-border spinner-border-sm me-2"></i> Đang xử lý...'
+            );
+        });
+
+        $('#addToWishlist').on('click', function() {
+            $(this).html(
+                '<i class="spinner-border spinner-border-sm me-2"></i> Đang xử lý...'
+            );
+        });
+
         const format_price = (price) => {
             return new Intl.NumberFormat('vi-VN', {
                 style: 'currency',
                 currency: 'VND'
             }).format(price);
         }
-
-        //increment and decrement quantity
 
         $('input[name="quantity"]').val(1);
 

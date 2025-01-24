@@ -25,7 +25,7 @@
                         <i class="ti ti-truck-delivery fs-28px"></i>
                     </div>
 
-                    <div class="mb-0 cursor-pointer">
+                    <a href="{{ route('cart.index') }}" class="mb-0 cursor-pointer nav-link">
                         <div class="position-relative">
                             <i class="ti ti-shopping-cart fs-28px"></i>
                             <span
@@ -33,7 +33,7 @@
                                 {{ session()->has('cart') ? count(session('cart')) : 0 }}
                             </span>
                         </div>
-                    </div>
+                    </a>
 
                     <div class="dropdown">
                         <div class="user-dropdown dropdown-toggle cursor-pointer" data-bs-toggle="dropdown"
