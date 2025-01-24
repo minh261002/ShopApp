@@ -60,26 +60,28 @@
                 @foreach ($categories as $category)
                     @if ($category->children->count() > 0)
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href=""
+                            <a class="nav-link dropdown-toggle"
+                                href="{{ route('product.index', ['category' => $category->slug]) }} "
                                 data-bs-toggle="dropdown">{{ $category->name }}</a>
                             <ul class="dropdown-menu">
                                 @foreach ($category->children as $child)
                                     @if ($child->children->count() > 0)
                                         <li>
                                             <a class="dropdown-item dropdown-toggle"
-                                                href="">{{ $child->name }}</a>
+                                                href="{{ route('product.index', ['category' => $child->slug]) }} ">{{ $child->name }}</a>
                                             <ul class="dropdown-menu">
                                                 @foreach ($child->children as $subChild)
                                                     <li>
                                                         <a class="dropdown-item"
-                                                            href="">{{ $subChild->name }}</a>
+                                                            href="{{ route('product.index', ['category' => $subChild->slug]) }} ">{{ $subChild->name }}</a>
                                                     </li>
                                                 @endforeach
                                             </ul>
                                         </li>
                                     @else
                                         <li>
-                                            <a class="dropdown-item" href="">{{ $child->name }}</a>
+                                            <a class="dropdown-item"
+                                                href="{{ route('product.index', ['category' => $child->slug]) }} ">{{ $child->name }}</a>
                                         </li>
                                     @endif
                                 @endforeach
@@ -87,7 +89,8 @@
                         </li>
                     @else
                         <li class="nav-item">
-                            <a class="nav-link" href="">{{ $category->name }}</a>
+                            <a class="nav-link"
+                                href="{{ route('product.index', ['category' => $category->slug]) }} ">{{ $category->name }}</a>
                         </li>
                     @endif
                 @endforeach
@@ -97,33 +100,4 @@
 </nav>
 
 @push('scripts')
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            if (window.innerWidth < 992) {
-
-                document.querySelectorAll('.navbar .dropdown').forEach(function(everydropdown) {
-                    everydropdown.addEventListener('hidden.bs.dropdown', function() {
-                        this.querySelectorAll('.submenu').forEach(function(everysubmenu) {
-                            everysubmenu.style.display = 'none';
-                        });
-                    })
-                });
-
-                document.querySelectorAll('.dropdown-menu a').forEach(function(element) {
-                    element.addEventListener('click', function(e) {
-                        let nextEl = this.nextElementSibling;
-                        if (nextEl && nextEl.classList.contains('submenu')) {
-                            e.preventDefault();
-                            if (nextEl.style.display == 'block') {
-                                nextEl.style.display = 'none';
-                            } else {
-                                nextEl.style.display = 'block';
-                            }
-
-                        }
-                    });
-                })
-            }
-        });
-    </script>
 @endpush
