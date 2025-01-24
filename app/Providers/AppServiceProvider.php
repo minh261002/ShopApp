@@ -30,6 +30,7 @@ class AppServiceProvider extends ServiceProvider
         'App\Repositories\FlashSale\FlashSaleItemRepositoryInterface' => 'App\Repositories\FlashSale\FlashSaleItemRepository',
         'App\Repositories\Order\OrderRepositoryInterface' => 'App\Repositories\Order\OrderRepository',
         'App\Repositories\Order\OrderItemRepositoryInterface' => 'App\Repositories\Order\OrderItemRepository',
+        'App\Repositories\Order\OrderShippingRepositoryInterface' => 'App\Repositories\Order\OrderShippingRepository',
     ];
 
     public function register(): void
