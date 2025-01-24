@@ -26,6 +26,9 @@ class AuthController extends Controller
         $remember = $data['remember'] ?? false;
         unset($data['remember']);
 
+        $redirect = $data['redirect'] ?? null;
+        unset($data['redirect']);
+
         if (!auth()->guard('web')->attempt($data, $remember)) {
             return back()->withInput($request->only('email'))->with('error', 'Thông tin đăng nhập không chính xác');
         }
@@ -33,6 +36,11 @@ class AuthController extends Controller
         if (auth()->guard('web')->user()->status->value == ActiveStatus::InActive->value) {
             auth()->guard('web')->logout();
             return back()->withInput($request->only('email'))->with('error', 'Tài khoản hiện không hoạt động');
+        }
+        // dd($redirect);
+        // http://localhost:8000/san-pham/ao-so-mi-lua-mystic
+        if ($redirect) {
+            return redirect()->to($redirect)->with('success', 'Xin chào, ' . auth()->guard('web')->user()->name);
         }
 
         return redirect()->route('home')->with('success', 'Xin chào, ' . auth()->guard('web')->user()->name);
@@ -111,6 +119,6 @@ class AuthController extends Controller
     public function logout()
     {
         auth()->guard('web')->logout();
-        return redirect()->route('home')->with('success', 'Đăng xuất thành công');
+        return redirect()->back()->with('success', 'Đăng xuất thành công');
     }
 }

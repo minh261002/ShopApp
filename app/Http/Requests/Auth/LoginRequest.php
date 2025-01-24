@@ -25,6 +25,7 @@ class LoginRequest extends FormRequest
             'email' => 'required|email',
             'password' => 'required|min:6',
             'remember' => 'nullable',
+            'redirect' => 'nullable',
         ];
     }
 

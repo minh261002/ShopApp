@@ -12,6 +12,8 @@
             <form action="{{ route('login.post') }}" class="d-flex flex-column" method="POST">
                 @csrf
 
+                <input type="hidden" name="redirect" value="{{ request()->redirect ?? '' }}">
+
                 <div class="form-group mb-3">
                     <label for="email" class="form-label">Email</label>
                     <input type="email" class="form-control" id="email" name="email" value="{{ old('email') }}">

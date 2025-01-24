@@ -142,14 +142,22 @@
         </div>
 
         <div class="d-flex gap-3">
-            <button class="btn bg-red-lt w-100 fs-18px">
-                <i class="ti ti-heart fs-20px me-1"></i>
-                Yêu thích
-            </button>
-            <button class="btn bg-red text-white w-100 fs-18px">
-                <i class="ti ti-shopping-cart fs-20px me-1"></i>
-                Thêm vào giỏ hàng
-            </button>
+            @if (auth()->guard('web')->check())
+                <button class="btn bg-red-lt w-100 fs-18px">
+                    <i class="ti ti-heart fs-20px me-1"></i>
+                    Yêu thích
+                </button>
+                <button class="btn bg-red text-white w-100 fs-18px">
+                    <i class="ti ti-shopping-cart fs-20px me-1"></i>
+                    Thêm vào giỏ hàng
+                </button>
+            @else
+                <a href="{{ route('login', ['redirect' => route('product.detail', $product->slug)]) }}"
+                    class="btn bg-red-lt w-100 fs-18px">
+                    <i class="ti ti-login fs-20px me-1"></i>
+                    Bạn cần đăng nhập
+                </a>
+            @endif
         </div>
 
         <div class="d-flex align-items-stretch mt-4">
