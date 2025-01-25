@@ -37,7 +37,7 @@ class LocationController extends Controller
     {
         $html = '<option value="0">' . $root . '</option>';
         foreach ($districts as $district) {
-            $html .= '<option value="' . $district->code . '">' . $district->name . '</option>';
+            $html .= '<option value="' . $district->code . '">' . $district->name_with_type . '</option>';
         }
         return $html;
     }

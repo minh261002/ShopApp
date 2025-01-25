@@ -7,9 +7,7 @@
              <label class="form-label fw-semibold mb-2">
                  MÃ PHIẾU GIẢM GIÁ
              </label>
-             <p class="text-muted">
-                 Bạn có thể sử dụng mã giảm giá ở bước thanh toán
-             </p>
+             @include('client.checkout.components.cart-apply-voucher')
 
              <p class="text-sm mt-2">
                  Kiểm tra

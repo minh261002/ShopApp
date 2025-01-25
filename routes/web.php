@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LocationController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ShoppingCartController;
 use Illuminate\Support\Facades\Route;
@@ -24,6 +26,7 @@ Route::get('/san-pham/{slug}', [ProductController::class, 'show'])->name('produc
 Route::get('/san-pham', [ProductController::class, 'index'])->name('product.index');
 Route::post('/san-pham/chi-tiet', [ProductController::class, 'get'])->name('product.variation.get');
 
+Route::get('/ajax/location', [LocationController::class, 'index'])->name('ajax.location');
 Route::middleware('auth:web')->group(function () {
     Route::post('/dang-xuat', [AuthController::class, 'logout'])->name('logout');
 
@@ -33,4 +36,6 @@ Route::middleware('auth:web')->group(function () {
     Route::get('/gio-hang/xoa/{variation_id}', [ShoppingCartController::class, 'destroy'])->name('cart.destroy');
     Route::post('/gio-hang/xoa-tat-ca', [ShoppingCartController::class, 'destroyAll'])->name('cart.destroy.all');
     Route::post('/gio-hang/cap-nhat-so-luong', [ShoppingCartController::class, 'updateQuantity'])->name('cart.update.quantity');
+
+    Route::get('/thanh-toan', [CheckoutController::class, 'index'])->name('checkout.index');
 });
