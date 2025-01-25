@@ -16,7 +16,15 @@
                 </div>
             </div>
         @else
-            <div class="row">
+            <form class="row" action="{{ route('checkout.store') }}" method="POST">
+                @csrf
+
+                <input type="hidden" name="order[user_id]" value="{{ auth()->guard('web')->id() }}">
+
+                <input type="hidden" name="cart" value="{{ json_encode($cart) }}">
+                <input type="hidden" name="total_price" value="{{ $totalPrice }}">
+                <input type="hidden" name="sub_total" value="{{ $subTotal }}">
+
                 <div class="col-md-8">
                     @include('client.checkout.components.user-info')
                     @include('client.checkout.components.cart-tabler')
@@ -24,7 +32,7 @@
                 <div class="col-md-4">
                     @include('client.checkout.components.cart-summary')
                 </div>
-            </div>
+            </form>
         @endif
     </div>
 @endsection

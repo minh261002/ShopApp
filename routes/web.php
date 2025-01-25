@@ -40,4 +40,5 @@ Route::middleware('client:web')->group(function () {
     Route::post('/gio-hang/cap-nhat-so-luong', [ShoppingCartController::class, 'updateQuantity'])->name('cart.update.quantity');
 
     Route::get('/thanh-toan', [CheckoutController::class, 'index'])->name('checkout.index');
+    Route::post('/thanh-toan', [CheckoutController::class, 'store'])->name('checkout.store');
 });

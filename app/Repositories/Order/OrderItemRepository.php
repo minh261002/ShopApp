@@ -11,4 +11,9 @@ class OrderItemRepository extends BaseRepository implements OrderItemRepositoryI
     {
         return OrderItem::class;
     }
+
+    public function insert($data)
+    {
+        return $this->model->insert($data);
+    }
 }

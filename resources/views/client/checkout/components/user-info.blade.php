@@ -14,32 +14,33 @@
         <div class="row">
             <div class="col-md-6 mb-3">
                 <label for="name" class="form-label">Họ và tên</label>
-                <input type="text" class="form-control" id="name" name="name"
+                <input type="text" class="form-control" id="name" name="order[name]"
                     value="{{ $user->name ?? '' }}">
             </div>
 
             <div class="col-md-6 mb-3">
                 <label for="email" class="form-label">Email</label>
-                <input type="email" class="form-control" id="email" name="email"
+                <input type="email" class="form-control" id="email" name="order[email]"
                     value="{{ $user->email ?? '' }}">
             </div>
 
             <div class="col-md-6 mb-3">
                 <label for="phone" class="form-label">Số điện thoại</label>
-                <input type="text" class="form-control" id="phone" name="phone"
+                <input type="text" class="form-control" id="phone" name="order[phone]"
                     value="{{ $user->phone ?? '' }}">
             </div>
 
             <div class="col-md-6 mb-3">
                 <label for="address" class="form-label">Địa chỉ</label>
                 <input type="text" class="form-control" id="address"
-                    name="address"value="{{ $user->address ?? '' }}">
+                    name="order[address]"value="{{ $user->address ?? '' }}">
             </div>
 
             <div class="row">
                 <div class="col-md-4 mb-3">
                     <label for="province_id" class="form-label">Chọn Tỉnh / Thành Phố</label>
-                    <select name="province_id" class="form-control select2 province location" data-target="districts">
+                    <select name="order[province_id]" class="form-control select2 province location"
+                        data-target="districts">
                         <option value="0">[Chọn Tỉnh / Thành Phố]</option>
                         @if (isset($provinces))
                             @foreach ($provinces as $province)
@@ -53,14 +54,15 @@
 
                 <div class="col-md-4 mb-3">
                     <label for="" class="form-label">Chọn Quận / Huyện </label>
-                    <select name="district_id" class="form-control districts select2 location" data-target="wards">
+                    <select name="order[district_id]" class="form-control districts select2 location"
+                        data-target="wards">
                         <option value="0">[Chọn Quận / Huyện]</option>
                     </select>
                 </div>
 
                 <div class="col-md-4 mb-3">
                     <label for="" class="form-label">Chọn Phường / Xã </label>
-                    <select name="ward_id" class="form-control select2 wards">
+                    <select name="order[ward_id]" class="form-control select2 wards">
                         <option value="0">[Chọn Phường / Xã]</option>
                     </select>
                 </div>
@@ -68,7 +70,7 @@
 
             <div class="col-12 mb-3">
                 <label for="note" class="form-label">Ghi chú</label>
-                <textarea name="note" id="note" class="form-control" rows="3"></textarea>
+                <textarea name="order[note]" id="note" class="form-control" rows="3"></textarea>
             </div>
         </div>
     </div>

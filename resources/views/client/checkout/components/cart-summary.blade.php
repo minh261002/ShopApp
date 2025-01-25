@@ -55,10 +55,13 @@
                 <span class="text-muted">Phí vận chuyển</span>
                 <span class="fw-semibold" id="shipping_fee">0đ</span>
             </div>
+            <input type="hidden" name="shipping_fee" value="0">
+
             <div class="d-flex justify-content-between text-sm">
                 <span class="text-muted">Mã giảm giá</span>
                 <span class="fw-semibold text-danger" id="discount">-0đ</span>
             </div>
+            <input type="hidden" name="discount_amount" value="0">
         </div>
 
         <hr class="border-dashed mb-4 border-dark" />
@@ -68,8 +71,8 @@
             <span id="total">{{ number_format($totalPrice) }}đ</span>
         </div>
 
-        <a href="{{ route('checkout.index') }}" class="btn btn-danger w-100">
+        <button type="submit" class="btn btn-danger w-100">
             Tiến hành thanh toán
-        </a>
+        </button>
     </div>
 </div>
