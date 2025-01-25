@@ -1,4 +1,4 @@
- <h1 class="text-left fw-bold mb-4">Đơn hàng</h1>
+ <h2 class="text-left fw-bold mb-3">Đơn hàng</h2>
 
  <div class="card">
      <div class="card-body">

@@ -1,4 +1,4 @@
-<h1 class="text-left fw-bold mb-4">Giỏ hàng</h1>
+<h2 class="text-left fw-bold mb-3">Giỏ hàng</h2>
 
 <div class="card">
     <div class="table-responsive">

@@ -20,6 +20,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'admin' => \App\Http\Middleware\AdminLoginMiddleware::class,
             'permission' => \Spatie\Permission\Middleware\PermissionMiddleware::class,
             'login' => \App\Http\Middleware\LoginMiddleware::class,
+            'client' => \App\Http\Middleware\ClientAuthMiddleware::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

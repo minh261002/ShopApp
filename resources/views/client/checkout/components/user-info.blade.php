@@ -5,7 +5,7 @@
 @php
     $user = auth()->guard('web')->user();
 @endphp
-<h1 class="text-left fw-bold mb-4">Khách hàng</h1>
+<h2 class="text-left fw-bold mb-3">Khách hàng</h2>
 
 <div class="card mb-5">
     <div class="card-body">
@@ -61,6 +61,11 @@
                         <option value="0">[Chọn Phường / Xã]</option>
                     </select>
                 </div>
+            </div>
+
+            <div class="col-12 mb-3">
+                <label for="note" class="form-label">Ghi chú</label>
+                <textarea name="note" id="note" class="form-control" rows="3"></textarea>
             </div>
         </div>
     </div>
