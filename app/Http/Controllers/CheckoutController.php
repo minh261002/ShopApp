@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\Order\PaymentMethod;
+use App\Enums\Order\ShippingMethod;
 use App\Models\Province;
 use App\Repositories\Order\OrderItemRepositoryInterface;
 use App\Repositories\Order\OrderRepositoryInterface;
@@ -29,7 +31,9 @@ class CheckoutController extends Controller
         }
         $totalPrice = $subTotal;
         $provinces = Province::all();
+        $payment_methods = PaymentMethod::asSelectArray();
+        $shipping_methods = ShippingMethod::asSelectArray();
 
-        return view('client.checkout.index', compact('cart', 'subTotal', 'totalPrice', 'provinces'));
+        return view('client.checkout.index', compact('cart', 'subTotal', 'totalPrice', 'provinces', 'payment_methods', 'shipping_methods'));
     }
 }

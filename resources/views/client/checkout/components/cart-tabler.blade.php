@@ -1,6 +1,7 @@
-<h2 class="text-left fw-bold mb-3">Giỏ hàng</h2>
-
 <div class="card">
+    <div class="card-header">
+        <h2 class="card-title text-left fw-bold">Thông tin giỏ hàng</h2>
+    </div>
     <div class="table-responsive">
         <table class="table table-vcenter card-table table-striped">
             <thead>

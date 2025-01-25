@@ -5,14 +5,17 @@
 @php
     $user = auth()->guard('web')->user();
 @endphp
-<h2 class="text-left fw-bold mb-3">Khách hàng</h2>
 
 <div class="card mb-5">
+    <div class="card-header">
+        <h2 class="card-title text-left fw-bold">Thông tin khách hàng</h2>
+    </div>
     <div class="card-body">
         <div class="row">
             <div class="col-md-6 mb-3">
                 <label for="name" class="form-label">Họ và tên</label>
-                <input type="text" class="form-control" id="name" name="name" value="{{ $user->name ?? '' }}">
+                <input type="text" class="form-control" id="name" name="name"
+                    value="{{ $user->name ?? '' }}">
             </div>
 
             <div class="col-md-6 mb-3">
