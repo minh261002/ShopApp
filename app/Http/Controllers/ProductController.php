@@ -37,6 +37,8 @@ class ProductController extends Controller
             'variations',
         ])->first();
 
+        $product->increment('viewed');
+
         $groupedAttributes = collect($product->variations->pluck('variationAttributes')->flatten(1)->groupBy('name'))
             ->mapWithKeys(function ($item, $key) {
                 return [$key => collect($item)->pluck('pivot.value')->unique()->values()];
@@ -98,7 +100,7 @@ class ProductController extends Controller
         }
 
 
-        $products = $query->paginate(1)->withQueryString();
+        $products = $query->paginate(12)->withQueryString();
         return view('client.product.index', compact('products', 'attributes', 'categories'));
     }
 
