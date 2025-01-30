@@ -91,7 +91,7 @@ class ProductController extends Controller
             });
         }
 
-        if ($request->has('category')) {
+        if ($request->has('danh-muc')) {
             $query->whereHas('categories', function ($query) use ($request) {
                 $query->where('slug', $request->get('category'));
             });
