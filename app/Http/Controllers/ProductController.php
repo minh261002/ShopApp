@@ -93,7 +93,7 @@ class ProductController extends Controller
 
         if ($request->has('danh-muc')) {
             $query->whereHas('categories', function ($query) use ($request) {
-                $query->where('slug', $request->get('category'));
+                $query->where('slug', $request->get('danh-muc'));
             });
         }
 

@@ -1,50 +1,6 @@
 <?php
 
 return [
-    'flashSales' => [
-        'image' => [
-            'title' => 'Ảnh',
-            'orderable' => false,
-            'exportable' => false,
-            'printable' => false,
-            'addClass' => 'text-center align-middle w-100px',
-        ],
-        'title' => [
-            'title' => 'Tiêu đề',
-            'orderable' => true,
-            'exportable' => true,
-            'printable' => true,
-            'addClass' => 'text-center align-middle',
-        ],
-        'start_date' => [
-            'title' => 'Ngày bắt đầu',
-            'orderable' => true,
-            'exportable' => true,
-            'printable' => true,
-            'addClass' => 'text-center align-middle',
-        ],
-        'end_date' => [
-            'title' => 'Ngày kết thúc',
-            'orderable' => true,
-            'exportable' => true,
-            'printable' => true,
-            'addClass' => 'text-center align-middle',
-        ],
-        'status' => [
-            'title' => 'Trạng thái',
-            'orderable' => true,
-            'exportable' => true,
-            'printable' => true,
-            'addClass' => 'text-center align-middle',
-        ],
-        'action' => [
-            'title' => 'Thao tác',
-            'orderable' => false,
-            'exportable' => false,
-            'printable' => false,
-            'addClass' => 'text-center align-middle',
-        ],
-    ],
     'productVariations' => [
         'sku' => [
             'title' => 'SKU',

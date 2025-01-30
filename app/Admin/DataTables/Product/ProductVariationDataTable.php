@@ -50,6 +50,8 @@ class ProductVariationDataTable extends BaseDataTable
         $this->customEditColumns = [
             'action' => $this->view['action'],
             'created_at' => '{{format_datetime($created_at)}}',
+            'price' => '{{format_price($price)}}',
+            'sale_price' => '{{format_price($sale_price)}}',
         ];
     }
 

@@ -65,27 +65,6 @@ return [
         ]
     ],
     [
-        'active' => ['admin.flash_sale.*'],
-        'show' => ['admin.flash_sale.*'],
-        'title' => 'Flash Sale',
-        'icon' => 'ti ti-bolt fs-2',
-        'permission' => ['viewFlashSale', 'createFlashSale', 'editFlashSale', 'deleteFlashSale'],
-        'children' => [
-            [
-                'title' => 'Thêm mới',
-                'route' => 'admin.flash_sale.create',
-                'icon' => 'ti ti-plus fs-3 me-2',
-                'permission' => 'createFlashSale'
-            ],
-            [
-                'title' => 'Danh sách',
-                'route' => 'admin.flash_sale.index',
-                'icon' => 'ti ti-list fs-3 me-2',
-                'permission' => 'viewFlashSale'
-            ]
-        ]
-    ],
-    [
         'active' => ['admin.order.*'],
         'show' => ['admin.order.*'],
         'title' => 'Đơn hàng',
