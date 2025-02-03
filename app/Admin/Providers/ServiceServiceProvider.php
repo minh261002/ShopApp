@@ -22,8 +22,7 @@ class ServiceServiceProvider extends ServiceProvider
         'App\Admin\Services\Category\CategoryServiceInterface' => 'App\Admin\Services\Category\CategoryService',
         'App\Admin\Services\Product\ProductServiceInterface' => 'App\Admin\Services\Product\ProductService',
         'App\Admin\Services\Discount\DiscountServiceInterface' => 'App\Admin\Services\Discount\DiscountService',
-        'App\Admin\Services\FlashSale\FlashSaleServiceInterface' => 'App\Admin\Services\FlashSale\FlashSaleService',
-        'App\Admin\Services\FlashSale\FlashSaleItemServiceInterface' => 'App\Admin\Services\FlashSale\FlashSaleItemService',
+        'App\Admin\Services\Order\OrderServiceInterface' => 'App\Admin\Services\Order\OrderService',
     ];
     public function register(): void
     {

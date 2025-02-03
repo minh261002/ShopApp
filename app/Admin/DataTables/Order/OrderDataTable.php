@@ -4,8 +4,8 @@ namespace App\Admin\DataTables\Order;
 
 use App\Admin\DataTables\BaseDataTable;
 use App\Enums\Order\OrderStatus;
+use App\Enums\Order\PaymentStatus;
 use App\Repositories\Order\OrderRepositoryInterface;
-use App\Enums\ActiveStatus;
 
 class OrderDataTable extends BaseDataTable
 {
@@ -24,7 +24,7 @@ class OrderDataTable extends BaseDataTable
         $this->view = [
             'action' => 'admin.order.datatable.action',
             'status' => 'admin.order.datatable.status',
-            'type' => 'admin.order.datatable.type',
+            'payment_status' => 'admin.order.datatable.payment_status',
         ];
     }
 
@@ -35,46 +35,43 @@ class OrderDataTable extends BaseDataTable
 
     public function setColumnSearch(): void
     {
-        $this->columnAllSearch = [0, 1, 2, 3, 4, 5];
+        $this->columnAllSearch = [0,1,2,3,4,5];
         $this->columnSearchSelect = [
             [
-                'column' => 5,
-                'data' => OrderStatus::asSelectArray()
+                'column' => 3,
+                'data' => PaymentStatus::asSelectArray()
             ],
+            [
+                'column' => 4,
+                'data' => OrderStatus::asSelectArray()
+            ]
         ];
+        $this->columnSearchDate = [5];
     }
 
     protected function setCustomColumns(): void
     {
-        $this->customColumns = config('datatable_columns.discounts', []);
+        $this->customColumns = config('datatable_columns.orders', []);
     }
 
     protected function setCustomEditColumns(): void
     {
         $this->customEditColumns = [
             'action' => $this->view['action'],
+            'created_at' => '{{format_datetime($created_at)}}',
             'status' => $this->view['status'],
-            'date_start' => function ($query) {
-                return formatDate($query->date_start);
-            },
-            'date_end' => function ($query) {
-                return formatDate($query->date_end);
-            },
-            'type' => $this->view['type'],
         ];
     }
 
     protected function setCustomAddColumns(): void
     {
         $this->customAddColumns = [
-            'action' => $this->view['action'],
-            'value' => function ($query) {
-                if ($query->type == DiscountType::Percentage) {
-                    return $query->percent_value . '%';
-                } else {
-                    return format_price($query->discount_value);
-                }
-            }
+            'amount' => function ($query) {
+                return format_price($query->transaction->grand_total);
+            },
+            'pạyment_status' =>function($query){
+                return view($this->view['payment_status'], ['payment_status' => $query->transaction->payment_status]);
+            },
         ];
     }
 
@@ -82,18 +79,17 @@ class OrderDataTable extends BaseDataTable
     {
         $this->customRawColumns = [
             'action',
-            'type',
             'status',
+            'payment_status',
         ];
     }
 
     public function setCustomFilterColumns(): void
     {
         $this->customFilterColumns = [
-            'value' => function ($query, $keyword) {
-                $query->where(function ($query) use ($keyword) {
-                    $query->where('discount_value', 'like', '%' . $keyword . '%')
-                        ->orWhere('percent_value', 'like', '%' . $keyword . '%');
+            'payment_status' => function ($query, $keyword) {
+                $query->whereHas('transaction', function ($query) use ($keyword) {
+                    $query->where('payment_status', $keyword);
                 });
             },
         ];

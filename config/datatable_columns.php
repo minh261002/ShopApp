@@ -1,6 +1,57 @@
 <?php
 
 return [
+    'orders' => [
+        'order_number' => [
+            'title' => 'Mã đơn hàng',
+            'orderable' => true,
+            'exportable' => true,
+            'printable' => true,
+            'addClass' => 'text-center align-middle',
+        ],
+        'name' => [
+            'title' => 'Người nhận',
+            'orderable' => true,
+            'exportable' => true,
+            'printable' => true,
+            'addClass' => 'text-center align-middle',
+        ],
+        'amount' => [
+            'title' => 'Tổng tiền',
+            'orderable' => true,
+            'exportable' => true,
+            'printable' => true,
+            'addClass' => 'text-center align-middle',
+        ],
+        'pạyment_status' => [
+            'title' => 'Thanh toán',
+            'orderable' => true,
+            'exportable' => true,
+            'printable' => true,
+            'addClass' => 'text-center align-middle',
+        ],
+        'status' => [
+            'title' => 'Trạng thái',
+            'orderable' => true,
+            'exportable' => true,
+            'printable' => true,
+            'addClass' => 'text-center align-middle',
+        ],
+        'created_at' => [
+            'title' => 'Ngày tạo',
+            'orderable' => true,
+            'exportable' => true,
+            'printable' => true,
+            'addClass' => 'text-center align-middle',
+        ],
+        'action' => [
+            'title' => 'Thao tác',
+            'orderable' => false,
+            'exportable' => false,
+            'printable' => false,
+            'addClass' => 'text-center align-middle',
+        ],
+    ],
     'productVariations' => [
         'sku' => [
             'title' => 'SKU',

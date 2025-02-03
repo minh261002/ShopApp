@@ -37,6 +37,7 @@ class orderService implements OrderServiceInterface
 
         try {
             $orderData = $data['order'];
+            $orderData['order_number'] = 'DH' . rand(100000000, 999999999);
             $order = $this->orderRepository->create($orderData);
 
             $cart = json_decode($data['cart']);

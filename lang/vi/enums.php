@@ -4,6 +4,7 @@ use App\Enums\ActiveStatus;
 use App\Enums\Discount\DiscountApplyFor;
 use App\Enums\Discount\DiscountType;
 use App\Enums\Module\ModuleStatus;
+use App\Enums\Order\OrderStatus;
 use App\Enums\Order\PaymentMethod;
 use App\Enums\Order\PaymentStatus;
 use App\Enums\Order\ShippingMethod;
@@ -48,4 +49,11 @@ return [
         ShippingStatus::Completed->value => 'Đã giao hàng',
         ShippingStatus::Cancelled->value => 'Đã hủy',
     ],
+    OrderStatus::class=> [
+        OrderStatus::Pending->value => 'Chờ xử lý',
+        OrderStatus::Processing->value => 'Đang xử lý',
+        OrderStatus::Shipping->value => 'Đang giao hàng',
+        OrderStatus::Completed->value => 'Đã giao hàng',
+        OrderStatus::Cancelled->value => 'Đã hủy',
+    ]
 ];

@@ -42,13 +42,14 @@ class CheckoutController extends Controller
         return view('client.checkout.index', compact('cart', 'subTotal', 'totalPrice', 'provinces', 'payment_methods', 'shipping_methods'));
     }
 
-    public function store(CheckoutRequest $request){
-       $response =  $this->service->store($request);
-       if($response){
-        session()->forget('cart');
-        return redirect()->route('home')->with('success', 'Đặt hàng thành công');
-       }else{
-        return redirect()->back()->with('error', 'Đặt hàng thất bại');
-       }
+    public function store(CheckoutRequest $request)
+    {
+        $response = $this->service->store($request);
+        if ($response) {
+            session()->forget('cart');
+            return redirect()->route('home')->with('success', 'Đặt hàng thành công');
+        } else {
+            return redirect()->back()->with('error', 'Đặt hàng thất bại');
+        }
     }
 }
