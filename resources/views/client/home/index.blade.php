@@ -9,4 +9,5 @@
     @include('client.home.components.hot')
     @include('client.home.components.new')
     @include('client.home.components.viewed')
+    @include('client.home.components.news')
 @endsection
