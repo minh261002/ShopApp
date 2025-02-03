@@ -329,11 +329,11 @@ Route::middleware(['auth:admin'])->prefix('admin')->as('admin.')->group(function
 
     //Transaction
     Route::prefix('transaction')->as('transaction.')->group(function () {
-        Route::middleware(['permission:viewTransaction'])->group(function () {
+        Route::middleware(['permission:viewOrder'])->group(function () {
             Route::get('/', [TransactionController::class, 'index'])->name('index');
         });
 
-        Route::middleware(['permission:editTransaction'])->group(function () {
+        Route::middleware(['permission:editOrder'])->group(function () {
             Route::get('/edit/{id}', [TransactionController::class, 'edit'])->name('edit');
             Route::put('/update', [TransactionController::class, 'update'])->name('update');
         });

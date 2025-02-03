@@ -87,9 +87,9 @@ class OrderDataTable extends BaseDataTable
     public function setCustomFilterColumns(): void
     {
         $this->customFilterColumns = [
-            'payment_status' => function ($query, $keyword) {
+            'amount' => function ($query, $keyword) {
                 $query->whereHas('transaction', function ($query) use ($keyword) {
-                    $query->where('payment_status', $keyword);
+                    $query->where('grand_total', $keyword);
                 });
             },
         ];

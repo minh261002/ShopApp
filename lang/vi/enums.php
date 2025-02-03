@@ -53,7 +53,7 @@ return [
         OrderStatus::Pending->value => 'Chờ xử lý',
         OrderStatus::Processing->value => 'Đang xử lý',
         OrderStatus::Shipping->value => 'Đang giao hàng',
-        OrderStatus::Completed->value => 'Đã giao hàng',
+        OrderStatus::Completed->value => 'Đã hoàn thành',
         OrderStatus::Cancelled->value => 'Đã hủy',
     ]
 ];
