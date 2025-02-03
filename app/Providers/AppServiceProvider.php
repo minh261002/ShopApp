@@ -31,6 +31,8 @@ class AppServiceProvider extends ServiceProvider
         'App\Repositories\Order\OrderRepositoryInterface' => 'App\Repositories\Order\OrderRepository',
         'App\Repositories\Order\OrderItemRepositoryInterface' => 'App\Repositories\Order\OrderItemRepository',
         'App\Repositories\Order\OrderShippingRepositoryInterface' => 'App\Repositories\Order\OrderShippingRepository',
+        'App\Repositories\Transaction\TransactionRepositoryInterface' => 'App\Repositories\Transaction\TransactionRepository',
+        'App\Services\Order\OrderServiceInterface' => 'App\Services\Order\OrderService',
     ];
 
     public function register(): void

@@ -23,8 +23,13 @@
     <link rel="stylesheet" type="text/css"
         href="https://cdn.jsdelivr.net/gh/lelinh014756/fui-toast-js@master/assets/css/toast@1.0.1/fuiToast.min.css">
     <link rel="stylesheet" href="{{ asset('admin/css/jquery-ui.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('admin/css/custom.css') }}">
 
     @stack('styles')
+
+    <script>
+        const BASEURL = "{{ rtrim(env('APP_URL'), '/') }}/";
+    </script>
 </head>
 
 <body class="bg-white">

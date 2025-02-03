@@ -61,19 +61,19 @@
                     @if ($category->children->count() > 0)
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle"
-                                href="{{ route('product.index', ['category' => $category->slug]) }} "
+                                href="{{ route('product.index', ['danh-muc' => $category->slug]) }} "
                                 data-bs-toggle="dropdown">{{ $category->name }}</a>
                             <ul class="dropdown-menu">
                                 @foreach ($category->children as $child)
                                     @if ($child->children->count() > 0)
                                         <li>
                                             <a class="dropdown-item dropdown-toggle"
-                                                href="{{ route('product.index', ['category' => $child->slug]) }} ">{{ $child->name }}</a>
+                                                href="{{ route('product.index', ['danh-muc' => $child->slug]) }} ">{{ $child->name }}</a>
                                             <ul class="dropdown-menu">
                                                 @foreach ($child->children as $subChild)
                                                     <li>
                                                         <a class="dropdown-item"
-                                                            href="{{ route('product.index', ['category' => $subChild->slug]) }} ">{{ $subChild->name }}</a>
+                                                            href="{{ route('product.index', ['danh-muc' => $subChild->slug]) }} ">{{ $subChild->name }}</a>
                                                     </li>
                                                 @endforeach
                                             </ul>
@@ -81,7 +81,7 @@
                                     @else
                                         <li>
                                             <a class="dropdown-item"
-                                                href="{{ route('product.index', ['category' => $child->slug]) }} ">{{ $child->name }}</a>
+                                                href="{{ route('product.index', ['danh-muc' => $child->slug]) }} ">{{ $child->name }}</a>
                                         </li>
                                     @endif
                                 @endforeach
@@ -90,7 +90,7 @@
                     @else
                         <li class="nav-item">
                             <a class="nav-link"
-                                href="{{ route('product.index', ['category' => $category->slug]) }} ">{{ $category->name }}</a>
+                                href="{{ route('product.index', ['danh-muc' => $category->slug]) }} ">{{ $category->name }}</a>
                         </li>
                     @endif
                 @endforeach

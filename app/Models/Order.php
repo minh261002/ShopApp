@@ -27,4 +27,24 @@ class Order extends Model
     {
         return $this->hasOne(Transaction::class);
     }
+
+    public function ward()
+    {
+        return $this->belongsTo(Ward::class, 'ward_id', 'code');
+    }
+
+    public function district()
+    {
+        return $this->belongsTo(District::class, 'district_id', 'code');
+    }
+
+    public function province()
+    {
+        return $this->belongsTo(Province::class, 'province_id', 'code');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

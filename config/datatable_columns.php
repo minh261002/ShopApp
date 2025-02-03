@@ -1,30 +1,95 @@
 <?php
 
 return [
-    'flashSales' => [
-        'image' => [
-            'title' => 'Ảnh',
+    'transactions' => [
+        'user_id' => [
+            'title' => 'Người thanh toán',
+            'orderable' => true,
+            'exportable' => true,
+            'printable' => true,
+            'addClass' => 'text-center align-middle',
+        ],
+        'order_id' => [
+            'title' => 'Mã đơn hàng',
+            'orderable' => true,
+            'exportable' => true,
+            'printable' => true,
+            'addClass' => 'text-center align-middle',
+        ],
+        'sub_total' => [
+            'title' => 'Tạm tính',
+            'orderable' => true,
+            'exportable' => true,
+            'printable' => true,
+            'addClass' => 'text-center align-middle',
+        ],
+        'discount_amount' => [
+            'title' => 'Giảm giá',
+            'orderable' => true,
+            'exportable' => true,
+            'printable' => true,
+            'addClass' => 'text-center align-middle',
+        ],
+        'shipping_fee' => [
+            'title' => 'Phí vận chuyển',
+            'orderable' => true,
+            'exportable' => true,
+            'printable' => true,
+            'addClass' => 'text-center align-middle',
+        ],
+        'grand_total' => [
+            'title' => 'Tổng tiền ',
+            'orderable' => true,
+            'exportable' => true,
+            'printable' => true,
+            'addClass' => 'text-center align-middle',
+        ],
+        'payment_method' => [
+            'title' => 'Phương thức thanh toán',
+            'orderable' => true,
+            'exportable' => true,
+            'printable' => true,
+            'addClass' => 'text-center align-middle',
+        ],
+        'payment_status' => [
+            'title' => 'Trạng thái ',
+            'orderable' => true,
+            'exportable' => true,
+            'printable' => true,
+            'addClass' => 'text-center align-middle',
+        ],
+        'action' => [
+            'title' => 'Thao tác',
             'orderable' => false,
             'exportable' => false,
             'printable' => false,
-            'addClass' => 'text-center align-middle w-100px',
+            'addClass' => 'text-center align-middle',
         ],
-        'title' => [
-            'title' => 'Tiêu đề',
+    ],
+    'orders' => [
+        'order_number' => [
+            'title' => 'Mã đơn hàng',
             'orderable' => true,
             'exportable' => true,
             'printable' => true,
             'addClass' => 'text-center align-middle',
         ],
-        'start_date' => [
-            'title' => 'Ngày bắt đầu',
+        'name' => [
+            'title' => 'Người nhận',
             'orderable' => true,
             'exportable' => true,
             'printable' => true,
             'addClass' => 'text-center align-middle',
         ],
-        'end_date' => [
-            'title' => 'Ngày kết thúc',
+        'amount' => [
+            'title' => 'Tổng tiền',
+            'orderable' => true,
+            'exportable' => true,
+            'printable' => true,
+            'addClass' => 'text-center align-middle',
+        ],
+        'pạyment_status' => [
+            'title' => 'Thanh toán',
             'orderable' => true,
             'exportable' => true,
             'printable' => true,
@@ -32,6 +97,13 @@ return [
         ],
         'status' => [
             'title' => 'Trạng thái',
+            'orderable' => true,
+            'exportable' => true,
+            'printable' => true,
+            'addClass' => 'text-center align-middle',
+        ],
+        'created_at' => [
+            'title' => 'Ngày tạo',
             'orderable' => true,
             'exportable' => true,
             'printable' => true,

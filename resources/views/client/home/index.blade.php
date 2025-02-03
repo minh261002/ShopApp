@@ -6,5 +6,8 @@
     @include('client.home.components.carousel')
     @include('client.home.components.category')
     @include('client.home.components.discount')
-    @include('client.home.components.flash-sale')
+    @include('client.home.components.hot')
+    @include('client.home.components.new')
+    @include('client.home.components.viewed')
+    @include('client.home.components.news')
 @endsection

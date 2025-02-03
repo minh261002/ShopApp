@@ -16,7 +16,7 @@ return new class extends Migration {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('order_id')->constrained()->onDelete('cascade');
-            $table->double('total_amount');
+            $table->double('sub_total');
             $table->double('discount_amount')->default(0);
             $table->double('shipping_fee')->default(0);
             $table->double('grand_total');

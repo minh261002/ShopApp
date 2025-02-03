@@ -3,14 +3,15 @@ use App\Admin\Http\Controllers\Admin\AdminController;
 use App\Admin\Http\Controllers\Category\CategoryController;
 use App\Admin\Http\Controllers\Dashboard\DashboardController;
 use App\Admin\Http\Controllers\Discount\DiscountController;
-use App\Admin\Http\Controllers\FlashSale\FlashSaleController;
 use App\Admin\Http\Controllers\Module\ModuleController;
+use App\Admin\Http\Controllers\Order\OrderController;
 use App\Admin\Http\Controllers\Permission\PermissionController;
 use App\Admin\Http\Controllers\Post\PostCatalogueController;
 use App\Admin\Http\Controllers\Post\PostController;
 use App\Admin\Http\Controllers\Product\ProductVariationController;
 use App\Admin\Http\Controllers\Role\RoleController;
 use App\Admin\Http\Controllers\Slider\SliderController;
+use App\Admin\Http\Controllers\Transaction\TransactionController;
 use App\Admin\Http\Controllers\User\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Admin\Http\Controllers\Auth\AuthController;
@@ -329,11 +330,11 @@ Route::middleware(['auth:admin'])->prefix('admin')->as('admin.')->group(function
 
     //Transaction
     Route::prefix('transaction')->as('transaction.')->group(function () {
-        Route::middleware(['permission:viewTransaction'])->group(function () {
+        Route::middleware(['permission:viewOrder'])->group(function () {
             Route::get('/', [TransactionController::class, 'index'])->name('index');
         });
 
-        Route::middleware(['permission:editTransaction'])->group(function () {
+        Route::middleware(['permission:editOrder'])->group(function () {
             Route::get('/edit/{id}', [TransactionController::class, 'edit'])->name('edit');
             Route::put('/update', [TransactionController::class, 'update'])->name('update');
         });
@@ -352,25 +353,4 @@ Route::middleware(['auth:admin'])->prefix('admin')->as('admin.')->group(function
         });
     });
 
-    //Flash Sale
-    Route::prefix('flash-sale')->as('flash_sale.')->group(function () {
-        Route::middleware(['permission:viewFlashSale'])->group(function () {
-            Route::get('/', [FlashSaleController::class, 'index'])->name('index');
-        });
-
-        Route::middleware(['permission:createFlashSale'])->group(function () {
-            Route::get('/create', [FlashSaleController::class, 'create'])->name('create');
-            Route::post('/store', [FlashSaleController::class, 'store'])->name('store');
-        });
-
-        Route::middleware(['permission:editFlashSale'])->group(function () {
-            Route::get('/edit/{id}', [FlashSaleController::class, 'edit'])->name('edit');
-            Route::put('/update', [FlashSaleController::class, 'update'])->name('update');
-            Route::patch('/update-status', [FlashSaleController::class, 'updateStatus'])->name('update.status');
-        });
-
-        Route::middleware(['permission:deleteFlashSale'])->group(function () {
-            Route::delete('/delete/{id}', [FlashSaleController::class, 'delete'])->name('delete');
-        });
-    });
 });

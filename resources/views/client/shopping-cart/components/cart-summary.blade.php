@@ -43,7 +43,7 @@
              <span id="total">{{ number_format($totalPrice) }}đ</span>
          </div>
 
-         <a href="" class="btn btn-danger w-100">
+         <a href="{{ route('checkout.index') }}" class="btn btn-danger w-100">
              Tiến hành thanh toán
          </a>
      </div>
