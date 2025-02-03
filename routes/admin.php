@@ -11,6 +11,7 @@ use App\Admin\Http\Controllers\Post\PostController;
 use App\Admin\Http\Controllers\Product\ProductVariationController;
 use App\Admin\Http\Controllers\Role\RoleController;
 use App\Admin\Http\Controllers\Slider\SliderController;
+use App\Admin\Http\Controllers\Transaction\TransactionController;
 use App\Admin\Http\Controllers\User\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Admin\Http\Controllers\Auth\AuthController;

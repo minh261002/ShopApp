@@ -1,6 +1,71 @@
 <?php
 
 return [
+    'transactions' => [
+        'user_id' => [
+            'title' => 'Người thanh toán',
+            'orderable' => true,
+            'exportable' => true,
+            'printable' => true,
+            'addClass' => 'text-center align-middle',
+        ],
+        'order_id' => [
+            'title' => 'Mã đơn hàng',
+            'orderable' => true,
+            'exportable' => true,
+            'printable' => true,
+            'addClass' => 'text-center align-middle',
+        ],
+        'sub_total' => [
+            'title' => 'Tạm tính',
+            'orderable' => true,
+            'exportable' => true,
+            'printable' => true,
+            'addClass' => 'text-center align-middle',
+        ],
+        'discount_amount' => [
+            'title' => 'Giảm giá',
+            'orderable' => true,
+            'exportable' => true,
+            'printable' => true,
+            'addClass' => 'text-center align-middle',
+        ],
+        'shipping_fee' => [
+            'title' => 'Phí vận chuyển',
+            'orderable' => true,
+            'exportable' => true,
+            'printable' => true,
+            'addClass' => 'text-center align-middle',
+        ],
+        'grand_total' => [
+            'title' => 'Tổng tiền ',
+            'orderable' => true,
+            'exportable' => true,
+            'printable' => true,
+            'addClass' => 'text-center align-middle',
+        ],
+        'payment_method' => [
+            'title' => 'Phương thức thanh toán',
+            'orderable' => true,
+            'exportable' => true,
+            'printable' => true,
+            'addClass' => 'text-center align-middle',
+        ],
+        'payment_status' => [
+            'title' => 'Trạng thái ',
+            'orderable' => true,
+            'exportable' => true,
+            'printable' => true,
+            'addClass' => 'text-center align-middle',
+        ],
+        'action' => [
+            'title' => 'Thao tác',
+            'orderable' => false,
+            'exportable' => false,
+            'printable' => false,
+            'addClass' => 'text-center align-middle',
+        ],
+    ],
     'orders' => [
         'order_number' => [
             'title' => 'Mã đơn hàng',
