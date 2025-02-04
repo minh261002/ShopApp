@@ -36,7 +36,7 @@
             <div class="d-flex align-items-center gap-2">
                 @if (count($product->variations) > 0)
                     @if ($product->variations->first()->sale_price)
-                        <input type="hidden" name="price" value="{{ $product->variations->first()->price }} " />
+                        <input type="hidden" name="price" value="{{ $product->variations->first()->sale_price }} " />
                         <span class="text-red fs-28px fw-bold">
                             {{ format_price($product->variations->first()->sale_price) }}
                         </span>
