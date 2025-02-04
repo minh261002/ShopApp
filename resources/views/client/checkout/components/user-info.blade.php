@@ -30,42 +30,14 @@
                     value="{{ $user->phone ?? '' }}">
             </div>
 
-            <div class="col-md-6 mb-3">
-                <label for="address" class="form-label">Địa chỉ</label>
-                <input type="text" class="form-control" id="address"
-                    name="order[address]"value="{{ $user->address ?? '' }}">
-            </div>
-
-            <div class="row">
-                <div class="col-md-4 mb-3">
-                    <label for="province_id" class="form-label">Chọn Tỉnh / Thành Phố</label>
-                    <select name="order[province_id]" class="form-control select2 province location"
-                        data-target="districts">
-                        <option value="0">[Chọn Tỉnh / Thành Phố]</option>
-                        @if (isset($provinces))
-                            @foreach ($provinces as $province)
-                                <option @if (old('province_id') == $province->code) selected @endif value="{{ $province->code }}">
-                                    {{ $province->name_with_type }}
-                                </option>
-                            @endforeach
-                        @endif
-                    </select>
-                </div>
-
-                <div class="col-md-4 mb-3">
-                    <label for="" class="form-label">Chọn Quận / Huyện </label>
-                    <select name="order[district_id]" class="form-control districts select2 location"
-                        data-target="wards">
-                        <option value="0">[Chọn Quận / Huyện]</option>
-                    </select>
-                </div>
-
-                <div class="col-md-4 mb-3">
-                    <label for="" class="form-label">Chọn Phường / Xã </label>
-                    <select name="order[ward_id]" class="form-control select2 wards">
-                        <option value="0">[Chọn Phường / Xã]</option>
-                    </select>
-                </div>
+            <div class="col-12 form-group mb-3">
+                @include('admin.components.pick-address', [
+                    'label' => 'Địa chỉ cụ thể',
+                    'name' => 'address',
+                    'value' => old('address', $user->address ?? ''),
+                ])
+                <input type="hidden" name="lat" value="{{ old('lat', $user->lat ?? '') }}">
+                <input type="hidden" name="lng" value="{{ old('lng', $user->lng ?? '') }}">
             </div>
 
             <div class="col-12 mb-3">
@@ -74,15 +46,9 @@
             </div>
         </div>
     </div>
-    <script>
-        var province_id = '{{ isset($user->province_id) ? $user->province_id : old('province_id') }}'
-        var district_id = '{{ isset($user->district_id) ? $user->district_id : old('district_id') }}'
-        var ward_id = '{{ isset($user->ward_id) ? $user->ward_id : old('ward_id') }}'
-    </script>
 </div>
 
 @push('scripts')
-    <script src="{{ asset('admin/js/location.js') }}"></script>
     <script src="{{ asset('admin/js/finder.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script>

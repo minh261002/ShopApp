@@ -49,10 +49,10 @@ return [
         ShippingStatus::Completed->value => 'Đã giao hàng',
         ShippingStatus::Cancelled->value => 'Đã hủy',
     ],
-    OrderStatus::class=> [
+    OrderStatus::class => [
         OrderStatus::Pending->value => 'Chờ xử lý',
         OrderStatus::Processing->value => 'Đang xử lý',
-        OrderStatus::Shipping->value => 'Đang giao hàng',
+        OrderStatus::Shipping->value => 'Đã bàn giao vận chuyển',
         OrderStatus::Completed->value => 'Đã hoàn thành',
         OrderStatus::Cancelled->value => 'Đã hủy',
     ]

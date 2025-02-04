@@ -92,6 +92,30 @@
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
+
+                                    <div class="col-md-6 mb-3 form-group">
+                                        <label for="role_id" class="form-label">
+                                            Vai trò
+                                        </label>
+                                        <select name="role_id" id="role_id" class="form-control select2">
+                                            @foreach ($roles as $role)
+                                                <option value="{{ $role->id }}"
+                                                    {{ $admin->role->contains($role->id) ? 'selected' : '' }}>
+
+                                                    {{ $role->title }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+
+                                    <div class="col-12 form-group mb-3">
+                                        @include('admin.components.pick-address', [
+                                            'label' => 'Địa chỉ cụ thể',
+                                            'name' => 'address',
+                                            'value' => old('address', $admin->address ?? ''),
+                                        ])
+                                        <input type="hidden" name="lat" value="{{ old('lat', $admin->lat ?? '') }}">
+                                        <input type="hidden" name="lng" value="{{ old('lng', $admin->lng ?? '') }}">
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -118,74 +142,10 @@
                                 </div>
                             </div>
                         </div>
-
-                        <div class="card mt-3">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-md-4 mb-3">
-                                        <label for="province_id" class="form-label">Chọn Tỉnh / Thành Phố</label>
-                                        <select name="province_id" class="form-control select2 province location"
-                                            data-target="districts">
-                                            <option value="0">[Chọn Tỉnh / Thành Phố]</option>
-                                            @if (isset($provinces))
-                                                @foreach ($provinces as $province)
-                                                    <option @if (old('province_id') == $province->code) selected @endif
-                                                        value="{{ $province->code }}">{{ $province->name_with_type }}
-                                                    </option>
-                                                @endforeach
-                                            @endif
-                                        </select>
-                                    </div>
-
-                                    <div class="col-md-4 mb-3">
-                                        <label for="" class="form-label">Chọn Quận / Huyện </label>
-                                        <select name="district_id" class="form-control districts select2 location"
-                                            data-target="wards">
-                                            <option value="0">[Chọn Quận / Huyện]</option>
-                                        </select>
-                                    </div>
-
-                                    <div class="col-md-4 mb-3">
-                                        <label for="" class="form-label">Chọn Phường / Xã </label>
-                                        <select name="ward_id" class="form-control select2 wards">
-                                            <option value="0">[Chọn Phường / Xã]</option>
-                                        </select>
-                                    </div>
-
-                                    <div class="col-12 mb-3">
-                                        <label for="address" class="form-label">Địa chỉ</label>
-                                        <input type="text" class="form-control" id="address" name="address"
-                                            value="{{ old('address', $admin->address ?? '') }}">
-                                        @error('address')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
 
                     <div class="col-md-3">
                         <div class="card">
-                            <div class="card-header d-flex align-items-center justify-content-between">
-                                <h2 class="card-title mb-0">Vai trò</h2>
-                            </div>
-                            <div class="card-body">
-                                <select name="role_id" id="role_id" class="form-control select2">
-                                    @foreach ($roles as $role)
-                                        <option value="{{ $role->id }}"
-                                            {{ $admin->role->contains($role->id) ? 'selected' : '' }}>
-
-                                            {{ $role->title }}</option>
-                                    @endforeach
-                                </select>
-                                @error('role_id')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="card mt-3">
                             <div class="card-header d-flex align-items-center justify-content-between">
                                 <h2 class="card-title mb-0">Ảnh đại diện</h2>
                             </div>
@@ -225,11 +185,8 @@
         </div>
     </div>
 
-    <script>
-        var province_id = '{{ isset($admin->province_id) ? $admin->province_id : old('province_id') }}'
-        var district_id = '{{ isset($admin->district_id) ? $admin->district_id : old('district_id') }}'
-        var ward_id = '{{ isset($admin->ward_id) ? $admin->ward_id : old('ward_id') }}'
-    </script>
+    @include('admin.components.modal-pick-address')
+    @include('admin.components.google-map-script')
 @endsection
 
 @push('scripts')
@@ -241,10 +198,6 @@
             theme: 'bootstrap-5'
         });
     </script>
-    @php
-        $timestamp = time();
-    @endphp
-    <script src="{{ asset('admin/js/location.js') }}?v={{ $timestamp }}"></script>
 
     <script>
         const picker = new Litepicker({

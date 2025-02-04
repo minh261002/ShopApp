@@ -37,7 +37,11 @@ class orderService implements OrderServiceInterface
 
         try {
             $orderData = $data['order'];
+            $orderData['address'] = $data['address'];
+            $orderData['lat'] = $data['lat'];
+            $orderData['lng'] = $data['lng'];
             $orderData['order_number'] = 'DH' . rand(100000000, 999999999);
+
             $order = $this->orderRepository->create($orderData);
 
             $cart = json_decode($data['cart']);
@@ -58,7 +62,7 @@ class orderService implements OrderServiceInterface
                 'order_id' => $order->id,
                 'shipping_method' => $data['shipping_method'],
                 'shipping_status' => ShippingStatus::Pending->value,
-                'tracking_number' => 'GH' . rand(100000000, 999999999),
+                'tracking_number' => 'N.A',
             ]);
 
             $this->transactionRepository->create([

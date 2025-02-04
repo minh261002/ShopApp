@@ -66,10 +66,10 @@ return [
     ],
     [
         'active' => ['admin.order.*'],
-        'show' => ['admin.order.*'],
+        'show' => ['admin.order.*', 'admin.transaction.*', 'admin.shipping.*'],
         'title' => 'Đơn hàng',
         'icon' => 'ti ti-shopping-cart fs-2',
-        'permission' => ['viewOrder', 'createOrder', 'editOrder', 'deleteOrder'],
+        'permission' => ['viewOrder', 'editOrder'],
         'children' => [
             [
                 'title' => 'Danh sách đơn hàng',
@@ -80,6 +80,12 @@ return [
             [
                 'title' => 'Danh sách giao dịch',
                 'route' => 'admin.transaction.index',
+                'icon' => 'ti ti-list fs-3 me-2',
+                'permission' => 'viewOrder'
+            ],
+            [
+                'title' => 'Danh sách vận chuyển',
+                'route' => 'admin.shipping.index',
                 'icon' => 'ti ti-list fs-3 me-2',
                 'permission' => 'viewOrder'
             ]

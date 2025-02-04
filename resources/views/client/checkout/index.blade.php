@@ -35,4 +35,7 @@
             </form>
         @endif
     </div>
+
+    @include('admin.components.modal-pick-address')
+    @include('admin.components.google-map-script')
 @endsection

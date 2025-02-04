@@ -10,6 +10,7 @@ use App\Admin\Http\Controllers\Post\PostCatalogueController;
 use App\Admin\Http\Controllers\Post\PostController;
 use App\Admin\Http\Controllers\Product\ProductVariationController;
 use App\Admin\Http\Controllers\Role\RoleController;
+use App\Admin\Http\Controllers\Shipping\ShippingController;
 use App\Admin\Http\Controllers\Slider\SliderController;
 use App\Admin\Http\Controllers\Transaction\TransactionController;
 use App\Admin\Http\Controllers\User\UserController;
@@ -342,11 +343,11 @@ Route::middleware(['auth:admin'])->prefix('admin')->as('admin.')->group(function
 
     //Shipping
     Route::prefix('shipping')->as('shipping.')->group(function () {
-        Route::middleware(['permission:viewShipping'])->group(function () {
+        Route::middleware(['permission:viewOrder'])->group(function () {
             Route::get('/', [ShippingController::class, 'index'])->name('index');
         });
 
-        Route::middleware(['permission:editShipping'])->group(function () {
+        Route::middleware(['permission:editOrder'])->group(function () {
             Route::get('/edit/{id}', [ShippingController::class, 'edit'])->name('edit');
             Route::put('/update', [ShippingController::class, 'update'])->name('update');
             Route::patch('/update-status', [ShippingController::class, 'updateStatus'])->name('update.status');

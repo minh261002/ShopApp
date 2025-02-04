@@ -15,10 +15,9 @@ return new class extends Migration {
             $table->id();
             $table->string('name');
             $table->string('phone', 20)->nullable();
-            $table->string('province_id', 10)->nullable();
-            $table->string('district_id', 10)->nullable();
-            $table->string('ward_id', 10)->nullable();
             $table->string('address')->nullable();
+            $table->string('lat')->nullable();
+            $table->string('lng')->nullable();
             $table->dateTime('birthday')->nullable();
             $table->string('image')->default('/admin/images/not-found.jpg');
             $table->text('description')->nullable();
