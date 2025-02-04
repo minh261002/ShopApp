@@ -1,6 +1,57 @@
 <?php
 
 return [
+    'shippings' => [
+        'order_id' => [
+            'title' => 'Mã đơn hàng',
+            'orderable' => true,
+            'exportable' => true,
+            'printable' => true,
+            'addClass' => 'text-center align-middle'
+        ],
+        'name' => [
+            'title' => 'Tên người nhận',
+            'orderable' => true,
+            'exportable' => true,
+            'printable' => true,
+            'addClass' => 'text-center align-middle'
+        ],
+        'phone' => [
+            'title' => 'Số điện thoại',
+            'orderable' => true,
+            'exportable' => true,
+            'printable' => true,
+            'addClass' => 'text-center align-middle'
+        ],
+        'shipping_method' => [
+            'title' => 'Phương thức vận chuyển',
+            'orderable' => true,
+            'exportable' => true,
+            'printable' => true,
+            'addClass' => 'text-center align-middle'
+        ],
+        'tracking_number' => [
+            'title' => 'Mã vận đơn',
+            'orderable' => true,
+            'exportable' => true,
+            'printable' => true,
+            'addClass' => 'text-center align-middle'
+        ],
+        'shipping_status' => [
+            'title' => 'Trạng thái vận chuyển',
+            'orderable' => true,
+            'exportable' => true,
+            'printable' => true,
+            'addClass' => 'text-center align-middle'
+        ],
+        'action' => [
+            'title' => 'Thao tác',
+            'orderable' => false,
+            'exportable' => false,
+            'printable' => false,
+            'addClass' => 'text-center align-middle'
+        ],
+    ],
     'transactions' => [
         'user_id' => [
             'title' => 'Người thanh toán',
