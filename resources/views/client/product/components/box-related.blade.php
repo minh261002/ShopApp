@@ -28,16 +28,22 @@
                     </a>
 
                     <div class="d-flex align-items-center justify-content-between">
-                        @if ($item->variations->first()->sale_price)
-                            <p class="mb-0 text-danger fs-18px fw-semibold">
-                                {{ format_price($item->variations->first()->sale_price) }}
-                            </p>
-                            <p class="mb-0 text-muted fs-14px text-decoration-line-through">
-                                {{ format_price($item->variations->first()->price) }}
-                            </p>
+                        @if (count($item->variations) > 0)
+                            @if ($item->variations->first()->sale_price)
+                                <p class="mb-0 text-danger fs-18px fw-semibold">
+                                    {{ format_price($item->variations->first()->sale_price) }}
+                                </p>
+                                <p class="mb-0 text-muted fs-14px text-decoration-line-through">
+                                    {{ format_price($item->variations->first()->price) }}
+                                </p>
+                            @else
+                                <p class="mb-0 text-danger fs-18px fw-semibold">
+                                    {{ format_price($item->variations->first()->price) }}
+                                </p>
+                            @endif
                         @else
                             <p class="mb-0 text-danger fs-18px fw-semibold">
-                                {{ format_price($item->variations->first()->price) }}
+                                Liên hệ
                             </p>
                         @endif
                     </div>

@@ -1,5 +1,7 @@
 <div class="w-100 bg-white">
-    <input type="hidden" name="product_variation_id" value="{{ $product->variations->first()->id }}">
+    @if (count($product->variations) > 0)
+        <input type="hidden" name="product_variation_id" value="{{ $product->variations->first()->id }}">
+    @endif
     <input type="hidden" name="product_name" value="{{ $product->name }}">
     <input type="hidden" name="product_image" value="{{ $product->image }}">
     <input type="hidden" name="product_slug" value="{{ $product->slug }}">
@@ -9,7 +11,11 @@
             {{ $product->name }}
             <br />
             <span class="fs-16px fw-medium text-secondary" id="variation-sku">
-                SKU: {{ $product->variations->first()->sku }}
+                @if (count($product->variations) > 0)
+                    SKU: {{ $product->variations->first()->sku }}
+                @else
+                    Không có thông tin
+                @endif
             </span>
         </h1>
 
@@ -28,18 +34,24 @@
 
         <div class="d-flex align-items-center justify-content-between">
             <div class="d-flex align-items-center gap-2">
-                @if ($product->variations->first()->sale_price)
-                    <input type="hidden" name="price" value="{{ $product->variations->first()->price }} " />
-                    <span class="text-red fs-28px fw-bold">
-                        {{ format_price($product->variations->first()->sale_price) }}
-                    </span>
-                    <span class="text-muted fs-20px text-decoration-line-through text-secondary fw-medium">
-                        {{ format_price($product->variations->first()->price) }}
-                    </span>
+                @if (count($product->variations) > 0)
+                    @if ($product->variations->first()->sale_price)
+                        <input type="hidden" name="price" value="{{ $product->variations->first()->price }} " />
+                        <span class="text-red fs-28px fw-bold">
+                            {{ format_price($product->variations->first()->sale_price) }}
+                        </span>
+                        <span class="text-muted fs-20px text-decoration-line-through text-secondary fw-medium">
+                            {{ format_price($product->variations->first()->price) }}
+                        </span>
+                    @else
+                        <input type="hidden" name="price" value="{{ $product->variations->first()->price }} " />
+                        <span class="text-danger fs-28px fw-bold">
+                            {{ format_price($product->variations->first()->price) }}
+                        </span>
+                    @endif
                 @else
-                    <input type="hidden" name="price" value="{{ $product->variations->first()->price }} " />
                     <span class="text-danger fs-28px fw-bold">
-                        {{ format_price($product->variations->first()->price) }}
+                        Liên hệ
                     </span>
                 @endif
             </div>
@@ -83,31 +95,35 @@
 
                 <div class="d-flex align-items-center gap-2 ms-3">
                     <i class="ti ti-building-warehouse fs-18px me-1"></i>
-                    <span class="text-secondary" id="stock">Còn
-                        {{ $product->variations->first()->stock }}
-                        sản phẩm</span>
+                    @if (count($product->variations) > 0)
+                        <span class="text-secondary" id="stock">Còn
+                            {{ $product->variations->first()->stock }}
+                            sản phẩm</span>
+                    @endif
                 </div>
             </div>
         </div>
 
-        <div class="d-flex gap-3">
-            @if (auth()->guard('web')->check())
-                <button type="button" class="btn bg-red-lt w-100 fs-18px" id="addToWishlist">
-                    <i class="ti ti-heart fs-20px me-1"></i>
-                    Yêu thích
-                </button>
-                <button class="btn bg-red text-white w-100 fs-18px" id="addToCart">
-                    <i class="ti ti-shopping-cart fs-20px me-1"></i>
-                    Thêm vào giỏ hàng
-                </button>
-            @else
-                <a href="{{ route('login', ['redirect' => route('product.detail', $product->slug)]) }}"
-                    class="btn bg-red-lt w-100 fs-18px">
-                    <i class="ti ti-login fs-20px me-1"></i>
-                    Bạn cần đăng nhập
-                </a>
-            @endif
-        </div>
+        @if (count($product->variations) > 0)
+            <div class="d-flex gap-3">
+                @if (auth()->guard('web')->check())
+                    <button type="button" class="btn bg-red-lt w-100 fs-18px" id="addToWishlist">
+                        <i class="ti ti-heart fs-20px me-1"></i>
+                        Yêu thích
+                    </button>
+                    <button class="btn bg-red text-white w-100 fs-18px" id="addToCart">
+                        <i class="ti ti-shopping-cart fs-20px me-1"></i>
+                        Thêm vào giỏ hàng
+                    </button>
+                @else
+                    <a href="{{ route('login', ['redirect' => route('product.detail', $product->slug)]) }}"
+                        class="btn bg-red-lt w-100 fs-18px">
+                        <i class="ti ti-login fs-20px me-1"></i>
+                        Bạn cần đăng nhập
+                    </a>
+                @endif
+            </div>
+        @endif
 
         <div class="d-flex align-items-stretch">
             <div class="flex-grow-1 d-flex flex-column align-items-center gap-2 text-center">
@@ -174,7 +190,7 @@
 
         $('#increment').on('click', function() {
             let quantity = parseInt($('input[name="quantity"]').val());
-            let stock = parseInt('{{ $product->variations->first()->stock }}');
+            let stock = parseInt('{{ $product->variations->first()->stock ?? 0 }}');
 
             if (quantity < stock) {
                 quantity++;
