@@ -18,10 +18,9 @@ return new class extends Migration {
             $table->string('name');
             $table->string('email');
             $table->string('phone');
-            $table->string('province_id');
-            $table->string('district_id');
-            $table->string('ward_id');
             $table->string('address');
+            $table->string('lat');
+            $table->string('lng');
             $table->string('note')->nullable();
             $table->string('cancel_reason')->nullable();
             $table->enum('status', OrderStatus::getValues())->default(OrderStatus::Pending->value);
