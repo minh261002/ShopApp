@@ -3,6 +3,7 @@ use App\Admin\Http\Controllers\Admin\AdminController;
 use App\Admin\Http\Controllers\Category\CategoryController;
 use App\Admin\Http\Controllers\Dashboard\DashboardController;
 use App\Admin\Http\Controllers\Discount\DiscountController;
+use App\Admin\Http\Controllers\Media\MediaController;
 use App\Admin\Http\Controllers\Module\ModuleController;
 use App\Admin\Http\Controllers\Order\OrderController;
 use App\Admin\Http\Controllers\Permission\PermissionController;
@@ -342,17 +343,10 @@ Route::middleware(['auth:admin'])->prefix('admin')->as('admin.')->group(function
         });
     });
 
-    //Shipping
-    Route::prefix('shipping')->as('shipping.')->group(function () {
-        Route::middleware(['permission:viewOrder'])->group(function () {
-            Route::get('/', [ShippingController::class, 'index'])->name('index');
-        });
-
-        Route::middleware(['permission:editOrder'])->group(function () {
-            Route::get('/edit/{id}', [ShippingController::class, 'edit'])->name('edit');
-            Route::put('/update', [ShippingController::class, 'update'])->name('update');
-            Route::patch('/update-status', [ShippingController::class, 'updateStatus'])->name('update.status');
+    Route::prefix('media')->as('media.')->group(function () {
+        Route::middleware(['permission:viewMedia'])->group(function () {
+            Route::get('/', [MediaController::class, 'index'])->name('index');
+            Route::get('/{folder}', [MediaController::class, 'getMedia'])->name('get');
         });
     });
-
 });

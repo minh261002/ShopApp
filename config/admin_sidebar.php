@@ -23,6 +23,21 @@ return [
         ]
     ],
     [
+        'active' => ['admin.media.*'],
+        'show' => ['admin.media.*'],
+        'title' => 'Tệp tin',
+        'icon' => 'ti ti-files fs-2',
+        'permission' => ['viewMedia', 'createMedia', 'editMedia', 'deleteMedia'],
+        'children' => [
+            [
+                'title' => 'Danh sách',
+                'route' => 'admin.media.index',
+                'icon' => 'ti ti-list fs-3 me-2',
+                'permission' => 'viewMedia'
+            ]
+        ]
+    ],
+    [
         'active' => ['admin.category.*'],
         'show' => ['admin.category.*'],
         'title' => 'Danh mục',
@@ -80,12 +95,6 @@ return [
             [
                 'title' => 'Danh sách giao dịch',
                 'route' => 'admin.transaction.index',
-                'icon' => 'ti ti-list fs-3 me-2',
-                'permission' => 'viewOrder'
-            ],
-            [
-                'title' => 'Danh sách vận chuyển',
-                'route' => 'admin.shipping.index',
                 'icon' => 'ti ti-list fs-3 me-2',
                 'permission' => 'viewOrder'
             ]
