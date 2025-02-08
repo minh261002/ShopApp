@@ -80,22 +80,12 @@
                         </div>
                     </div>
 
-                    <div class="card-footer bg-transparent mt-auto">
-                        <div class="btn-list justify-content-end">
-                            <button type="submit" class="btn btn-red btn-2">
-                                Lưu thay đổi
-                            </button>
-                        </div>
+                    <div class="btn-list justify-content-end">
+                        <button type="submit" class="btn btn-red btn-2" id="updateProfileButton">
+                            Lưu thay đổi
+                        </button>
                     </div>
                 </form>
-
-                {{-- <div class="card-footer bg-transparent mt-auto">
-                    <div class="btn-list justify-content-end">
-                        <a href="#" class="btn btn-red btn-2">
-                            Lưu thay đổi
-                        </a>
-                    </div>
-                </div> --}}
             </div>
         </div>
     </div>
@@ -109,6 +99,12 @@
     <script src="{{ asset('admin/libs/litepicker/dist/litepicker.js?1692870487') }}"></script>
 
     <script>
+        $('#updateProfileButton').click(function() {
+            $(this).html(
+                '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>'
+            );
+        });
+
         const picker = new Litepicker({
             element: document.getElementById('datepicker-icon'),
             format: "YYYY-MM-DD",

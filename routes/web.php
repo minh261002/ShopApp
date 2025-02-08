@@ -46,4 +46,7 @@ Route::middleware('client:web')->group(function () {
 
     Route::get('/thong-tin-ca-nhan', [ProfileController::class, 'index'])->name('profile.index');
     Route::post('/thong-tin-ca-nhan', [ProfileController::class, 'update'])->name('profile.update');
+
+    Route::get('/doi-mat-khau', [ProfileController::class, 'changePassword'])->name('profile.change.password');
+    Route::post('/doi-mat-khau', [ProfileController::class, 'updatePassword'])->name('profile.update.password');
 });
