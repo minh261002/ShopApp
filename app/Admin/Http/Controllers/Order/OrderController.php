@@ -42,6 +42,12 @@ class OrderController extends Controller
         return view('admin.order.edit', compact('order', 'status', 'paymentStatus', 'shippingStatus', 'paymentMethod', 'shippingMethod'));
     }
 
+    public function invoice($id)
+    {
+        $order = $this->repository->findOrFail($id);
+        return view('admin.order.invoice', compact('order'));
+    }
+
     // public function update(DiscountRequest $request)
     // {
     //     $this->service->update($request);

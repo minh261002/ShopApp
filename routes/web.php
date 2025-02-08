@@ -5,6 +5,7 @@ use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ShoppingCartController;
 use Illuminate\Support\Facades\Route;
 
@@ -29,6 +30,7 @@ Route::get('/san-pham', [ProductController::class, 'index'])->name('product.inde
 Route::post('/san-pham/chi-tiet', [ProductController::class, 'get'])->name('product.variation.get');
 
 Route::get('/ajax/location', [LocationController::class, 'index'])->name('ajax.location');
+
 Route::middleware('client:web')->group(function () {
     Route::post('/dang-xuat', [AuthController::class, 'logout'])->name('logout');
 
@@ -41,4 +43,15 @@ Route::middleware('client:web')->group(function () {
 
     Route::get('/thanh-toan', [CheckoutController::class, 'index'])->name('checkout.index');
     Route::post('/thanh-toan', [CheckoutController::class, 'store'])->name('checkout.store');
+
+    Route::get('/thong-tin-ca-nhan', [ProfileController::class, 'index'])->name('profile.index');
+    Route::post('/thong-tin-ca-nhan', [ProfileController::class, 'update'])->name('profile.update');
+
+    Route::get('/doi-mat-khau', [ProfileController::class, 'changePassword'])->name('profile.change.password');
+    Route::post('/doi-mat-khau', [ProfileController::class, 'updatePassword'])->name('profile.update.password');
+
+    Route::get('/don-hang-cua-toi', [ProfileController::class, 'order'])->name('profile.order');
+    Route::get('/don-hang-cua-toi/{order_number}', [ProfileController::class, 'orderDetail'])->name('profile.order.detail');
+
+    Route::get('/ma-giam-gia', [ProfileController::class, 'discount'])->name('profile.discount');
 });

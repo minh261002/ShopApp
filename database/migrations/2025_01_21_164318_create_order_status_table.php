@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\Order\OrderStatus;
 use App\Enums\Order\ShippingStatus;
 use App\Enums\Order\ShippingMethod;
 use Illuminate\Database\Migrations\Migration;
@@ -12,12 +13,10 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('order_shippings', function (Blueprint $table) {
+        Schema::create('order_status', function (Blueprint $table) {
             $table->id();
             $table->foreignId('order_id')->constrained()->onDelete('cascade');
-            $table->enum('shipping_method', ShippingMethod::getValues())->default(ShippingMethod::GHTK->value);
-            $table->string('tracking_number')->nullable();
-            $table->enum('shipping_status', ShippingStatus::getValues())->default(ShippingStatus::Pending->value);
+            $table->enum('status', OrderStatus::getValues())->default(OrderStatus::Pending->value);
             $table->timestamps();
         });
     }
@@ -27,6 +26,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('order_shippings');
+        Schema::dropIfExists('order_status');
     }
 };

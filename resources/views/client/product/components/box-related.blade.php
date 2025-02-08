@@ -5,50 +5,56 @@
 </div>
 
 
-<div class="owl-carousel owl-theme">
-    @foreach ($relatedProducts as $item)
-        <div class="card border-0">
-            <div class="card-body p-0 border-gray rounded-2">
-                <div class="img-wrapper" style="height: 340px; object-fit: cover;">
-                    <a href="{{ route('product.detail', $item->slug) }}">
-                        <img src="{{ $item->image }}" alt="{{ $item->name }}" class="w-100 h-100 rounded-2">
-                    </a>
-                </div>
-
-                <div class="d-flex flex-column mt-3 px-3">
-                    <div class="d-flex mb-1">
-                        @for ($i = 0; $i < 5; $i++)
-                            <i class="ti ti-star text-yellow"></i>
-                        @endfor
+@if ($relatedProducts->count() > 0)
+    <div class="owl-carousel owl-theme">
+        @foreach ($relatedProducts as $item)
+            <div class="card border-0">
+                <div class="card-body p-0 border-gray rounded-2">
+                    <div class="img-wrapper" style="height: 340px; object-fit: cover;">
+                        <a href="{{ route('product.detail', $item->slug) }}">
+                            <img src="{{ $item->image }}" alt="{{ $item->name }}" class="w-100 h-100 rounded-2">
+                        </a>
                     </div>
 
-                    <a href="{{ route('product.detail', $item->slug) }}"
-                        class="text-dark fs-14px fw-normal text-decoration-none">
-                        {{ limit_text($item->name, 30) }}
-                    </a>
+                    <div class="d-flex flex-column mt-3 px-3">
+                        <div class="d-flex mb-1">
+                            @for ($i = 0; $i < 5; $i++)
+                                <i class="ti ti-star text-yellow"></i>
+                            @endfor
+                        </div>
 
-                    <div class="d-flex align-items-center justify-content-between">
-                        @if (count($item->variations) > 0)
-                            @if ($item->variations->first()->sale_price)
-                                <p class="mb-0 text-danger fs-18px fw-semibold">
-                                    {{ format_price($item->variations->first()->sale_price) }}
-                                </p>
-                                <p class="mb-0 text-muted fs-14px text-decoration-line-through">
-                                    {{ format_price($item->variations->first()->price) }}
-                                </p>
+                        <a href="{{ route('product.detail', $item->slug) }}"
+                            class="text-dark fs-14px fw-normal text-decoration-none">
+                            {{ limit_text($item->name, 30) }}
+                        </a>
+
+                        <div class="d-flex align-items-center justify-content-between">
+                            @if (count($item->variations) > 0)
+                                @if ($item->variations->first()->sale_price)
+                                    <p class="mb-0 text-danger fs-18px fw-semibold">
+                                        {{ format_price($item->variations->first()->sale_price) }}
+                                    </p>
+                                    <p class="mb-0 text-muted fs-14px text-decoration-line-through">
+                                        {{ format_price($item->variations->first()->price) }}
+                                    </p>
+                                @else
+                                    <p class="mb-0 text-danger fs-18px fw-semibold">
+                                        {{ format_price($item->variations->first()->price) }}
+                                    </p>
+                                @endif
                             @else
                                 <p class="mb-0 text-danger fs-18px fw-semibold">
-                                    {{ format_price($item->variations->first()->price) }}
+                                    Liên hệ
                                 </p>
                             @endif
-                        @else
-                            <p class="mb-0 text-danger fs-18px fw-semibold">
-                                Liên hệ
-                            </p>
-                        @endif
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    @endforeach
-</div>
+        @endforeach
+    </div>
+@else
+    <div class="alert alert-danger" role="alert">
+        Không tìm thấy sản phẩm liên quan
+    </div>
+@endif
