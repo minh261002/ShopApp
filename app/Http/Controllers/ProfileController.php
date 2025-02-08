@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Enums\Order\OrderStatus;
 use App\Http\Requests\Profile\UpdatePasswordRequest;
 use App\Http\Requests\Profile\UpdateProfileRequest;
+use App\Repositories\Discount\DiscountRepositoryInterface;
 use App\Repositories\Order\OrderRepositoryInterface;
 use App\Services\Profile\ProfileServiceInterface;
 use Illuminate\Http\Request;
@@ -14,13 +15,16 @@ class ProfileController extends Controller
 
     protected $service;
     protected $orderRepository;
+    protected $discountRepository;
 
     public function __construct(
         ProfileServiceInterface $service,
-        OrderRepositoryInterface $orderRepository
+        OrderRepositoryInterface $orderRepository,
+        DiscountRepositoryInterface $discountRepository
     ) {
         $this->service = $service;
         $this->orderRepository = $orderRepository;
+        $this->discountRepository = $discountRepository;
     }
 
     public function index()
@@ -77,6 +81,8 @@ class ProfileController extends Controller
 
     public function discount()
     {
-        return view('client.profile.discount');
+        $user = auth()->guard('web')->user();
+        $discounts = $user->discounts()->orderBy('created_at', 'desc')->paginate(10);
+        return view('client.profile.discount', compact('discounts'));
     }
 }
