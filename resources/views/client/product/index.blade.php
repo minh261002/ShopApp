@@ -53,7 +53,7 @@
                             </div>
                         </div>
                     @empty
-                        <div class="col-md-12">
+                        <div class="alert alert-danger" role="alert">
                             <p class="text-center">Không tìm thấy sản phẩm nào</p>
                         </div>
                     @endforelse
