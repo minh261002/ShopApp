@@ -12,23 +12,25 @@
                 </div>
             </div>
             <div class="col-12 col-md-9 d-flex flex-column">
-                <form class="card-body" method="POST" action="{{ route('profile.update') }}">
+                <form class="card-body" method="POST" action="{{ route('profile.update') }}" enctype="multipart/form-data">
                     @csrf
                     <h2 class="mb-4">Thông tin cá nhân</h2>
 
                     <div class="row align-items-center">
                         <div class="col-auto">
-                            <span class="avatar avatar-xl" style="background-image: url({{ $user->image }})"></span>
+                            <span class="avatar avatar-xl" id="preview-avatar"
+                                style="background-image: url({{ $user->image }})"></span>
                         </div>
+
                         <div class="col-auto">
                             <label for="upload-image" class="btn btn-1">
                                 Thay đổi
                             </label>
                             <input type="file" name="image" class="form-control" id="upload-image" hidden>
-
+                            <input type="hidden" name="old_image" value="{{ $user->image }}">
                         </div>
                         <div class="col-auto">
-                            <a href="#" class="btn btn-ghost-danger btn-3">
+                            <a href="#" class="btn btn-ghost-danger btn-3" id="removeAvatarButton">
                                 Xoá
                             </a>
                         </div>
@@ -99,6 +101,22 @@
     <script src="{{ asset('admin/libs/litepicker/dist/litepicker.js?1692870487') }}"></script>
 
     <script>
+        //preview-avatar
+        $('#upload-image').change(function() {
+            const file = $(this)[0].files[0];
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                $('#preview-avatar').css('background-image', `url(${e.target.result})`);
+            };
+            reader.readAsDataURL(file);
+        });
+
+        //remove avatar
+        $('#removeAvatarButton').click(function() {
+            $('#preview-avatar').css('background-image', 'url("/admin/images/not-found.jpg")');
+            $('#upload-image').val('/admin/images/not-found.jpg');
+        });
+
         $('#updateProfileButton').click(function() {
             $(this).html(
                 '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>'

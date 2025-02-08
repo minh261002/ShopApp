@@ -14,6 +14,8 @@ class UpdateProfileRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'image' => 'nullable|image',
+            'old_image' => 'nullable',
             'name' => 'required',
             'email' => 'required|email|unique:users,email,' . auth()->guard('web')->id(),
             'phone' => 'required|unique:users,phone,' . auth()->guard('web')->id(),
