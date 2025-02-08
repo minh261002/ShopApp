@@ -1,4 +1,4 @@
-<div class="w-100 mt-5 border-top border-gray shadow-footer">
+<div class="w-100 border-top border-gray shadow-footer">
     <div class="container py-4">
         <footer class="bg-white w-100">
             <div class="d-flex w-100 mx-auto px-md-0 my-4 gap-5">

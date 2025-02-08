@@ -3,7 +3,7 @@
 @section('title', 'Thông tin cá nhân')
 
 @section('content')
-    <div class="card mt-5">
+    <div class="card">
         <div class="row g-0">
             <div class="col-12 col-md-3 border-end">
                 <div class="card-body">

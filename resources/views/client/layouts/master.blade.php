@@ -39,7 +39,7 @@
     @include('client.layouts.partials.header-main')
     @include('client.layouts.partials.navigation')
     <div class="w-100 app-bg">
-        <div class="container">
+        <div class="container py-5">
             @yield('content')
         </div>
     </div>
