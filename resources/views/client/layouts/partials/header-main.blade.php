@@ -49,7 +49,14 @@
                         <ul class="dropdown-menu">
                             @if (auth()->guard('web')->check())
                                 <li>
-                                    <a class="dropdown-item" href="{{ route('profile.index') }}">Cài đặt tài khoản</a>
+                                    <a class="dropdown-item" href="{{ route('profile.index') }}">Thông tin cá nhân</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="{{ route('profile.index') }}">Thông báo</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="{{ route('profile.change.password') }}">Đổi mật
+                                        khẩu</a>
                                 </li>
                                 <li>
                                     <form action="{{ route('logout') }}" method="POST">
