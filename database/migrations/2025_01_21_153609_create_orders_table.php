@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\Order\ShippingMethod;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -21,9 +22,9 @@ return new class extends Migration {
             $table->string('address');
             $table->string('lat');
             $table->string('lng');
+            $table->enum('shipping_method', ShippingMethod::getValues())->default(ShippingMethod::GHTK->value);
             $table->string('note')->nullable();
             $table->string('cancel_reason')->nullable();
-            $table->enum('status', OrderStatus::getValues())->default(OrderStatus::Pending->value);
             $table->timestamps();
         });
     }
