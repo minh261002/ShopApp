@@ -5,6 +5,7 @@ use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ShoppingCartController;
 use Illuminate\Support\Facades\Route;
 
@@ -29,6 +30,7 @@ Route::get('/san-pham', [ProductController::class, 'index'])->name('product.inde
 Route::post('/san-pham/chi-tiet', [ProductController::class, 'get'])->name('product.variation.get');
 
 Route::get('/ajax/location', [LocationController::class, 'index'])->name('ajax.location');
+
 Route::middleware('client:web')->group(function () {
     Route::post('/dang-xuat', [AuthController::class, 'logout'])->name('logout');
 
@@ -41,4 +43,7 @@ Route::middleware('client:web')->group(function () {
 
     Route::get('/thanh-toan', [CheckoutController::class, 'index'])->name('checkout.index');
     Route::post('/thanh-toan', [CheckoutController::class, 'store'])->name('checkout.store');
+
+    Route::get('/thong-tin-ca-nhan', [ProfileController::class, 'index'])->name('profile.index');
+    Route::post('/thong-tin-ca-nhan', [ProfileController::class, 'update'])->name('profile.update');
 });

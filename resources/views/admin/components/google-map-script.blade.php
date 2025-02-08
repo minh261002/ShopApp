@@ -19,22 +19,35 @@
         }
 
         function updateLocation(lat, lng) {
+            if (!marker) {
+                console.error("Marker is not initialized yet");
+                return;
+            }
+
             if (lat && lng) {
                 var userLocation = {
                     lat: parseFloat(lat),
                     lng: parseFloat(lng)
                 };
+
+                console.log("Updating location:", userLocation);
+
                 marker.setPosition(userLocation);
                 map.setCenter(userLocation);
                 map.setZoom(17);
                 changeAddress($(ipAddress).val());
                 window.lat = parseFloat(lat);
                 window.lng = parseFloat(lng);
+            } else {
+                console.error("Invalid lat/lng:", lat, lng);
             }
         }
 
+
         $(document).ready(function() {
-            updateLocation($(ipLat).val(), $(ipLng).val());
+            setTimeout(function() {
+                updateLocation($(ipLat).val(), $(ipLng).val());
+            }, 1000);
         });
 
         $(document).on('click', '#openModalPickAddress', function(e) {
@@ -149,7 +162,8 @@
                             };
 
                             service.getDetails(placeDetailsRequest, function(place, status) {
-                                if (status === google.maps.places.PlacesServiceStatus.OK) {
+                                if (status === google.maps.places.PlacesServiceStatus
+                                    .OK) {
                                     lat = newPosition.lat();
                                     lng = newPosition.lng();
                                     changeAddress(place.formatted_address);
@@ -179,6 +193,9 @@
                             lat: position.coords.latitude,
                             lng: position.coords.longitude
                         };
+
+                        console.log(userLocation)
+
                         marker.setPosition(userLocation);
                         map.setCenter(userLocation);
                         map.setZoom(17);
@@ -199,8 +216,10 @@
                                         placeId: results[0].place_id
                                     };
 
-                                    service.getDetails(placeDetailsRequest, function(place, status) {
-                                        if (status === google.maps.places.PlacesServiceStatus.OK) {
+                                    service.getDetails(placeDetailsRequest, function(place,
+                                        status) {
+                                        if (status === google.maps.places
+                                            .PlacesServiceStatus.OK) {
                                             changeAddress(place.formatted_address);
 
                                             $(ipAddress).val(address);
@@ -208,10 +227,13 @@
                                             lng = newPosition.lng();
                                             $(ipLat).val(newPosition.lat());
                                             $(ipLng).val(newPosition.lng());
-                                            $(document).trigger("mychangeAddressChanged");
+                                            $(document).trigger(
+                                                "mychangeAddressChanged");
 
-                                            $("#getCurrentLocation .spinner-border").hide();
-                                            $(ipAddress).removeAttr('readonly', 'readonly');
+                                            $("#getCurrentLocation .spinner-border")
+                                                .hide();
+                                            $(ipAddress).removeAttr('readonly',
+                                                'readonly');
                                         }
                                     });
                                 }

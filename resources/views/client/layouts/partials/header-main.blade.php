@@ -49,6 +49,9 @@
                         <ul class="dropdown-menu">
                             @if (auth()->guard('web')->check())
                                 <li>
+                                    <a class="dropdown-item" href="{{ route('profile.index') }}">Cài đặt tài khoản</a>
+                                </li>
+                                <li>
                                     <form action="{{ route('logout') }}" method="POST">
                                         @csrf
                                         <button type="submit" class="dropdown-item">Đăng xuất</button>

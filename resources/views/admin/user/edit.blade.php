@@ -209,10 +209,6 @@
             theme: 'bootstrap-5'
         });
     </script>
-    @php
-        $timestamp = time();
-    @endphp
-    <script src="{{ asset('admin/js/location.js') }}?v={{ $timestamp }}"></script>
 
     <script>
         const picker = new Litepicker({
