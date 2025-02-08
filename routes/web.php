@@ -49,4 +49,9 @@ Route::middleware('client:web')->group(function () {
 
     Route::get('/doi-mat-khau', [ProfileController::class, 'changePassword'])->name('profile.change.password');
     Route::post('/doi-mat-khau', [ProfileController::class, 'updatePassword'])->name('profile.update.password');
+
+    Route::get('/don-hang-cua-toi', [ProfileController::class, 'order'])->name('profile.order');
+    Route::get('/don-hang-cua-toi/{order_number}', [ProfileController::class, 'orderDetail'])->name('profile.order.detail');
+
+    Route::get('/ma-giam-gia', [ProfileController::class, 'discount'])->name('profile.discount');
 });

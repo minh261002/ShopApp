@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\Order\OrderStatus;
 use App\Http\Requests\Profile\UpdatePasswordRequest;
 use App\Http\Requests\Profile\UpdateProfileRequest;
+use App\Repositories\Order\OrderRepositoryInterface;
 use App\Services\Profile\ProfileServiceInterface;
 use Illuminate\Http\Request;
 
@@ -11,11 +13,14 @@ class ProfileController extends Controller
 {
 
     protected $service;
+    protected $orderRepository;
 
     public function __construct(
-        ProfileServiceInterface $service
+        ProfileServiceInterface $service,
+        OrderRepositoryInterface $orderRepository
     ) {
         $this->service = $service;
+        $this->orderRepository = $orderRepository;
     }
 
     public function index()
@@ -47,5 +52,31 @@ class ProfileController extends Controller
         }
     }
 
+    public function order()
+    {
+        $orderStatus = OrderStatus::getValues();
+        $statusDescriptions = [];
+        foreach ($orderStatus as $status) {
+            $statusDescriptions[$status] = OrderStatus::getDescription($status);
+        }
 
+        $status = request()->get('status');
+
+        $orders = $this->orderRepository->getByQueryBuilder([
+            'user_id' => auth()->guard('web')->id(),
+        ]);
+
+        if ($status) {
+            $orders->where('status', $status);
+        }
+        $orders = $orders->orderBy('created_at', 'desc')->paginate(10);
+
+        return view('client.profile.order', compact('statusDescriptions', 'orders'));
+    }
+
+
+    public function discount()
+    {
+        return view('client.profile.discount');
+    }
 }

@@ -9,10 +9,12 @@
         class="list-group-item list-group-item-action d-flex align-items-center {{ setSidebarActive(['profile.change.password']) }}">
         Đổi mật khẩu
     </a>
-    <a href="./settings-plan.html" class="list-group-item list-group-item-action d-flex align-items-center">
+    <a href="{{ route('profile.order') }}"
+        class="list-group-item list-group-item-action d-flex align-items-center {{ setSidebarActive(['profile.order']) }}">
         Đơn hàng
     </a>
-    <a href="#" class="list-group-item list-group-item-action d-flex align-items-center">
+    <a href="{{ route('profile.discount') }}"
+        class="list-group-item list-group-item-action d-flex align-items-center {{ setSidebarActive(['profile.discount']) }}">
         Mã giảm giá
     </a>
 </div>

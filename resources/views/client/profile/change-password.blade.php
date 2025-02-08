@@ -1,6 +1,6 @@
 @extends('client.layouts.master')
 
-@section('title', 'Thông tin cá nhân')
+@section('title', 'Đổi mật khẩu')
 
 @section('content')
     <div class="card">
