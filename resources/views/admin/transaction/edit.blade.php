@@ -37,68 +37,70 @@
 
         <!-- Page body -->
         <div class="page-body">
-            <div class="row">
-                <div class="col-md-9">
-                    <div class="card">
-                        <div class="card-header">
-                            <h4 class="card-title">Thông tin giao dịch</h4>
-                        </div>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label for="user_id">Người thanh toán</label>
-                                    <input type="text" class="form-control" value="{{ $transaction->user->name }}"
-                                        disabled>
-                                </div>
+            <form action="{{ route('admin.transaction.update', $transaction->id) }}" method="POST">
+                @csrf
+                @method('PUT')
 
-                                <div class="col-md-6 mb-3">
-                                    <label for="order_id">Đơn hàng</label>
-                                    <input type="text" class="form-control"
-                                        value="{{ $transaction->order->order_number }}" disabled>
-                                </div>
+                <input type="hidden" name="id" value="{{ $transaction->id }}">
 
-                                <div class="col-md-6 mb-3">
-                                    <label for="sub_total">Tạm tính</label>
-                                    <input type="text" class="form-control"
-                                        value="{{ format_price($transaction->sub_total) }}" disabled>
-                                </div>
+                <div class="row">
+                    <div class="col-md-9">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Thông tin giao dịch</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="user_id">Người thanh toán</label>
+                                        <input type="text" class="form-control" value="{{ $transaction->user->name }}"
+                                            disabled>
+                                    </div>
 
-                                <div class="col-md-6 mb-3">
-                                    <label for="discount_amount">Giảm giá</label>
-                                    <input type="text" class="form-control"
-                                        value="{{ format_price($transaction->discount_amount) }}" disabled>
-                                </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="order_id">Đơn hàng</label>
+                                        <input type="text" class="form-control"
+                                            value="{{ $transaction->order->order_number }}" disabled>
+                                    </div>
 
-                                <div class="col-md-6 mb-3">
-                                    <label for="shipping_fee">Phí vận chuyển</label>
-                                    <input type="text" class="form-control"
-                                        value="{{ format_price($transaction->shipping_fee) }}" disabled>
-                                </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="sub_total">Tạm tính</label>
+                                        <input type="text" class="form-control"
+                                            value="{{ format_price($transaction->sub_total) }}" disabled>
+                                    </div>
 
-                                <div class="col-md-6 mb-3">
-                                    <label for="grand_total">Tổng tiền</label>
-                                    <input type="text" class="form-control"
-                                        value="{{ format_price($transaction->grand_total) }}" disabled>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="discount_amount">Giảm giá</label>
+                                        <input type="text" class="form-control"
+                                            value="{{ format_price($transaction->discount_amount) }}" disabled>
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                        <label for="shipping_fee">Phí vận chuyển</label>
+                                        <input type="text" class="form-control"
+                                            value="{{ format_price($transaction->shipping_fee) }}" disabled>
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                        <label for="grand_total">Tổng tiền</label>
+                                        <input type="text" class="form-control"
+                                            value="{{ format_price($transaction->grand_total) }}" disabled>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="col-md-3">
-                    <div class="card">
-                        <div class="card-header">
-                            <h4 class="card-title">Trạng thái giao dịch</h4>
-                        </div>
+                    <div class="col-md-3">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Trạng thái giao dịch</h4>
+                            </div>
 
-                        <div class="card-body">
-                            <form action="{{ route('admin.transaction.update', $transaction->id) }}" method="POST">
-                                @csrf
-                                @method('PUT')
-
+                            <div class="card-body">
                                 <div class="mb-3">
                                     <label for="payment_method" class="form-label">Phương thức thanh toán</label>
-                                    <select name="payment_method" id="payment_method" class="form-select" disabled>
+                                    <select name="payment_method" id="payment_method" class="form-select">
                                         @foreach ($paymentMethod as $key => $status)
                                             <option value="{{ $key }}"
                                                 @if ($transaction->payment_method == $key) selected @endif>
@@ -119,29 +121,29 @@
                                         @endforeach
                                     </select>
                                 </div>
-                            </form>
-                        </div>
-                    </div>
-
-                    <div class="card mt-3">
-                        <div class="card-header">
-                            <h3 class="card-title">
-                                Thao tác
-                            </h3>
+                            </div>
                         </div>
 
-                        <div class="card-body d-flex align-items-center justify-content-between gap-4">
-                            <a href="{{ route('admin.transaction.index') }}" class="btn btn-secondary w-100">
-                                Quay lại
-                            </a>
+                        <div class="card mt-3">
+                            <div class="card-header">
+                                <h3 class="card-title">
+                                    Thao tác
+                                </h3>
+                            </div>
 
-                            <button type="submit" class="btn btn-primary w-100">
-                                Thêm mới
-                            </button>
+                            <div class="card-body d-flex align-items-center justify-content-between gap-4">
+                                <a href="{{ route('admin.transaction.index') }}" class="btn btn-secondary w-100">
+                                    Quay lại
+                                </a>
+
+                                <button type="submit" class="btn btn-primary w-100">
+                                    Lưu thay đổi
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 @endsection

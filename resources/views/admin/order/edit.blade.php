@@ -201,17 +201,19 @@
                                 <div class="form-group mb-3">
                                     <select class="form-select" name="status">
                                         @foreach ($status as $key => $value)
-                                            <option value="{{ $key }}"
-                                                {{ $order->status->last()->status == $key ? 'selected' : '' }}>
-                                                {{ $value }}
-                                            </option>
+                                            @if (array_search($order->status->last()->status, array_keys($status)) <= array_search($key, array_keys($status)))
+                                                <option value="{{ $key }}"
+                                                    {{ $order->status->last()->status == $key ? 'selected' : '' }}>
+                                                    {{ $value }}
+                                                </option>
+                                            @endif
                                         @endforeach
                                     </select>
                                 </div>
 
                                 <div class="form-group" id="cancel_reason" hidden>
                                     <label class="form-label">Lý do huỷ đơn hàng</label>
-                                    <textarea class="form-control" name="cancel_reason" rows="3"></textarea>
+                                    <textarea class="form-control" name="cancel_reason" rows="3">{{ $order->cancel_reason }}</textarea>
                                 </div>
                             </div>
                         </div>
