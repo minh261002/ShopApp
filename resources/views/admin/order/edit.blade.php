@@ -37,191 +37,226 @@
 
         <!-- Page body -->
         <div class="page-body">
-            <div class="row">
-                <div class="col-md-9">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">
-                                Thông tin đơn hàng
-                            </h3>
-                        </div>
+            <form action="{{ route('admin.order.update') }}" method="POST">
+                @csrf
+                @method('PUT')
 
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label">Mã đơn hàng</label>
-                                    <input type="text" class="form-control" value="{{ $order->order_number }}" disabled>
-                                </div>
+                <input type="hidden" name="id" value="{{ $order->id }}">
 
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label">Người nhận</label>
-                                    <input type="text" class="form-control" value="{{ $order->name }}" disabled>
-                                </div>
+                <div class="row">
+                    <div class="col-md-9">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">
+                                    Thông tin đơn hàng
+                                </h3>
+                            </div>
 
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label">Email</label>
-                                    <input type="text" class="form-control" value="{{ $order->email }}" disabled>
-                                </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Mã đơn hàng</label>
+                                        <input type="text" class="form-control" value="{{ $order->order_number }}"
+                                            disabled>
+                                    </div>
 
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label">Số điện thoại</label>
-                                    <input type="text" class="form-control" value="{{ $order->phone }}" disabled>
-                                </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Người nhận</label>
+                                        <input type="text" class="form-control" value="{{ $order->name }}" disabled>
+                                    </div>
 
-                                <div class="col-12 mb-3">
-                                    <label class="form-label">Địa chỉ</label>
-                                    <input type="text" class="form-control" value="{{ $order->address }}" disabled>
-                                </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Email</label>
+                                        <input type="text" class="form-control" value="{{ $order->email }}" disabled>
+                                    </div>
 
-                                <div class="col-12">
-                                    <label class="form-label">Ghi chú</label>
-                                    <textarea class="form-control" rows="3" disabled>{{ $order->note }}</textarea>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Số điện thoại</label>
+                                        <input type="text" class="form-control" value="{{ $order->phone }}" disabled>
+                                    </div>
+
+                                    <div class="col-12 mb-3">
+                                        <label class="form-label">Địa chỉ</label>
+                                        <input type="text" class="form-control" value="{{ $order->address }}" disabled>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <label class="form-label">Ghi chú</label>
+                                        <textarea class="form-control" rows="3" disabled>{{ $order->note }}</textarea>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="card mt-5">
-                        <div class="card-header">
-                            <h3 class="card-title">
-                                Giỏ hàng
-                            </h3>
-                        </div>
+                        <div class="card mt-5">
+                            <div class="card-header">
+                                <h3 class="card-title">
+                                    Giỏ hàng
+                                </h3>
+                            </div>
 
-                        <div class="card-body">
-                            <table class="table table-bordered table-striped">
-                                <thead>
-                                    <tr>
-                                        <th style="width: 100px">Ảnh</th>
-                                        <th>Tên sản phẩm</th>
-                                        <th>Giá</th>
-                                        <th>Số lượng</th>
-                                        <th>Thành tiền</th>
-                                    </tr>
-                                </thead>
-
-                                <tbody>
-                                    @foreach ($order->items as $key => $item)
+                            <div class="card-body">
+                                <table class="table table-bordered table-striped">
+                                    <thead>
                                         <tr>
-                                            <td>
-                                                <img src="{{ $item->productVariation->product->image }}" class="img-fluid"
-                                                    style="width: 100px" alt="{{ $item->productVariation->product->name }}">
-                                            </td>
-                                            <td>
-                                                <span class="fw-bold">
-                                                    {{ $item->productVariation->product->name }}
-                                                </span>
-                                                <br>
-                                                @foreach ($item->productVariation->variationAttributes as $attribute)
-                                                    {{ $attribute->name }}: {{ $attribute->pivot->value }}<br>
-                                                @endforeach
-                                            </td>
-                                            <td>{{ number_format($item->price) }}đ</td>
-                                            <td>{{ $item->quantity }}</td>
-                                            <td>{{ number_format($item->price * $item->quantity) }}đ</td>
+                                            <th style="width: 100px">Ảnh</th>
+                                            <th>Tên sản phẩm</th>
+                                            <th>Giá</th>
+                                            <th>Số lượng</th>
+                                            <th>Thành tiền</th>
                                         </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
+                                    </thead>
+
+                                    <tbody>
+                                        @foreach ($order->items as $key => $item)
+                                            <tr>
+                                                <td>
+                                                    <img src="{{ $item->productVariation->product->image }}"
+                                                        class="img-fluid" style="width: 100px"
+                                                        alt="{{ $item->productVariation->product->name }}">
+                                                </td>
+                                                <td>
+                                                    <span class="fw-bold">
+                                                        {{ $item->productVariation->product->name }}
+                                                    </span>
+                                                    <br>
+                                                    @foreach ($item->productVariation->variationAttributes as $attribute)
+                                                        {{ $attribute->name }}: {{ $attribute->pivot->value }}<br>
+                                                    @endforeach
+                                                </td>
+                                                <td>{{ number_format($item->price) }}đ</td>
+                                                <td>{{ $item->quantity }}</td>
+                                                <td>{{ number_format($item->price * $item->quantity) }}đ</td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="card mt-5">
+                            <div class="card-header">
+                                <h3 class="card-title">
+                                    Mã giảm giá
+                                </h3>
+                            </div>
+
+                            <div class="card-body">
+                                @if ($order->discount)
+                                    //To do something
+                                @else
+                                    <div class="alert alert-info">
+                                        Đơn hàng này không áp dụng mã giảm giá
+                                    </div>
+                                @endif
+                            </div>
                         </div>
                     </div>
 
-                    <div class="card mt-5">
-                        <div class="card-header">
-                            <h3 class="card-title">
-                                Mã giảm giá
-                            </h3>
+                    <div class="col-md-3">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">
+                                    Thông tin thanh toán
+                                </h3>
+                            </div>
+
+                            <div class="card-body">
+                                <a href="{{ route('admin.transaction.edit', $order->transaction->id) }}"
+                                    class="nav-link text-primary">
+                                    Xem thông tin thanh toán
+                                </a>
+                            </div>
                         </div>
 
-                        <div class="card-body">
-                            @if ($order->discount)
-                                //To do something
-                            @else
-                                <div class="alert alert-info">
-                                    Đơn hàng này không áp dụng mã giảm giá
+                        <div class="card mt-5">
+                            <div class="card-header">
+                                <h3 class="card-title">
+                                    Thông tin vận chuyển
+                                </h3>
+                            </div>
+
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <select class="form-select" name="shipping_method">
+                                        @foreach ($shippingMethod as $key => $value)
+                                            <option value="{{ $key }}"
+                                                {{ $order->shipping_method == $key ? 'selected' : '' }}>
+                                                {{ $value }}
+                                            </option>
+                                        @endforeach
+                                    </select>
                                 </div>
-                            @endif
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-3">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">
-                                Thông tin thanh toán
-                            </h3>
+                            </div>
                         </div>
 
-                        <div class="card-body">
-                            <a href="{{ route('admin.transaction.edit', $order->transaction->id) }}"
-                                class="nav-link text-primary">
-                                Xem thông tin thanh toán
-                            </a>
-                        </div>
-                    </div>
+                        <div class="card mt-5">
+                            <div class="card-header">
+                                <h3 class="card-title">
+                                    Trạng thái đơn hàng
+                                </h3>
+                            </div>
 
-                    <div class="card mt-5">
-                        <div class="card-header">
-                            <h3 class="card-title">
-                                Thông tin vận chuyển
-                            </h3>
+                            <div class="card-body">
+                                <div class="form-group mb-3">
+                                    <select class="form-select" name="status">
+                                        @foreach ($status as $key => $value)
+                                            <option value="{{ $key }}"
+                                                {{ $order->status->last()->status == $key ? 'selected' : '' }}>
+                                                {{ $value }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <div class="form-group" id="cancel_reason" hidden>
+                                    <label class="form-label">Lý do huỷ đơn hàng</label>
+                                    <textarea class="form-control" name="cancel_reason" rows="3"></textarea>
+                                </div>
+                            </div>
                         </div>
 
-                        <div class="card-body">
-                            <div class="form-group">
-                                <select class="form-select">
-                                    @foreach ($shippingMethod as $key => $value)
-                                        <option value="{{ $key }}"
-                                            {{ $order->shipping_method == $key ? 'selected' : '' }}>
-                                            {{ $value }}
-                                        </option>
-                                    @endforeach
-                                </select>
+                        <div class="card mt-5">
+                            <div class="card-header">
+                                <h3 class="card-title">
+                                    Thao tác
+                                </h3>
+                            </div>
+
+                            <div class="card-body d-flex align-items-center justify-content-between gap-4">
+                                <a href="{{ route('admin.order.index') }}" class="btn btn-secondary w-100">
+                                    Quay lại
+                                </a>
+
+                                <button type="submit" class="btn btn-primary w-100">
+                                    Lưu thay đổi
+                                </button>
                             </div>
                         </div>
                     </div>
-
-                    <div class="card mt-5">
-                        <div class="card-header">
-                            <h3 class="card-title">
-                                Trạng thái đơn hàng
-                            </h3>
-                        </div>
-
-                        <div class="card-body">
-                            <div class="form-group">
-                                <select class="form-select">
-                                    @foreach ($status as $key => $value)
-                                        <option value="{{ $key }}"
-                                            {{ $order->status->last()->status == $key ? 'selected' : '' }}>
-                                            {{ $value }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card mt-5">
-                        <div class="card-header">
-                            <h3 class="card-title">
-                                Thao tác
-                            </h3>
-                        </div>
-
-                        <div class="card-body d-flex align-items-center justify-content-between gap-4">
-                            <a href="{{ route('admin.order.index') }}" class="btn btn-secondary w-100">
-                                Quay lại
-                            </a>
-
-                            <button type="submit" class="btn btn-primary w-100">
-                                Lưu thay đổi
-                            </button>
-                        </div>
-                    </div>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 @endsection
+
+
+@push('scripts')
+    <script>
+        $(document).ready(function() {
+            let cancelStatus = {{ $order->status->last()->status == 'cancelled' ? 'true' : 'false' }};
+
+            if (cancelStatus) {
+                $('#cancel_reason').removeAttr('hidden');
+            }
+
+            $('select[name="status"]').change(function() {
+                if ($(this).val() == 'cancelled') {
+                    $('#cancel_reason').removeAttr('hidden');
+                } else {
+                    $('#cancel_reason').attr('hidden', true);
+                }
+            });
+        });
+    </script>
+@endpush

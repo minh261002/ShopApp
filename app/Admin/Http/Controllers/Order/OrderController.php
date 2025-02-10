@@ -3,6 +3,7 @@
 namespace App\Admin\Http\Controllers\Order;
 
 use App\Admin\DataTables\Order\OrderDataTable;
+use App\Admin\Http\Requests\Order\OrderUpdateRequest;
 use App\Admin\Services\Order\OrderServiceInterface;
 use App\Enums\Order\OrderStatus;
 use App\Enums\Order\PaymentMethod;
@@ -46,17 +47,10 @@ class OrderController extends Controller
         return view('admin.order.invoice', compact('order'));
     }
 
-    // public function update(DiscountRequest $request)
-    // {
-    //     $this->service->update($request);
-    //     return redirect()->route('admin.discount.index')->with('success', 'Cập nhật mã giảm giá thành công');
-    // }
-
-    public function updateStatus(Request $request)
+    public function update(OrderUpdateRequest $request)
     {
-        $data = $request->only('id', 'status');
-        $this->repository->update($data['id'], $data);
-        return response()->json(['status' => 'success', 'message' => 'Cập nhật trạng thái thành công']);
+        $this->service->update($request);
+        return redirect()->back()->with('success', 'Cập nhật đơn hàng thành công');
     }
 
 }

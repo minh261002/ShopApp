@@ -3,13 +3,39 @@
 namespace App\Admin\Services\Order;
 
 use App\Admin\Services\Order\OrderServiceInterface;
-use App\Models\Order;
-use App\Repositories\BaseRepository;
+use App\Repositories\Order\OrderRepositoryInterface;
+use App\Repositories\Order\OrderStatusRepositoryInterface;
+use Illuminate\Http\Request;
 
-class OrderService extends BaseRepository implements OrderServiceInterface
+class OrderService implements OrderServiceInterface
 {
-    public function getModel()
+    protected $repository;
+    protected $orderStatusRepository;
+
+    public function __construct(
+        OrderRepositoryInterface $repository,
+        OrderStatusRepositoryInterface $orderStatusRepository
+    ) {
+        $this->repository = $repository;
+        $this->orderStatusRepository = $orderStatusRepository;
+    }
+
+    public function update(Request $request)
     {
-        return Order::class;
+        $data = $request->validated();
+
+        $orderStatus = $this->orderStatusRepository->findByField('order_id', $data['id'])->first();
+
+        if ($orderStatus && $orderStatus->status != $data['status']) {
+            $this->orderStatusRepository->create([
+                'order_id' => $data['id'],
+                'status' => $data['status'],
+                'updated_at' => now(),
+            ]);
+        }
+
+        unset($data['status']);
+
+        return $this->repository->update($data['id'], $data);
     }
 }
