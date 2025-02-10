@@ -31,7 +31,7 @@ class HomeController extends Controller
     public function index()
     {
         $slider = $this->sliderRepository->getByQueryBuilder(['key' => 'home_slider', 'status' => ActiveStatus::Active->value], ['items'])->first();
-        $homeCategories = $this->categoryRepository->getByQueryBuilder(['show_home' => true, 'status' => ActiveStatus::Active->value], [])->paginate(5);
+        $homeCategories = $this->categoryRepository->getByQueryBuilder(['show_home' => true, 'status' => ActiveStatus::Active->value], [])->paginate(6);
         $homeDiscounts = $this->discountRepository->getByQueryBuilder(['show_home' => true, 'status' => ActiveStatus::Active->value], [])->paginate(6);
 
         $newProducts = $this->productRepository->getByQueryBuilder(['status' => ActiveStatus::Active->value], ['categories',])->orderBy('created_at', 'desc')->limit(10)->get();

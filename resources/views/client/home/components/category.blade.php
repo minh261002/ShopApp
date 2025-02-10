@@ -7,8 +7,9 @@
 
     <div class="row align-items-center">
         @forelse ($homeCategories as $category)
-            <div class="col-4 col-md-2">
-                <a href="" class="nav-link p-0  d-flex flex-column align-items-center justify-content-center">
+            <div class="col-3 col-md-2">
+                <a href="{{ route('product.index', ['danh-muc' => $category->slug]) }}"
+                    class="nav-link p-0  d-flex flex-column align-items-center justify-content-center">
                     <img src="{{ $category->image }}" alt="{{ $category->name }}" class="img-fluid home-category-img">
                     <p class="text-center text-uppercase text-dark fw-semibold mt-3">{{ $category->name }}</p>
                 </a>

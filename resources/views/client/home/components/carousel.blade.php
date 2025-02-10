@@ -1,4 +1,4 @@
-<div class="py-5">
+<div class="pb-5">
     <div id="homeCarousel" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
             @if ($slider)
