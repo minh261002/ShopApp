@@ -2,11 +2,11 @@
 
 namespace App\Services\Order;
 
+use App\Enums\Order\OrderStatus;
 use App\Enums\Order\PaymentStatus;
-use App\Enums\Order\ShippingStatus;
 use App\Repositories\Order\OrderItemRepositoryInterface;
 use App\Repositories\Order\OrderRepositoryInterface;
-use App\Repositories\Order\OrderShippingRepositoryInterface;
+use App\Repositories\Order\OrderStatusRepositoryInterface;
 use App\Repositories\Transaction\TransactionRepositoryInterface;
 use Illuminate\Support\Facades\DB;
 
@@ -14,18 +14,18 @@ class orderService implements OrderServiceInterface
 {
     protected $orderRepository;
     protected $orderItemRepository;
-    protected $orderShippingRepository;
+    protected $orderStatusRepository;
     protected $transactionRepository;
 
     public function __construct(
         OrderRepositoryInterface $orderRepository,
         OrderItemRepositoryInterface $orderItemRepository,
-        OrderShippingRepositoryInterface $orderShippingRepository,
-        TransactionRepositoryInterface $transactionRepository
+        TransactionRepositoryInterface $transactionRepository,
+        OrderStatusRepositoryInterface $orderStatusRepository
     ) {
         $this->orderRepository = $orderRepository;
         $this->orderItemRepository = $orderItemRepository;
-        $this->orderShippingRepository = $orderShippingRepository;
+        $this->orderStatusRepository = $orderStatusRepository;
         $this->transactionRepository = $transactionRepository;
     }
 
@@ -41,7 +41,7 @@ class orderService implements OrderServiceInterface
             $orderData['lat'] = $data['lat'];
             $orderData['lng'] = $data['lng'];
             $orderData['order_number'] = 'DH' . rand(100000000, 999999999);
-
+            $orderData['shipping_method'] = $data['shipping_method'];
             $order = $this->orderRepository->create($orderData);
 
             $cart = json_decode($data['cart']);
@@ -58,13 +58,6 @@ class orderService implements OrderServiceInterface
 
             $this->orderItemRepository->insert($orderItemDatas);
 
-            $this->orderShippingRepository->create([
-                'order_id' => $order->id,
-                'shipping_method' => $data['shipping_method'],
-                'shipping_status' => ShippingStatus::Pending->value,
-                'tracking_number' => 'N.A',
-            ]);
-
             $this->transactionRepository->create([
                 'user_id' => $order->user_id,
                 'order_id' => $order->id,
@@ -74,6 +67,12 @@ class orderService implements OrderServiceInterface
                 'grand_total' => $data['total_price'],
                 'payment_method' => $data['payment_method'],
                 'payment_status' => PaymentStatus::Pending->value,
+            ]);
+
+            $this->orderStatusRepository->create([
+                'order_id' => $order->id,
+                'status' => OrderStatus::Pending->value,
+                'updated_at' => now(),
             ]);
 
             DB::commit();
