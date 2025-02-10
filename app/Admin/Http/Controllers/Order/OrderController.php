@@ -35,11 +35,9 @@ class OrderController extends Controller
     {
         $order = $this->repository->findOrFail($id);
         $status = OrderStatus::asSelectArray();
-        $paymentStatus = PaymentStatus::asSelectArray();
-        $paymentMethod = PaymentMethod::asSelectArray();
-        $shippingStatus = ShippingStatus::asSelectArray();
         $shippingMethod = ShippingMethod::asSelectArray();
-        return view('admin.order.edit', compact('order', 'status', 'paymentStatus', 'shippingStatus', 'paymentMethod', 'shippingMethod'));
+
+        return view('admin.order.edit', compact('order', 'status', 'shippingMethod'));
     }
 
     public function invoice($id)
