@@ -38,7 +38,7 @@
 
             <p class="text-sm mt-2">
                 Kiểm tra
-                <a href="#" class="text-success text-decoration-underline">
+                <a href="{{ route('profile.discount') }}" class="text-success text-decoration-underline">
                     Phiếu giảm giá của tôi
                 </a>
             </p>
