@@ -18,9 +18,9 @@ class Order extends Model
         return $this->hasMany(OrderItem::class);
     }
 
-    public function shipping()
+    public function status()
     {
-        return $this->hasOne(OrderShipping::class);
+        return $this->hasMany(OrderStatus::class);
     }
 
     public function transaction()
