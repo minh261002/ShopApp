@@ -49,17 +49,17 @@
         <div class="space-y-3 mb-4">
             <div class="d-flex justify-content-between text-sm">
                 <span class="text-muted">Tạm tính</span>
-                <span class="fw-semibold" id="subTotal">{{ number_format($subTotal) }}đ</span>
+                <span class="fw-semibold" id="subTotal">{{ number_format($subTotal) }} đ</span>
             </div>
             <div class="d-flex justify-content-between text-sm">
                 <span class="text-muted">Phí vận chuyển</span>
-                <span class="fw-semibold" id="shipping_fee">0đ</span>
+                <span class="fw-semibold" id="shipping_fee">0 đ</span>
             </div>
             <input type="hidden" name="shipping_fee" value="0">
 
             <div class="d-flex justify-content-between text-sm">
                 <span class="text-muted">Mã giảm giá</span>
-                <span class="fw-semibold text-danger" id="discount">-0đ</span>
+                <span class="fw-semibold text-danger" id="discount">-0 đ</span>
             </div>
             <input type="hidden" name="discount_amount" value="0">
         </div>
@@ -68,7 +68,7 @@
 
         <div class="d-flex justify-content-between align-items-center fs-4 fw-bold text-danger mb-4">
             <span>Tổng thanh toán</span>
-            <span id="total">{{ number_format($totalPrice) }}đ</span>
+            <span id="total">{{ number_format($totalPrice) }} đ</span>
         </div>
 
         <button type="submit" class="btn btn-danger w-100">

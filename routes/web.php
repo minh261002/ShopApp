@@ -7,6 +7,7 @@ use App\Http\Controllers\LocationController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ShoppingCartController;
+use App\Http\Controllers\DiscountController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -54,4 +55,7 @@ Route::middleware('client:web')->group(function () {
     Route::get('/don-hang-cua-toi/{order_number}', [ProfileController::class, 'orderDetail'])->name('profile.order.detail');
 
     Route::get('/ma-giam-gia', [ProfileController::class, 'discount'])->name('profile.discount');
+
+    Route::post('/ma-giam-gia', [DiscountController::class, 'applyVoucher'])->name('discount.apply');
+    Route::post('/ma-giam-gia/xoa', [DiscountController::class, 'removeVoucher'])->name('discount.remove');
 });
