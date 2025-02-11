@@ -8,6 +8,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ShoppingCartController;
 use App\Http\Controllers\DiscountController;
+use App\Http\Controllers\WishlistController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -34,6 +35,10 @@ Route::get('/ajax/location', [LocationController::class, 'index'])->name('ajax.l
 
 Route::middleware('client:web')->group(function () {
     Route::post('/dang-xuat', [AuthController::class, 'logout'])->name('logout');
+
+    Route::get('/yeu-thich', [WishlistController::class, 'index'])->name('wishlist.index');
+    Route::post('/yeu-thich', [WishlistController::class, 'store'])->name('wishlist.store');
+    Route::delete('/yeu-thich/xoa/{variation_id}', [WishlistController::class, 'destroy'])->name('wishlist.destroy');
 
     Route::get('/gio-hang', [ShoppingCartController::class, 'index'])->name('cart.index');
     Route::post('/gio-hang', [ShoppingCartController::class, 'store'])->name('cart.store');
