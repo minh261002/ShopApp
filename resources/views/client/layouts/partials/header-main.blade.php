@@ -9,9 +9,10 @@
             </div>
 
             <div class="flex-grow-1">
-                <form method="GET">
+                <form method="GET" action="{{ route('product.index') }}">
                     <div class="input-group">
-                        <input type="text" class="form-control" name="keyword" placeholder="Tìm kiếm sản phẩm">
+                        <input type="text" class="form-control" name="q" placeholder="Tìm kiếm sản phẩm"
+                            value="{{ request()->q ?? '' }}">
                         <button class="btn btn-danger" type="submit">
                             <i class="ti ti-search fs-22px"></i>
                         </button>

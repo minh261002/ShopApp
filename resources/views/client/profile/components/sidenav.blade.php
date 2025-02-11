@@ -13,6 +13,10 @@
         class="list-group-item list-group-item-action d-flex align-items-center {{ setSidebarActive(['profile.order']) }}">
         Đơn hàng
     </a>
+    <a href="{{ route('wishlist.index') }}"
+        class="list-group-item list-group-item-action d-flex align-items-center {{ setSidebarActive(['wishlist.index']) }}">
+        Sản phẩm yêu thích
+    </a>
     <a href="{{ route('profile.discount') }}"
         class="list-group-item list-group-item-action d-flex align-items-center {{ setSidebarActive(['profile.discount']) }}">
         Mã giảm giá

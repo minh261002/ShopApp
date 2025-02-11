@@ -8,6 +8,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ShoppingCartController;
 use App\Http\Controllers\DiscountController;
+use App\Http\Controllers\WishlistController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -35,6 +36,10 @@ Route::get('/ajax/location', [LocationController::class, 'index'])->name('ajax.l
 Route::middleware('client:web')->group(function () {
     Route::post('/dang-xuat', [AuthController::class, 'logout'])->name('logout');
 
+    Route::get('/yeu-thich', [WishlistController::class, 'index'])->name('wishlist.index');
+    Route::post('/yeu-thich', [WishlistController::class, 'store'])->name('wishlist.store');
+    Route::delete('/yeu-thich/xoa/{variation_id}', [WishlistController::class, 'destroy'])->name('wishlist.destroy');
+
     Route::get('/gio-hang', [ShoppingCartController::class, 'index'])->name('cart.index');
     Route::post('/gio-hang', [ShoppingCartController::class, 'store'])->name('cart.store');
     Route::post('/gio-hang/cap-nhat', [ShoppingCartController::class, 'update'])->name('cart.update');
@@ -43,7 +48,7 @@ Route::middleware('client:web')->group(function () {
     Route::post('/gio-hang/cap-nhat-so-luong', [ShoppingCartController::class, 'updateQuantity'])->name('cart.update.quantity');
 
     Route::get('/thanh-toan', [CheckoutController::class, 'index'])->name('checkout.index');
-    Route::get('/thanh-toan/hoan-thanh', [CheckoutController::class, 'complete'])->name('checkout.complete');
+    Route::get('/thanh-toan/ket-qua', [CheckoutController::class, 'result'])->name('checkout.result');
     Route::post('/thanh-toan', [CheckoutController::class, 'store'])->name('checkout.store');
 
     Route::get('/thong-tin-ca-nhan', [ProfileController::class, 'index'])->name('profile.index');
@@ -58,5 +63,4 @@ Route::middleware('client:web')->group(function () {
     Route::get('/ma-giam-gia', [ProfileController::class, 'discount'])->name('profile.discount');
 
     Route::post('/ma-giam-gia', [DiscountController::class, 'applyVoucher'])->name('discount.apply');
-    Route::post('/ma-giam-gia/xoa', [DiscountController::class, 'removeVoucher'])->name('discount.remove');
 });

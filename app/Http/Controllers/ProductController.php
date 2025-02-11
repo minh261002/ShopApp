@@ -99,6 +99,9 @@ class ProductController extends Controller
             });
         }
 
+        if ($request->has('q')) {
+            $query->where('name', 'like', '%' . $request->get('q') . '%');
+        }
 
         $products = $query->paginate(12)->withQueryString();
         return view('client.product.index', compact('products', 'attributes', 'categories'));

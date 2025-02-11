@@ -45,11 +45,21 @@ class CheckoutController extends Controller
     public function store(CheckoutRequest $request)
     {
         $response = $this->service->store($request);
-        if ($response) {
-            session()->forget('cart');
+        session()->forget('cart');
+
+        if ($response === true) {
             return redirect()->route('home')->with('success', 'Đặt hàng thành công');
-        } else {
+        } elseif ($response === false) {
             return redirect()->back()->with('error', 'Đặt hàng thất bại');
+        } elseif (filter_var($response, FILTER_VALIDATE_URL)) {
+            return redirect()->away($response);
+        } else {
+            return redirect()->back()->with('error', 'Có lỗi xảy ra');
         }
+    }
+
+    public function result()
+    {
+        return view('client.checkout.result');
     }
 }
