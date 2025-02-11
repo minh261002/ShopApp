@@ -3,7 +3,12 @@
 @section('title', 'Thanh toán đơn hàng')
 
 @section('content')
-    <div class="py-5">
+    <div class="pb-5">
+        <ul class="steps steps-red steps-counter mb-5">
+            <li class="step-item ">Giỏ hàng</li>
+            <li class="step-item active">Đặt hàng</li>
+            <li class="step-item">Thành công</li>
+        </ul>
         @if (empty($cart))
             <div class="w-100 d-flex align-items-center justify-content-center">
                 <div class="d-flex flex-column align-items-center gap-4">

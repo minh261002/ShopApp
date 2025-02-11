@@ -55,20 +55,12 @@ class DiscountController extends Controller
 
         $total -= $amount;
 
-        session()->put('voucher', $discount);
-        session()->put('discount', $amount);
-
         return response()->json([
             'message' => 'Áp dụng mã giảm giá thành công',
             'discount' => $amount,
+            'discount_id' => $discount->id,
             'total' => $total,
             'status' => 200
         ]);
-    }
-
-    public function removeVoucher()
-    {
-        session()->forget(['voucher', 'discount']);
-        return redirect()->back();
     }
 }

@@ -37,7 +37,7 @@ class CheckoutRequest extends FormRequest
             'payment_method' => 'required',
             'shipping_method' => 'required',
             'order.note' => 'nullable',
-
+            'discount_id' => 'nullable'
         ];
     }
 

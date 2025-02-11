@@ -54,10 +54,9 @@ class ProductVariationController extends Controller
     public function edit($id)
     {
         $variationAttributes = $this->variationAttributeRepository->getAll();
-        $variation = $this->repository->findOrFail($id)->with('variationAttributes')->first();
-        dd($variation);
-        $variationValues = $variation->variationAttributes->pluck('pivot.value', 'id');
+        $variation = $this->repository->findOrFail($id)->with('variationAttributes')->where('id', $id)->first();
 
+        $variationValues = $variation->variationAttributes->pluck('pivot.value', 'id');
         return view('admin.product.variation.edit', compact('variation', 'variationAttributes', 'variationValues'));
     }
 

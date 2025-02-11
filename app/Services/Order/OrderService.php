@@ -9,6 +9,7 @@ use App\Repositories\Order\OrderRepositoryInterface;
 use App\Repositories\Order\OrderStatusRepositoryInterface;
 use App\Repositories\Transaction\TransactionRepositoryInterface;
 use Illuminate\Support\Facades\DB;
+use App\Models\DiscountApplication;
 
 class orderService implements OrderServiceInterface
 {
@@ -75,11 +76,23 @@ class orderService implements OrderServiceInterface
                 'updated_at' => now(),
             ]);
 
+            $discount_id = $data['discount_id'];
+            if ($discount_id) {
+                DiscountApplication::withoutTimestamps(function () use ($discount_id, $order) {
+                    DiscountApplication::where('discount_id', $discount_id)
+                        ->where('user_id', auth()->guard('web')->user()->id)
+                        ->whereNull('order_id')
+                        ->update(['order_id' => $order->id]);
+                });
+
+            }
+
             DB::commit();
 
             return true;
         } catch (\Exception $e) {
             DB::rollBack();
+            \Log::error($e->getMessage());
             return false;
         }
     }

@@ -5,6 +5,8 @@
             <i class="ti ti-send-2"></i>
         </button>
     </div>
+    <input type="hidden" name="discount_amount" value="0">
+    <input type="hidden" name="discount_id" value="">
 </div>
 
 
@@ -14,7 +16,8 @@
             function format_price(price) {
                 return new Intl.NumberFormat('vi-VN', {
                     style: 'currency',
-                    currency: 'VND'
+                    currency: 'VND',
+                    minimumFractionDigits: 0
                 }).format(price);
             }
 
@@ -40,13 +43,18 @@
                     success: function(response) {
                         if (response.status === 200) {
                             $('#discount').text('-' + format_price(response.discount));
-                            $('input[name="discount_amount"]').val(format_price(response
-                                .discount));
+                            $('input[name="discount_amount"]').val(response.discount);
+                            $('input[name="discount_id"]').val(response.discount_id);
                             $('#total').text(format_price(response.total));
 
                             $('#applyVoucher').replaceWith(
                                 '<button class="btn btn-danger" type="button" id="removeVoucher"><i class="ti ti-x"></i></button>'
                             );
+
+                            //disable input
+                            $('#voucher').attr('disabled', true);
+
+                            FuiToast.success(response.message);
                         } else {
                             FuiToast.error(response.message);
 
@@ -64,44 +72,16 @@
             });
 
             $(document).on('click', '#removeVoucher', function(e) {
-                let url = '{{ route('discount.remove') }}';
-                let data = {
-                    _token: '{{ csrf_token() }}'
-                };
+                //reset
+                $('#discount').text('-0 đ');
+                $('input[name="discount_amount"]').val('0');
+                $('#total').text(format_price({{ $totalPrice }}));
+                $('input[name="voucher"]').val('');
+                $('#voucher').attr('disabled', false);
 
-                $.ajax({
-                    url: url,
-                    method: 'POST',
-                    data: data,
-                    beforeSend: function() {
-                        $('#removeVoucher').attr('disabled', true);
-                        $('#removeVoucher').html(
-                            '<div class="spinner-border spinner-border-sm" role="status"><span class="visually-hidden">Loading...</span></div>'
-                        );
-                    },
-                    success: function(response) {
-                        if (response.status === 200) {
-                            $('#discount').text('-0 đ');
-                            $('input[name="discount_amount"]').val('0');
-                            $('#total').text(format_price(response.total));
-
-                            $('#removeVoucher').replaceWith(
-                                '<button class="btn btn-danger" type="button" id="applyVoucher"><i class="ti ti-send-2"></i></button>'
-                            );
-                        } else {
-                            FuiToast.error(response.message);
-
-                            $('#removeVoucher').attr('disabled', false);
-                            $('#removeVoucher').html('<i class="ti ti-x"></i>');
-                        }
-                    },
-                    error: function(xhr, status, error) {
-                        FuiToast.error('Đã có lỗi xảy ra, vui lòng thử lại sau');
-                    },
-                    complete: function() {
-                        $('#removeVoucher').attr('disabled', false);
-                    }
-                });
+                $('#removeVoucher').replaceWith(
+                    '<button class="btn btn-danger" type="button" id="applyVoucher"><i class="ti ti-send-2"></i></button>'
+                );
             });
         })
     </script>

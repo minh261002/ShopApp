@@ -43,6 +43,7 @@ Route::middleware('client:web')->group(function () {
     Route::post('/gio-hang/cap-nhat-so-luong', [ShoppingCartController::class, 'updateQuantity'])->name('cart.update.quantity');
 
     Route::get('/thanh-toan', [CheckoutController::class, 'index'])->name('checkout.index');
+    Route::get('/thanh-toan/hoan-thanh', [CheckoutController::class, 'complete'])->name('checkout.complete');
     Route::post('/thanh-toan', [CheckoutController::class, 'store'])->name('checkout.store');
 
     Route::get('/thong-tin-ca-nhan', [ProfileController::class, 'index'])->name('profile.index');
