@@ -10,6 +10,11 @@
             </div>
 
             <div class="col-md-9">
+                @if (request()->q)
+                    <p class="fw-semibold fs-18px mb-2">
+                        Tìm thấy {{ $products->total() }} sản phẩm với từ khóa "{{ request()->q }}"
+                    </p>
+                @endif
                 <div class="row">
                     @forelse ($products as $item)
                         <div class="col-md-3">
