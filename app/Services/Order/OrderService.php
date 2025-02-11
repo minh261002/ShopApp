@@ -34,6 +34,18 @@ class orderService implements OrderServiceInterface
     {
         $data = $request->validated();
 
+        if ($data['save_profile']) {
+            $user = auth()->guard('web')->user();
+            $user->update([
+                'name' => $data['order']['name'],
+                'email' => $data['order']['email'],
+                'phone' => $data['order']['phone'],
+                'address' => $data['address'],
+                'lat' => $data['lat'],
+                'lng' => $data['lng'],
+            ]);
+        }
+
         DB::beginTransaction();
 
         try {
