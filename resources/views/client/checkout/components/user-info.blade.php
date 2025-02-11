@@ -12,19 +12,19 @@
     </div>
     <div class="card-body">
         <div class="row">
-            <div class="col-md-6 mb-3">
+            <div class="col-12 mb-3">
                 <label for="name" class="form-label">Họ và tên</label>
                 <input type="text" class="form-control" id="name" name="order[name]"
                     value="{{ $user->name ?? '' }}">
             </div>
 
-            <div class="col-md-6 mb-3">
+            <div class="col-12 mb-3">
                 <label for="email" class="form-label">Email</label>
                 <input type="email" class="form-control" id="email" name="order[email]"
                     value="{{ $user->email ?? '' }}">
             </div>
 
-            <div class="col-md-6 mb-3">
+            <div class="col-12 mb-3">
                 <label for="phone" class="form-label">Số điện thoại</label>
                 <input type="text" class="form-control" id="phone" name="order[phone]"
                     value="{{ $user->phone ?? '' }}">
@@ -38,6 +38,13 @@
                 ])
                 <input type="hidden" name="lat" value="{{ old('lat', $user->lat ?? '') }}">
                 <input type="hidden" name="lng" value="{{ old('lng', $user->lng ?? '') }}">
+            </div>
+
+            <div class="col-12 form-group mb-3">
+                <label class="form-check">
+                    <input class="form-check-input" type="checkbox" name="save_profile">
+                    <span class="form-check-label">Cập nhật thông tin cá nhân</span>
+                </label>
             </div>
 
             <div class="col-12 mb-3">

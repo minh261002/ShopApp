@@ -18,9 +18,9 @@ class Order extends Model
         return $this->hasMany(OrderItem::class);
     }
 
-    public function shipping()
+    public function status()
     {
-        return $this->hasOne(OrderShipping::class);
+        return $this->hasMany(OrderStatus::class);
     }
 
     public function transaction()
@@ -46,5 +46,10 @@ class Order extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function discounts()
+    {
+        return $this->belongsToMany(Discount::class, 'discount_applications', 'order_id', 'discount_id');
     }
 }

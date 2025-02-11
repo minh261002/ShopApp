@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\ActiveStatus;
 use App\Enums\Discount\DiscountApplyFor;
 use App\Enums\Discount\DiscountType;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -43,7 +44,7 @@ class Discount extends Model
         return $query
             ->where('date_start', '<=', Carbon::now())
             ->where('date_end', '>=', Carbon::now())
-            ->where('status', '=', 2)
+            ->where('status', '=', ActiveStatus::Active->value)
             ->where(function ($query) {
                 $query->where('max_usage', '>', 0)
                     ->orWhereNull('max_usage');

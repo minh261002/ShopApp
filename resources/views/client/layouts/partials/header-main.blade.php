@@ -40,7 +40,8 @@
                             aria-expanded="false">
                             @if (auth()->guard('web')->check())
                                 <img src="{{ auth()->guard('web')->user()->image }}" alt="avatar"
-                                    class="img-fluid rounded-circle" width="35">
+                                    class="img-fluid rounded-circle object-fit-cover"
+                                    style="width: 35px; height: 35px;">
                             @else
                                 <i class="ti ti-user-circle fs-28px"></i>
                             @endif

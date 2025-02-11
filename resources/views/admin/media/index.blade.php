@@ -36,7 +36,9 @@
                         Danh sách tệp tin
                     </h3>
                     <div class="card-actions">
-
+                        <button class="btn btn-primary" id="upload-file">
+                            Thêm mới
+                        </button>
                     </div>
                 </div>
 
@@ -80,3 +82,16 @@
         </div>
     </div>
 @endsection
+
+@push('scripts')
+    <script src="{{ asset('admin/js/finder.js') }}"></script>
+    <script>
+        $('#upload-file').click(function() {
+            CKFinder.modal({
+                chooseFiles: true,
+                width: 800,
+                height: 600,
+            });
+        });
+    </script>
+@endpush

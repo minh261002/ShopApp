@@ -3,6 +3,8 @@
 namespace App\Admin\Http\Controllers\Transaction;
 
 use App\Admin\DataTables\Transaction\TransactionDataTable;
+use App\Admin\Http\Requests\Transaction\TransactionUpdateRequest;
+use App\Admin\Services\Transaction\TransactionServiceInterface;
 use App\Enums\Order\PaymentMethod;
 use App\Enums\Order\PaymentStatus;
 use App\Http\Controllers\Controller;
@@ -12,11 +14,14 @@ use Illuminate\Http\Request;
 class TransactionController extends Controller
 {
     protected $repository;
+    protected $service;
 
     public function __construct(
         TransactionRepositoryInterface $repository,
+        TransactionServiceInterface $service
     ) {
         $this->repository = $repository;
+        $this->service = $service;
     }
 
     public function index(TransactionDataTable $dataTable)
@@ -32,17 +37,10 @@ class TransactionController extends Controller
         return view('admin.transaction.edit', compact('transaction', 'paymentMethod', 'paymentStatus'));
     }
 
-    // public function update(DiscountRequest $request)
-    // {
-    //     $this->service->update($request);
-    //     return redirect()->route('admin.discount.index')->with('success', 'Cập nhật mã giảm giá thành công');
-    // }
-
-    public function updateStatus(Request $request)
+    public function update(TransactionUpdateRequest $request)
     {
-        $data = $request->only('id', 'status');
-        $this->repository->update($data['id'], $data);
-        return response()->json(['status' => 'success', 'message' => 'Cập nhật trạng thái thành công']);
+        $this->service->update($request);
+        return redirect()->back()->with('success', 'Cập nhật giao dịch thành công');
     }
 
 }

@@ -348,5 +348,9 @@ Route::middleware(['auth:admin'])->prefix('admin')->as('admin.')->group(function
             Route::get('/', [MediaController::class, 'index'])->name('index');
             Route::get('/{folder}', [MediaController::class, 'getMedia'])->name('get');
         });
+
+        Route::middleware(['permission:deleteMedia'])->group(function () {
+            Route::post('/delete', [MediaController::class, 'delete'])->name('delete');
+        });
     });
 });

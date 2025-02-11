@@ -35,7 +35,7 @@ class OrderDataTable extends BaseDataTable
 
     public function setColumnSearch(): void
     {
-        $this->columnAllSearch = [0,1,2,3,4,5];
+        $this->columnAllSearch = [0, 1, 2, 3, 4, 5];
         $this->columnSearchSelect = [
             [
                 'column' => 3,
@@ -59,7 +59,9 @@ class OrderDataTable extends BaseDataTable
         $this->customEditColumns = [
             'action' => $this->view['action'],
             'created_at' => '{{format_datetime($created_at)}}',
-            'status' => $this->view['status'],
+            'status' => function ($query) {
+                return view($this->view['status'], ['status' => $query->status->last()->status]);
+            },
         ];
     }
 
@@ -69,7 +71,7 @@ class OrderDataTable extends BaseDataTable
             'amount' => function ($query) {
                 return format_price($query->transaction->grand_total);
             },
-            'pạyment_status' =>function($query){
+            'pạyment_status' => function ($query) {
                 return view($this->view['payment_status'], ['payment_status' => $query->transaction->payment_status]);
             },
         ];

@@ -86,7 +86,6 @@
                                         </div>
                                     @endforeach
 
-
                                     <div class="col-md-6 mb-3">
                                         <label for="price" class="form-label">
                                             Giá bán

@@ -19,6 +19,7 @@
                     <option value="{{ $key }}">{{ $shipping_method }}</option>
                 @endforeach
             </select>
+            <input type="hidden" name="shipping_fee" value="10000">
         </div>
     </div>
 </div>
@@ -38,7 +39,7 @@
 
             <p class="text-sm mt-2">
                 Kiểm tra
-                <a href="#" class="text-success text-decoration-underline">
+                <a href="{{ route('profile.discount') }}" class="text-success text-decoration-underline">
                     Phiếu giảm giá của tôi
                 </a>
             </p>
@@ -49,17 +50,16 @@
         <div class="space-y-3 mb-4">
             <div class="d-flex justify-content-between text-sm">
                 <span class="text-muted">Tạm tính</span>
-                <span class="fw-semibold" id="subTotal">{{ number_format($subTotal) }}đ</span>
+                <span class="fw-semibold" id="subTotal">{{ format_price($subTotal) }}</span>
             </div>
             <div class="d-flex justify-content-between text-sm">
                 <span class="text-muted">Phí vận chuyển</span>
-                <span class="fw-semibold" id="shipping_fee">0đ</span>
+                <span class="fw-semibold" id="shipping_fee">10.000 đ</span>
             </div>
-            <input type="hidden" name="shipping_fee" value="0">
 
             <div class="d-flex justify-content-between text-sm">
                 <span class="text-muted">Mã giảm giá</span>
-                <span class="fw-semibold text-danger" id="discount">-0đ</span>
+                <span class="fw-semibold text-danger" id="discount">-0 đ</span>
             </div>
             <input type="hidden" name="discount_amount" value="0">
         </div>
@@ -68,7 +68,7 @@
 
         <div class="d-flex justify-content-between align-items-center fs-4 fw-bold text-danger mb-4">
             <span>Tổng thanh toán</span>
-            <span id="total">{{ number_format($totalPrice) }}đ</span>
+            <span id="total">{{ format_price($totalPrice + 10000) }}</span>
         </div>
 
         <button type="submit" class="btn btn-danger w-100">
@@ -76,3 +76,35 @@
         </button>
     </div>
 </div>
+
+@push('scripts')
+    <script>
+        $(document).ready(function() {
+            function format_price(price) {
+                return new Intl.NumberFormat('vi-VN', {
+                    style: 'currency',
+                    currency: 'VND'
+                }).format(price);
+            }
+            //shipping_fee
+            $('#shipping_method').on('change', function() {
+                if ($(this).val() == 'vnpost') {
+                    $('#shipping_fee').text('20.000 đ');
+                    $('input[name="shipping_fee"]').val(20000);
+                    let subTotal = parseInt($('#subTotal').text().replace(/\D/g, ''));
+                    $('#total').text(format_price(subTotal + 20000));
+                } else if ($(this).val() == 'express') {
+                    $('#shipping_fee').text('30.000 đ');
+                    $('input[name="shipping_fee"]').val(30000);
+                    let subTotal = parseInt($('#subTotal').text().replace(/\D/g, ''));
+                    $('#total').text(format_price(subTotal + 30000));
+                } else {
+                    $('#shipping_fee').text('10.000 đ');
+                    $('input[name="shipping_fee"]').val(10000);
+                    let subTotal = parseInt($('#subTotal').text().replace(/\D/g, ''));
+                    $('#total').text(format_price(subTotal + 10000));
+                }
+            })
+        })
+    </script>
+@endpush

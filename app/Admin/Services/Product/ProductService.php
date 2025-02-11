@@ -20,7 +20,7 @@ class ProductService implements ProductServiceInterface
         $this->productVariationRepository = $productVariationRepository;
     }
 
-    public function store(Request $request): void
+    public function store(Request $request)
     {
         $data = $request->validated();
 
@@ -38,10 +38,10 @@ class ProductService implements ProductServiceInterface
         $product = $this->repository->create($data);
         $product->categories()->attach($categoryIds);
 
-        return;
+        return $product;
     }
 
-    public function update(Request $request): void
+    public function update(Request $request)
     {
         $data = $request->validated();
         $product = $this->repository->findOrFail($data['id']);

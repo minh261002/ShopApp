@@ -2,36 +2,49 @@
 
 namespace App\Services\Order;
 
+use App\Enums\Order\OrderStatus;
 use App\Enums\Order\PaymentStatus;
-use App\Enums\Order\ShippingStatus;
 use App\Repositories\Order\OrderItemRepositoryInterface;
 use App\Repositories\Order\OrderRepositoryInterface;
-use App\Repositories\Order\OrderShippingRepositoryInterface;
+use App\Repositories\Order\OrderStatusRepositoryInterface;
 use App\Repositories\Transaction\TransactionRepositoryInterface;
 use Illuminate\Support\Facades\DB;
+use App\Models\DiscountApplication;
 
 class orderService implements OrderServiceInterface
 {
     protected $orderRepository;
     protected $orderItemRepository;
-    protected $orderShippingRepository;
+    protected $orderStatusRepository;
     protected $transactionRepository;
 
     public function __construct(
         OrderRepositoryInterface $orderRepository,
         OrderItemRepositoryInterface $orderItemRepository,
-        OrderShippingRepositoryInterface $orderShippingRepository,
-        TransactionRepositoryInterface $transactionRepository
+        TransactionRepositoryInterface $transactionRepository,
+        OrderStatusRepositoryInterface $orderStatusRepository
     ) {
         $this->orderRepository = $orderRepository;
         $this->orderItemRepository = $orderItemRepository;
-        $this->orderShippingRepository = $orderShippingRepository;
+        $this->orderStatusRepository = $orderStatusRepository;
         $this->transactionRepository = $transactionRepository;
     }
 
     public function store(\Illuminate\Http\Request $request)
     {
         $data = $request->validated();
+
+        if ($data['save_profile']) {
+            $user = auth()->guard('web')->user();
+            $user->update([
+                'name' => $data['order']['name'],
+                'email' => $data['order']['email'],
+                'phone' => $data['order']['phone'],
+                'address' => $data['address'],
+                'lat' => $data['lat'],
+                'lng' => $data['lng'],
+            ]);
+        }
 
         DB::beginTransaction();
 
@@ -41,7 +54,7 @@ class orderService implements OrderServiceInterface
             $orderData['lat'] = $data['lat'];
             $orderData['lng'] = $data['lng'];
             $orderData['order_number'] = 'DH' . rand(100000000, 999999999);
-
+            $orderData['shipping_method'] = $data['shipping_method'];
             $order = $this->orderRepository->create($orderData);
 
             $cart = json_decode($data['cart']);
@@ -58,13 +71,6 @@ class orderService implements OrderServiceInterface
 
             $this->orderItemRepository->insert($orderItemDatas);
 
-            $this->orderShippingRepository->create([
-                'order_id' => $order->id,
-                'shipping_method' => $data['shipping_method'],
-                'shipping_status' => ShippingStatus::Pending->value,
-                'tracking_number' => 'N.A',
-            ]);
-
             $this->transactionRepository->create([
                 'user_id' => $order->user_id,
                 'order_id' => $order->id,
@@ -76,11 +82,30 @@ class orderService implements OrderServiceInterface
                 'payment_status' => PaymentStatus::Pending->value,
             ]);
 
+            $this->orderStatusRepository->create([
+                'order_id' => $order->id,
+                'status' => OrderStatus::Pending->value,
+                'updated_at' => now(),
+            ]);
+
+            $discount_id = $data['discount_id'];
+
+            if ($discount_id) {
+                DiscountApplication::withoutTimestamps(function () use ($discount_id, $order) {
+                    DiscountApplication::where('discount_id', $discount_id)
+                        ->where('user_id', auth()->guard('web')->user()->id)
+                        ->whereNull('order_id')
+                        ->update(['order_id' => $order->id]);
+                });
+
+            }
+
             DB::commit();
 
             return true;
         } catch (\Exception $e) {
             DB::rollBack();
+            \Log::error($e->getMessage());
             return false;
         }
     }

@@ -128,7 +128,7 @@ function uniqid_real($lenght = 13)
     return Str::upper(substr(bin2hex($bytes), 0, $lenght));
 }
 
-if(!function_exists('limit_text')){
+if (!function_exists('limit_text')) {
     function limit_text($text, $limit = 100, $end = '...')
     {
         if (strlen($text) > $limit) {

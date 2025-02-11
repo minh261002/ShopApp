@@ -6,9 +6,9 @@ use Illuminate\Http\Request;
 
 interface ProductServiceInterface
 {
-    public function store(Request $request): void;
+    public function store(Request $request);
     public function variationStore(Request $request);
 
-    public function update(Request $request): void;
+    public function update(Request $request);
     public function variationUpdate(Request $request);
 }

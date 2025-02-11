@@ -23,6 +23,7 @@ class ServiceServiceProvider extends ServiceProvider
         'App\Admin\Services\Product\ProductServiceInterface' => 'App\Admin\Services\Product\ProductService',
         'App\Admin\Services\Discount\DiscountServiceInterface' => 'App\Admin\Services\Discount\DiscountService',
         'App\Admin\Services\Order\OrderServiceInterface' => 'App\Admin\Services\Order\OrderService',
+        'App\Admin\Services\Transaction\TransactionServiceInterface' => 'App\Admin\Services\Transaction\TransactionService',
     ];
     public function register(): void
     {

@@ -42,8 +42,8 @@ class ProductController extends Controller
 
     public function store(ProductRequest $request)
     {
-        $this->service->store($request);
-        return redirect()->route('admin.product.index')->with('success', 'Thêm sản phẩm thành công');
+        $response = $this->service->store($request);
+        return redirect()->route('admin.product.variation.create', $response->id)->with('success', 'Thêm sản phẩm thành công');
     }
 
     public function edit($id)
