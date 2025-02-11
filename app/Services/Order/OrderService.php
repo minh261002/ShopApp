@@ -3,6 +3,7 @@
 namespace App\Services\Order;
 
 use App\Enums\Order\OrderStatus;
+use App\Enums\Order\PaymentMethod;
 use App\Enums\Order\PaymentStatus;
 use App\Repositories\Order\OrderItemRepositoryInterface;
 use App\Repositories\Order\OrderRepositoryInterface;
@@ -10,13 +11,18 @@ use App\Repositories\Order\OrderStatusRepositoryInterface;
 use App\Repositories\Transaction\TransactionRepositoryInterface;
 use Illuminate\Support\Facades\DB;
 use App\Models\DiscountApplication;
+use PayOS\PayOS;
 
 class orderService implements OrderServiceInterface
 {
+
     protected $orderRepository;
     protected $orderItemRepository;
     protected $orderStatusRepository;
     protected $transactionRepository;
+    private $payOSClientId;
+    private $payOSApiKey;
+    private $payOSChecksumKey;
 
     public function __construct(
         OrderRepositoryInterface $orderRepository,
@@ -28,13 +34,17 @@ class orderService implements OrderServiceInterface
         $this->orderItemRepository = $orderItemRepository;
         $this->orderStatusRepository = $orderStatusRepository;
         $this->transactionRepository = $transactionRepository;
+
+        $this->payOSClientId = config('services.payos.client_id');
+        $this->payOSApiKey = config('services.payos.api_key');
+        $this->payOSChecksumKey = config('services.payos.checksum_key');
     }
 
     public function store(\Illuminate\Http\Request $request)
     {
         $data = $request->validated();
 
-        if ($data['save_profile']) {
+        if (!empty($data['save_profile'])) {
             $user = auth()->guard('web')->user();
             $user->update([
                 'name' => $data['order']['name'],
@@ -71,7 +81,7 @@ class orderService implements OrderServiceInterface
 
             $this->orderItemRepository->insert($orderItemDatas);
 
-            $this->transactionRepository->create([
+            $transaction = $this->transactionRepository->create([
                 'user_id' => $order->user_id,
                 'order_id' => $order->id,
                 'sub_total' => $data['sub_total'],
@@ -102,9 +112,37 @@ class orderService implements OrderServiceInterface
 
             DB::commit();
 
-            return true;
+            if ($data['payment_method'] == PaymentMethod::Cash->value) {
+                return true;
+            } else {
+                $checkoutUrl = $this->paymentGateway($transaction);
+                return $checkoutUrl;
+            }
+
         } catch (\Exception $e) {
             DB::rollBack();
+            \Log::error($e->getMessage());
+            return false;
+        }
+    }
+
+    protected function paymentGateway($transaction)
+    {
+        try {
+            $payOS = new PayOS($this->payOSClientId, $this->payOSApiKey, $this->payOSChecksumKey);
+
+            $data = [
+                "orderCode" => intval(substr(strval(microtime(true) * 10000), -6)),
+                "amount" => intval($transaction->grand_total),
+                "description" => "Thanh toán đơn hàng",
+
+                "returnUrl" => route('checkout.result'),
+                "cancelUrl" => route('checkout.result'),
+            ];
+
+            $response = $payOS->createPaymentLink($data);
+            return $response['checkoutUrl'];
+        } catch (\Exception $e) {
             \Log::error($e->getMessage());
             return false;
         }

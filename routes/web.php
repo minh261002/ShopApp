@@ -43,7 +43,7 @@ Route::middleware('client:web')->group(function () {
     Route::post('/gio-hang/cap-nhat-so-luong', [ShoppingCartController::class, 'updateQuantity'])->name('cart.update.quantity');
 
     Route::get('/thanh-toan', [CheckoutController::class, 'index'])->name('checkout.index');
-    Route::get('/thanh-toan/hoan-thanh', [CheckoutController::class, 'complete'])->name('checkout.complete');
+    Route::get('/thanh-toan/ket-qua', [CheckoutController::class, 'result'])->name('checkout.result');
     Route::post('/thanh-toan', [CheckoutController::class, 'store'])->name('checkout.store');
 
     Route::get('/thong-tin-ca-nhan', [ProfileController::class, 'index'])->name('profile.index');
@@ -58,5 +58,4 @@ Route::middleware('client:web')->group(function () {
     Route::get('/ma-giam-gia', [ProfileController::class, 'discount'])->name('profile.discount');
 
     Route::post('/ma-giam-gia', [DiscountController::class, 'applyVoucher'])->name('discount.apply');
-    Route::post('/ma-giam-gia/xoa', [DiscountController::class, 'removeVoucher'])->name('discount.remove');
 });
