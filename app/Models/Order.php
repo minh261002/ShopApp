@@ -47,4 +47,9 @@ class Order extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function discounts()
+    {
+        return $this->belongsToMany(Discount::class, 'discount_applications', 'order_id', 'discount_id');
+    }
 }

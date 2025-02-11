@@ -7,7 +7,7 @@
         <ul class="steps steps-red steps-counter mb-5">
             <li class="step-item ">Giỏ hàng</li>
             <li class="step-item active">Đặt hàng</li>
-            <li class="step-item">Thành công</li>
+            <li class="step-item">Kết quả</li>
         </ul>
         @if (empty($cart))
             <div class="w-100 d-flex align-items-center justify-content-center">

@@ -56,7 +56,6 @@
                 <span class="text-muted">Phí vận chuyển</span>
                 <span class="fw-semibold" id="shipping_fee">10.000 đ</span>
             </div>
-            <input type="hidden" name="shipping_fee" value="0">
 
             <div class="d-flex justify-content-between text-sm">
                 <span class="text-muted">Mã giảm giá</span>

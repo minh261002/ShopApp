@@ -142,8 +142,32 @@
                             </div>
 
                             <div class="card-body">
-                                @if ($order->discount)
-                                    //To do something
+                                @if ($order->discounts)
+                                    <table class="table table-bordered table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Mã giảm giá</th>
+                                                <th>Giảm giá</th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            @foreach ($order->discounts as $discount)
+                                                <tr>
+                                                    <td>{{ $discount->code }}
+                                                        {{ $discount->description ? ' - ' . $discount->description : '' }}
+                                                    </td>
+                                                    <td>
+                                                        @if ($discount->type->value == \App\Enums\Discount\DiscountType::Percentage->value)
+                                                            {{ $discount->percent_value }}%
+                                                        @else
+                                                            {{ format_price($discount->discount_value) }}
+                                                        @endif
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
                                 @else
                                     <div class="alert alert-info">
                                         Đơn hàng này không áp dụng mã giảm giá

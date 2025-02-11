@@ -77,6 +77,7 @@ class orderService implements OrderServiceInterface
             ]);
 
             $discount_id = $data['discount_id'];
+
             if ($discount_id) {
                 DiscountApplication::withoutTimestamps(function () use ($discount_id, $order) {
                     DiscountApplication::where('discount_id', $discount_id)
